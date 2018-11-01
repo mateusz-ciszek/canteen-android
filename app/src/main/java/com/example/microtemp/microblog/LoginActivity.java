@@ -10,11 +10,19 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.microtemp.microblog.api.HttpRequestData;
+import com.example.microtemp.microblog.api.HttpRequestMethods;
+import com.example.microtemp.microblog.api.models.RegisterRequestBody;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
+
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
@@ -44,12 +52,23 @@ public class LoginActivity extends AppCompatActivity {
         registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               new MakeNetworkCall().execute("http://212.191.92.88:5101/" +"email/"+email.getText() +"/haslo/"+ password.getText(), "Post");
+                RegisterRequestBody requestBody = RegisterRequestBody.builder()
+                        .email(email.getText().toString())
+                        .password(password.getText().toString())
+                        .build();
+                HttpRequestData<RegisterRequestBody> requestData = HttpRequestData.<RegisterRequestBody>builder()
+                        .requestBody(requestBody)
+                        .method(HttpRequestMethods.POST)
+                        .build();
+                Gson gson = new Gson();
+                new MakeNetworkCall().execute(gson.toJson(requestData));
                 Toast.makeText(LoginActivity.this, "test", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
+    // FIXME Wyodrębnienie tego do osobnej klasy
+    // Powinno działać dla dowolnych typów zapytan i odpowiedzi
     InputStream ByGetMethod(String ServerURL) {
 
         InputStream DataInputStream = null;
@@ -77,43 +96,47 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    InputStream ByPostMethod(String ServerURL) {
+    // FIXME Wyodrębnienie tego do osobnej klasy
+    InputStream ByPostMethod(String ServerURL, String data) {
 
-        InputStream DataInputStream = null;
+        InputStream inputStream = null;
         try {
-            String PostParam = "first_name=android&amp;last_name=pala";
             URL url = new URL(ServerURL);
             HttpURLConnection cc = (HttpURLConnection)
                     url.openConnection();
             cc.setConnectTimeout(5000);
+            cc.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
             cc.setRequestMethod("POST");
             cc.setDoInput(true);
+            cc.setDoOutput(true);
             cc.connect();
             DataOutputStream dos = new DataOutputStream(cc.getOutputStream());
-            dos.writeBytes(PostParam);
+            dos.writeBytes(data);
             dos.flush();
             dos.close();
 
             int response = cc.getResponseCode();
             if(response == HttpURLConnection.HTTP_OK) {
-                DataInputStream = cc.getInputStream();
+                inputStream = cc.getInputStream();
+            } else {
+                inputStream = cc.getErrorStream();
             }
 
         } catch (Exception e) {
             Log.e(LOG_TAG, "Error in GetData", e);
         }
-        return DataInputStream;
+        return inputStream;
 
     }
 
+    // FIXME Wyodrębnienie tego do osobnej klasy
     String ConvertStreamToString(InputStream stream) {
         InputStreamReader isr = new InputStreamReader(stream);
         BufferedReader reader = new BufferedReader(isr);
         StringBuilder response = new StringBuilder();
 
-        String line = null;
         try {
-
+            String line;
             while ((line = reader.readLine()) != null) {
                 response.append(line);
             }
@@ -138,7 +161,7 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-
+    // FIXME Wyodrębnienie tego do osobnej klasy
     private class MakeNetworkCall extends AsyncTask<String, Void, String> {
 
         @Override
@@ -149,16 +172,22 @@ public class LoginActivity extends AppCompatActivity {
 
         @Override
         protected String doInBackground(String... arg) {
+            GsonBuilder gsonBuilder = new GsonBuilder();
+            Type requestDataType = new TypeToken<HttpRequestData<RegisterRequestBody>>() {}.getType();
+            HttpRequestData requestData = gsonBuilder.create().fromJson(arg[0], requestDataType);
+            String URL = requestData.getUrl();
+            HttpRequestMethods method = requestData.getMethod();
+            Gson gson = new Gson();
+            String data = gson.toJson(requestData.getRequestBody());
 
-            InputStream is = null;
-            String URL = arg[0];
             Log.d(LOG_TAG, "URL: " + URL);
-            String res = "";
+            InputStream is;
+            String res;
 
 
-            if (arg[1].equals("Post")) {
+            if (method == HttpRequestMethods.POST) {
 
-                is = ByPostMethod(URL);
+                is = ByPostMethod(URL, data);
 
             } else {
 
