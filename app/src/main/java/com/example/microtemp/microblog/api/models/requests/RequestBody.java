@@ -1,4 +1,4 @@
-package com.example.microtemp.microblog.api.models;
+package com.example.microtemp.microblog.api.models.requests;
 
 import com.google.gson.Gson;
 

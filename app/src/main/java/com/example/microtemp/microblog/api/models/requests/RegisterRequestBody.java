@@ -1,4 +1,4 @@
-package com.example.microtemp.microblog.api.models;
+package com.example.microtemp.microblog.api.models.requests;
 
 import lombok.Builder;
 import lombok.Getter;

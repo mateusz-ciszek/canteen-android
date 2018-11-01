@@ -1,6 +1,6 @@
 package com.example.microtemp.microblog.api;
 
-import com.example.microtemp.microblog.api.models.RequestBody;
+import com.example.microtemp.microblog.api.models.requests.RequestBody;
 
 import lombok.Builder;
 import lombok.Getter;
