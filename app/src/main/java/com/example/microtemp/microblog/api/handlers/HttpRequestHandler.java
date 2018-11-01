@@ -1,4 +1,4 @@
-package com.example.microtemp.microblog.api.models.handlers;
+package com.example.microtemp.microblog.api.handlers;
 
 import android.os.AsyncTask;
 import android.util.Log;

@@ -1,4 +1,4 @@
-package com.example.microtemp.microblog.api.models.handlers;
+package com.example.microtemp.microblog.api.handlers;
 
 import com.example.microtemp.microblog.api.models.requests.RegisterRequestBody;
 import com.example.microtemp.microblog.api.models.responses.RegisterResponse;

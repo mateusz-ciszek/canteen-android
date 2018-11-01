@@ -11,7 +11,7 @@ import android.widget.Toast;
 
 import com.example.microtemp.microblog.api.HttpRequestData;
 import com.example.microtemp.microblog.api.HttpRequestMethods;
-import com.example.microtemp.microblog.api.models.handlers.RegisterRequestHandler;
+import com.example.microtemp.microblog.api.handlers.RegisterRequestHandler;
 import com.example.microtemp.microblog.api.models.requests.RegisterRequestBody;
 import com.example.microtemp.microblog.api.models.responses.RegisterResponse;
 
