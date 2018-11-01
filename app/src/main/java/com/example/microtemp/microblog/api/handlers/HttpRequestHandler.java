@@ -11,9 +11,11 @@ import com.google.gson.Gson;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.lang.reflect.ParameterizedType;
+import java.net.ConnectException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Arrays;
@@ -40,18 +42,27 @@ public abstract class HttpRequestHandler<T extends RequestBody, U extends Respon
         String data = gson.toJson(requestData.getRequestBody());
 
         Log.d(LOG_TAG, "URL: " + URL);
-        RequestResult requestResult = makeRequest(URL, data, method);
+        RequestResult requestResult = null;
+        try {
+            requestResult = makeRequest(URL, data, method);
+        } catch (ConnectException e) {
+            // No Internet
+            requestResult = new RequestResult(null, 400);
+        } catch (IOException e) {
+            Log.e(LOG_TAG, "doInBackground", e);
+        }
         String res;
 
         U response = null;
         try {
-            response = (U) ((Class) ((ParameterizedType)this.getClass().getSuperclass().getGenericSuperclass()).getActualTypeArguments()[1]).newInstance();
+            response = (U) ((Class) ((ParameterizedType) this.getClass().getSuperclass()
+                    .getGenericSuperclass()).getActualTypeArguments()[1]).newInstance();
 
             if (requestResult.getInputStream() != null) {
                 res = convertStreamToString(requestResult.getInputStream());
                 response.populate(requestResult.getHttpStatusCode(), res);
             } else {
-                response.populate(400, "Something went wrong");
+                response.populate(400, null);
             }
         } catch (InstantiationException | IllegalAccessException e) {
             e.printStackTrace();
@@ -64,34 +75,27 @@ public abstract class HttpRequestHandler<T extends RequestBody, U extends Respon
     @Override
     protected abstract void onPostExecute(U result);
 
-    private RequestResult makeRequest(String ServerURL, String data, HttpRequestMethods method) {
+    private RequestResult makeRequest(String ServerURL, String data, HttpRequestMethods method) throws IOException {
 
-        InputStream inputStream = null;
-        int response = 0;
-        try {
-            URL url = new URL(ServerURL);
-            HttpURLConnection cc = (HttpURLConnection)
-                    url.openConnection();
-            cc.setConnectTimeout(5000);
-            cc.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
-            cc.setRequestMethod(method.name());
-            cc.setDoInput(true);
+        URL url = new URL(ServerURL);
+        HttpURLConnection cc = (HttpURLConnection)
+                url.openConnection();
+        cc.setConnectTimeout(5000);
+        cc.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+        cc.setRequestMethod(method.name());
+        cc.setDoInput(true);
 
-            if (isSendingData(method)) {
-                cc.setDoOutput(true);
-                cc.connect();
-                DataOutputStream dos = new DataOutputStream(cc.getOutputStream());
-                dos.writeBytes(data);
-                dos.flush();
-                dos.close();
-            }
-
-            response = cc.getResponseCode();
-            inputStream = isSuccessResponse(response) ? cc.getInputStream() : cc.getErrorStream();
-
-        } catch (Exception e) {
-            Log.e(LOG_TAG, "Error in GetData", e);
+        if (isSendingData(method)) {
+            cc.setDoOutput(true);
+            cc.connect();
+            DataOutputStream dos = new DataOutputStream(cc.getOutputStream());
+            dos.writeBytes(data);
+            dos.flush();
+            dos.close();
         }
+
+        int response = cc.getResponseCode();
+        InputStream inputStream = isSuccessResponse(response) ? cc.getInputStream() : cc.getErrorStream();
         return new RequestResult(inputStream, response);
     }
 

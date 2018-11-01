@@ -53,13 +53,18 @@ public class LoginActivity extends AppCompatActivity {
                 new RegisterRequestHandler() {
                     @Override
                     protected void onPostExecute(RegisterResponse result) {
-                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                        intent.putExtra("response", result);
-                        startActivity(intent);
-                        Log.d(LOG_TAG, "Result: " + result);
+                        if (result.getHttpStatusCode() == 400) {
+                            Toast.makeText(registerBtn.getContext(),
+                                    "Nie można zarejestrować nowego użytkownika, ponieważ nie ma dostępu do internetu",
+                                    Toast.LENGTH_LONG).show();
+                        } else {
+                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                            intent.putExtra("response", result);
+                            startActivity(intent);
+                            Log.d(LOG_TAG, "Result: " + result);
+                        }
                     }
                 }.execute(requestData);
-                Toast.makeText(LoginActivity.this, "test", Toast.LENGTH_SHORT).show();
             }
         });
     }
