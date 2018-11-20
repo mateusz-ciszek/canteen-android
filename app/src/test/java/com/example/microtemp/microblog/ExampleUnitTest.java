@@ -1,5 +1,6 @@
 package com.example.microtemp.microblog;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -14,4 +15,37 @@ public class ExampleUnitTest {
     public void addition_isCorrect() {
         assertEquals(4, 2 + 2);
     }
-}
+
+    @Test
+    public void testRetypePassword() {
+        String password="halo";
+        String retypePassword="halo";
+        RegisterActivity registerActivity =new RegisterActivity();
+
+                assertEquals(true, registerActivity.checkRetypePassword(password,retypePassword));
+        }
+
+    @Test
+    public void testPassword() {
+        String password="Haslo123";
+        RegisterActivity registerActivity =new RegisterActivity();
+        assertEquals(true, registerActivity.checkPassword(password));
+    }
+
+    @Test
+    public void testMail() {
+        String mail="dawid@wp.pl";
+        RegisterActivity registerActivity =new RegisterActivity();
+        assertEquals(true, registerActivity.checkEmail(mail));
+    }
+
+    @Test
+    public void testName() {
+        String name="Dawid";
+        RegisterActivity registerActivity =new RegisterActivity();
+
+        assertEquals(true, registerActivity.checkName(name));
+    }
+
+    }
+
