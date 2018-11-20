@@ -43,7 +43,6 @@ public class ExampleUnitTest {
     public void testName() {
         String name="Dawid";
         RegisterActivity registerActivity =new RegisterActivity();
-
         assertEquals(true, registerActivity.checkName(name));
     }
 

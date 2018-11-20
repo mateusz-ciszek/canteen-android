@@ -43,6 +43,7 @@ public class RegisterActivity extends AppCompatActivity {
         registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 if (check() == true) {
                     RegisterRequestBody requestBody = RegisterRequestBody.builder()
                             .email(email.getText().toString())
@@ -80,52 +81,70 @@ public class RegisterActivity extends AppCompatActivity {
             } });
 
     }
+
     public boolean check()
     {
-    boolean isGood=true;
-    boolean goodPassword=true;
-    String patternPassword = "(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,}";
-    if(!password.getText().toString().matches(patternPassword))
-    {
-        isGood=false;
-        Toast.makeText(registerBtn.getContext(),
-                "Weak password",
-                Toast.LENGTH_LONG).show();
+    if(checkPassword(password.getText().toString())&&
+        checkName(surname.getText().toString())&&
+        checkName(name.getText().toString())&&
+        checkRetypePassword(password.getText().toString() , retype_password.getText().toString())) {
+        return true;
     }
-    String patternName="(?=.*[a-z])(?=.*[A-Z]).{3,}";
-        if(!name.getText().toString().matches(patternName))
+    else {
+        return false;
+    }
+    }
+
+    public boolean checkPassword(String password)
+    {
+        String patternPassword = "(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,}";
+        if(!password.matches(patternPassword))
         {
-            isGood=false;
+            Toast.makeText(registerBtn.getContext(),
+                    "Weak password",
+                    Toast.LENGTH_LONG).show();
+            return false;
+        }
+        return true;
+    }
+
+    public boolean checkName(String name)
+    {
+        String patternName="(?=.*[a-z])(?=.*[A-Z]).{3,}";
+        if(!name.matches(patternName))
+        {
             Toast.makeText(registerBtn.getContext(),
                     "Bad name",
                     Toast.LENGTH_LONG).show();
+            return false;
         }
+        return true;
+    }
 
-        if(!surname.getText().toString().matches(patternName))
-        {
-            isGood=false;
-            Toast.makeText(registerBtn.getContext(),
-                    "Bad surname",
-                    Toast.LENGTH_LONG).show();
-        }
-        if(password.getText().toString().equals(retype_password.getText().toString())) {
-        }
-            else{
-            isGood=false;
-            Toast.makeText(registerBtn.getContext(),
-                    "Password different",
-                    Toast.LENGTH_LONG).show();
-        }
+    public boolean checkEmail(String mail)
+    {
         String EMAIL_VERIFICATION = "^([\\w-\\.]+){1,64}@([\\w&&[^_]]+){2,255}.[a-z]{2,}$";
-        if(!email.getText().toString().matches(EMAIL_VERIFICATION))
+        if(!mail.matches(EMAIL_VERIFICATION))
         {
-            isGood=false;
             Toast.makeText(registerBtn.getContext(),
                     "Bad mail",
                     Toast.LENGTH_LONG).show();
+            return false;
         }
-
-    return isGood;
+        return true;
     }
+
+    public boolean checkRetypePassword(String password,String retypePassword)
+    {
+        if(!password.equals(retypePassword))
+        {
+            Toast.makeText(registerBtn.getContext(),
+                    "Password different",
+                    Toast.LENGTH_LONG).show();
+            return false;
+        }
+        return true;
+    }
+
     }
 
