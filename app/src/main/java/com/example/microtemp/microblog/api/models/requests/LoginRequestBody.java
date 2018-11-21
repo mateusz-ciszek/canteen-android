@@ -7,15 +7,12 @@ import lombok.Setter;
 @Getter
 @Setter
 @Builder
-public class RegisterRequestBody extends RequestBody {
+public class LoginRequestBody extends RequestBody {
     private String email;
     private String password;
-    private String firstName;
-    private String lastName;
-    private Boolean admin;
 
     @Override
     public String getUrl() {
-        return "/user/signup";
+        return "/user/login";
     }
 }
