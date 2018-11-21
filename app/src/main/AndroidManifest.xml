@@ -27,8 +27,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".RegisterActivity"></activity>
-        <activity android:name=".MenuActivity"></activity>
+    <activity android:name=".RegisterActivity"></activity>
+    <activity android:name=".MenuActivity"></activity>
+        <activity android:name=".AdminActivity"></activity>
+        <activity android:name=".AddDishActivity"></activity>
     </application>
 
 </manifest>
