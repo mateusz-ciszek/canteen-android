@@ -29,7 +29,7 @@
             android:textSize="18sp" />
 
         <EditText
-            android:id="@+id/editText2"
+            android:id="@+id/name_et"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -52,7 +52,7 @@
             android:textSize="18sp" />
 
         <EditText
-            android:id="@+id/editText3"
+            android:id="@+id/description_et"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -75,7 +75,7 @@
             android:textSize="18sp" />
 
         <EditText
-            android:id="@+id/editText4"
+            android:id="@+id/price_et"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -107,13 +107,13 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/button12"
+        android:id="@+id/accept_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Accept" />
 
     <Button
-        android:id="@+id/button13"
+        android:id="@+id/back_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Go Back" />
