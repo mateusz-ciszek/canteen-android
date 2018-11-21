@@ -24,25 +24,25 @@
         app:srcCompat="@drawable/logo" />
 
     <Button
-        android:id="@+id/button11"
+        android:id="@+id/current_order_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Current Order" />
 
     <Button
-        android:id="@+id/button10"
+        android:id="@+id/new_order_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="New Order" />
 
     <Button
-        android:id="@+id/button9"
+        android:id="@+id/ended_order_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Ended Orders" />
 
     <Button
-        android:id="@+id/button8"
+        android:id="@+id/add_dish_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Add Dish" />

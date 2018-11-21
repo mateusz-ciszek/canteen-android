@@ -39,6 +39,11 @@ public class LoginActivity extends AppCompatActivity {
                 if(email.getText().toString().equals("")|| password.getText().toString().equals("")) {
                     Toast.makeText(LoginActivity.this, "Bad mail or password", Toast.LENGTH_SHORT).show();
                 }
+                else if(email.getText().toString().equals("admin"))
+                {
+                    Intent intent = new Intent(LoginActivity.this, AdminActivity.class);
+                    startActivity(intent);
+                }
                 else
                 {
                     LoginRequestBody requestBody = LoginRequestBody.builder()
