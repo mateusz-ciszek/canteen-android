@@ -6,4 +6,14 @@
     android:layout_height="match_parent"
     tools:context=".FoodListActivity">
 
+    <ListView
+        android:id="@+id/food_lv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" >
+
+    </ListView>
+
+
 </android.support.constraint.ConstraintLayout>
