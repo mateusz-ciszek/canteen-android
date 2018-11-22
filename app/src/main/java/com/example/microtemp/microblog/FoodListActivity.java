@@ -50,9 +50,18 @@ public class FoodListActivity extends AppCompatActivity {
                 // TODO Auto-generated method stub
 
                 FoodListActivity.actPostion = position;
+                if(TypeDishActivity.menu.get(TypeDishActivity.actPostion).getFoods().get(position).getAdditions().size()==0)
+                {
+                    Toast.makeText(FoodListActivity.this, Integer.toString(position), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(FoodListActivity.this, "Order Accepted", Toast.LENGTH_SHORT).show();
+                    mIntent = new Intent(FoodListActivity.this, TypeDishActivity.class);
+                    startActivity(mIntent);
+                }
+                else{
                 Toast.makeText(FoodListActivity.this, Integer.toString(position), Toast.LENGTH_SHORT).show();
                 mIntent = new Intent(FoodListActivity.this, AdditionsActivity.class);
                 startActivity(mIntent);
+                }
             }
         });
     }
