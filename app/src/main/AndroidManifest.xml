@@ -30,9 +30,8 @@
         <activity android:name=".AddDishActivity" />
         <activity android:name=".TypeDishActivity" />
         <activity android:name=".FoodListActivity" />
-        <activity android:name=".AdditionsActivity"></activity>
-
+        <activity android:name=".AdditionsActivity" />
+        <activity android:name=".CurrentOrderActivity"></activity>
     </application>
-
 
 </manifest>
