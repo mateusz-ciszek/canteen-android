@@ -82,7 +82,7 @@ public class LoginActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(LoginResponse result) {
             if (result.getHttpStatusCode() == 200) {
-                Intent intent = new Intent(App.getContext(), TypeDishActivity.class);
+                Intent intent = new Intent(App.getContext(), MenuActivity.class);
                 App.getContext().startActivity(intent);
             } else {
                 Toast.makeText(App.getContext(),
