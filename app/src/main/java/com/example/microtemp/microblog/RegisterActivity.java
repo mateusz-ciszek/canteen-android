@@ -17,18 +17,18 @@ import com.example.microtemp.microblog.api.models.responses.RegisterResponse;
 
 public class RegisterActivity extends AppCompatActivity {
     private static String REG_TAG = "RegisterActivity";
-    Button backBtn,registerBtn;
-    EditText email,password,surname,name,retype_password;
+    Button backBtn, registerBtn;
+    EditText email, password, surname, name, retype_password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        email = findViewById(R.id.email_register) ;
-        password = findViewById(R.id.password) ;
-        surname=findViewById(R.id.Surname);
-        retype_password=findViewById(R.id.retype_password);
-        name=findViewById(R.id.name);
+        email = findViewById(R.id.email_register);
+        password = findViewById(R.id.password);
+        surname = findViewById(R.id.Surname);
+        retype_password = findViewById(R.id.retype_password);
+        name = findViewById(R.id.name);
         backBtn = findViewById(R.id.back_button);
 
         backBtn.setOnClickListener(new View.OnClickListener() {
@@ -78,28 +78,25 @@ public class RegisterActivity extends AppCompatActivity {
                         }
                     }.execute(requestData);
                 }
-            } });
+            }
+        });
 
     }
 
-    public boolean check()
-    {
-    if(checkPassword(password.getText().toString())&&
-        checkName(surname.getText().toString())&&
-        checkName(name.getText().toString())&&
-        checkRetypePassword(password.getText().toString() , retype_password.getText().toString())) {
-        return true;
-    }
-    else {
-        return false;
-    }
+    public boolean check() {
+        if (checkPassword(password.getText().toString()) &&
+                checkName(surname.getText().toString()) &&
+                checkName(name.getText().toString()) &&
+                checkRetypePassword(password.getText().toString(), retype_password.getText().toString())) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
-    public boolean checkPassword(String password)
-    {
+    public boolean checkPassword(String password) {
         String patternPassword = "(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,}";
-        if(!password.matches(patternPassword))
-        {
+        if (!password.matches(patternPassword)) {
             Toast.makeText(registerBtn.getContext(),
                     "Weak password",
                     Toast.LENGTH_LONG).show();
@@ -108,11 +105,9 @@ public class RegisterActivity extends AppCompatActivity {
         return true;
     }
 
-    public boolean checkName(String name)
-    {
-        String patternName="(?=.*[a-z])(?=.*[A-Z]).{3,}";
-        if(!name.matches(patternName))
-        {
+    public boolean checkName(String name) {
+        String patternName = "(?=.*[a-z])(?=.*[A-Z]).{3,}";
+        if (!name.matches(patternName)) {
             Toast.makeText(registerBtn.getContext(),
                     "Bad name",
                     Toast.LENGTH_LONG).show();
@@ -121,11 +116,9 @@ public class RegisterActivity extends AppCompatActivity {
         return true;
     }
 
-    public boolean checkEmail(String mail)
-    {
+    public boolean checkEmail(String mail) {
         String EMAIL_VERIFICATION = "^([\\w-\\.]+){1,64}@([\\w&&[^_]]+){2,255}.[a-z]{2,}$";
-        if(!mail.matches(EMAIL_VERIFICATION))
-        {
+        if (!mail.matches(EMAIL_VERIFICATION)) {
             Toast.makeText(registerBtn.getContext(),
                     "Bad mail",
                     Toast.LENGTH_LONG).show();
@@ -134,10 +127,8 @@ public class RegisterActivity extends AppCompatActivity {
         return true;
     }
 
-    public boolean checkRetypePassword(String password,String retypePassword)
-    {
-        if(!password.equals(retypePassword))
-        {
+    public boolean checkRetypePassword(String password, String retypePassword) {
+        if (!password.equals(retypePassword)) {
             Toast.makeText(registerBtn.getContext(),
                     "Password different",
                     Toast.LENGTH_LONG).show();
@@ -146,5 +137,5 @@ public class RegisterActivity extends AppCompatActivity {
         return true;
     }
 
-    }
+}
 
