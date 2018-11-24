@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.microtemp.microblog.Activities.menu.MenuListsActivity;
 import com.example.microtemp.microblog.api.HttpRequestData;
 import com.example.microtemp.microblog.api.HttpRequestMethods;
 import com.example.microtemp.microblog.api.handlers.LoginRequestHandler;
@@ -82,7 +83,7 @@ public class LoginActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(LoginResponse result) {
             if (result.getHttpStatusCode() == 200) {
-                Intent intent = new Intent(App.getContext(), MenuActivity.class);
+                Intent intent = new Intent(App.getContext(), MenuListsActivity.class);
                 App.getContext().startActivity(intent);
             } else {
                 Toast.makeText(App.getContext(),

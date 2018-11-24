@@ -16,7 +16,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        a
         <activity android:name=".MainActivity" />
         <activity android:name=".LoginActivity">
             <intent-filter>
@@ -26,13 +25,13 @@
             </intent-filter>
         </activity>
         <activity android:name=".RegisterActivity" />
-        <activity android:name=".MenuActivity" />
+        <activity android:name=".Activities.menu.MenuListsActivity" />
         <activity android:name=".AdminActivity" />
         <activity android:name=".AddDishActivity" />
         <activity android:name=".TypeDishActivity" />
         <activity android:name=".FoodListActivity" />
         <activity android:name=".AdditionsActivity" />
-        <activity android:name=".CurrentOrderActivity"></activity>
+        <activity android:name=".CurrentOrderActivity" />
     </application>
 
 </manifest>
