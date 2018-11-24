@@ -121,14 +121,13 @@ public class RegisterActivity extends AppCompatActivity {
             Context context = App.getContext();
             if (result.getHttpStatusCode() == 400) {
                 Toast.makeText(context,
-                        "Nie można zarejestrować nowego użytkownika, "
-                                + "ponieważ nie ma dostępu do internetu",
+                        "Could not register new user. No internet connection",
                         Toast.LENGTH_LONG).show();
             } else if (result.getHttpStatusCode() == 201) {
                 Intent intent = new Intent(context, LoginActivity.class);
                 context.startActivity(intent);
                 Toast.makeText(context,
-                        "Uzytkownik zarejestrowany",
+                        "New user registered",
                         Toast.LENGTH_LONG).show();
             } else {
                 Intent intent = new Intent(context, MainActivity.class);
