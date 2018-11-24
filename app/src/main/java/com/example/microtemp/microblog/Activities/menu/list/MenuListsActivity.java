@@ -21,7 +21,7 @@ public class MenuListsActivity extends AppCompatActivity implements AdapterConta
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_menu);
+        setContentView(R.layout.activity_menu_list);
 
         this.menusRecyclerView = findViewById(R.id.menusRecyclerView);
         this.menusRecyclerView.setHasFixedSize(true);
