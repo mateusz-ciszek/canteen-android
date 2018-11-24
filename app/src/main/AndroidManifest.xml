@@ -25,14 +25,14 @@
             </intent-filter>
         </activity>
         <activity android:name=".RegisterActivity" />
-        <activity android:name=".Activities$menu$list.MenuListsActivity" />
+        <activity android:name=".Activities.menu.list.MenuListsActivity" />
         <activity android:name=".AdminActivity" />
         <activity android:name=".AddDishActivity" />
         <activity android:name=".TypeDishActivity" />
         <activity android:name=".FoodListActivity" />
         <activity android:name=".AdditionsActivity" />
         <activity android:name=".CurrentOrderActivity" />
-        <activity android:name=".Activities$menu.MenuActivity" />
+        <activity android:name=".Activities.menu.MenuActivity" />
     </application>
 
 </manifest>
