@@ -58,7 +58,7 @@ public abstract class HttpRequestHandler<T extends RequestBody, U extends Respon
             response = (U) ((Class) ((ParameterizedType) this.getClass().getSuperclass()
                     .getGenericSuperclass()).getActualTypeArguments()[1]).newInstance();
 
-            if (requestResult.getInputStream() != null) {
+            if (requestResult != null && requestResult.getInputStream() != null) {
                 res = convertStreamToString(requestResult.getInputStream());
                 response.populate(requestResult.getHttpStatusCode(), res);
             } else {
