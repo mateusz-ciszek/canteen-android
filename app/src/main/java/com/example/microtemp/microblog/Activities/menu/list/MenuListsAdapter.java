@@ -1,4 +1,4 @@
-package com.example.microtemp.microblog.Activities.menu;
+package com.example.microtemp.microblog.Activities.menu.list;
 
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;

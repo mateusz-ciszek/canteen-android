@@ -8,7 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.microtemp.microblog.Activities.menu.MenuListsActivity;
+import com.example.microtemp.microblog.Activities.menu.list.MenuListsActivity;
 import com.example.microtemp.microblog.api.HttpRequestData;
 import com.example.microtemp.microblog.api.HttpRequestMethods;
 import com.example.microtemp.microblog.api.handlers.LoginRequestHandler;
