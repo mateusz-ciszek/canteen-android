@@ -1,8 +1,8 @@
 package com.example.microtemp.microblog;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -37,7 +37,8 @@ public class LoginActivity extends AppCompatActivity {
         registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+                Intent intent = new Intent(LoginActivity.this,
+                        RegisterActivity.class);
                 startActivity(intent);
             }
         });
@@ -45,7 +46,9 @@ public class LoginActivity extends AppCompatActivity {
 
     private void loginButtonHandler() {
         if (isEmptyEmailOrPassword()) {
-            makeToast("Bad mail or password");
+            Toast.makeText(LoginActivity.this,
+                    "Bad mail or password",
+                    Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(LoginActivity.this, TypeDishActivity.class);
             startActivity(intent);
         } else if (loginAsAdminMock()) {
@@ -61,17 +64,7 @@ public class LoginActivity extends AppCompatActivity {
                     .method(HttpRequestMethods.POST)
                     .build();
 
-            new LoginRequestHandler() {
-                @Override
-                protected void onPostExecute(LoginResponse result) {
-                    if (result.getHttpStatusCode() == 200) {
-                        Intent intent = new Intent(LoginActivity.this, TypeDishActivity.class);
-                        startActivity(intent);
-                    } else {
-                        makeToast("Could not log in. Check your email and password");
-                    }
-                }
-            }.execute(requestData);
+            new LoginRequestHandlerImpl().execute(requestData);
         }
     }
 
@@ -83,7 +76,19 @@ public class LoginActivity extends AppCompatActivity {
         return email.getText().toString().equals("") || password.getText().toString().equals("");
     }
 
-    private void makeToast(String message) {
-        Toast.makeText(LoginActivity.this, message, Toast.LENGTH_SHORT).show();
+
+    private static class LoginRequestHandlerImpl extends LoginRequestHandler {
+
+        @Override
+        protected void onPostExecute(LoginResponse result) {
+            if (result.getHttpStatusCode() == 200) {
+                Intent intent = new Intent(App.getContext(), TypeDishActivity.class);
+                App.getContext().startActivity(intent);
+            } else {
+                Toast.makeText(App.getContext(),
+                        "Could not log in. Check your email and password",
+                        Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 }
