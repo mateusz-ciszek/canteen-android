@@ -1,5 +1,6 @@
 package com.example.microtemp.microblog;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -18,7 +19,7 @@ import com.example.microtemp.microblog.api.models.responses.RegisterResponse;
 public class RegisterActivity extends AppCompatActivity {
     private static String REG_TAG = "RegisterActivity";
     Button backBtn, registerBtn;
-    EditText email, password, surname, name, retype_password;
+    EditText email, password, surname, name, passwordRetype;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +28,7 @@ public class RegisterActivity extends AppCompatActivity {
         email = findViewById(R.id.email_register);
         password = findViewById(R.id.password);
         surname = findViewById(R.id.Surname);
-        retype_password = findViewById(R.id.retype_password);
+        passwordRetype = findViewById(R.id.retype_password);
         name = findViewById(R.id.name);
         backBtn = findViewById(R.id.back_button);
 
@@ -44,7 +45,7 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if (check() == true) {
+                if (check()) {
                     RegisterRequestBody requestBody = RegisterRequestBody.builder()
                             .email(email.getText().toString())
                             .password(password.getText().toString())
@@ -56,27 +57,7 @@ public class RegisterActivity extends AppCompatActivity {
                             .requestBody(requestBody)
                             .method(HttpRequestMethods.POST)
                             .build();
-                    new RegisterRequestHandler() {
-                        @Override
-                        protected void onPostExecute(RegisterResponse result) {
-                            if (result.getHttpStatusCode() == 400) {
-                                Toast.makeText(registerBtn.getContext(),
-                                        "Nie można zarejestrować nowego użytkownika, ponieważ nie ma dostępu do internetu",
-                                        Toast.LENGTH_LONG).show();
-                            } else if (result.getHttpStatusCode() == 201) {
-                                Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
-                                startActivity(intent);
-                                Toast.makeText(registerBtn.getContext(),
-                                        "Uzytkownik zarejestrowany",
-                                        Toast.LENGTH_LONG).show();
-                            } else {
-                                Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
-                                intent.putExtra("response", result);
-                                startActivity(intent);
-                                Log.d(REG_TAG, "Result: " + result);
-                            }
-                        }
-                    }.execute(requestData);
+                    new RegisterRequestHandlerImpl().execute(requestData);
                 }
             }
         });
@@ -84,14 +65,10 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     public boolean check() {
-        if (checkPassword(password.getText().toString()) &&
+        return checkPassword(password.getText().toString()) &&
                 checkName(surname.getText().toString()) &&
                 checkName(name.getText().toString()) &&
-                checkRetypePassword(password.getText().toString(), retype_password.getText().toString())) {
-            return true;
-        } else {
-            return false;
-        }
+                checkRetypePassword(password.getText().toString(), passwordRetype.getText().toString());
     }
 
     public boolean checkPassword(String password) {
@@ -137,5 +114,30 @@ public class RegisterActivity extends AppCompatActivity {
         return true;
     }
 
+
+    private static class RegisterRequestHandlerImpl extends RegisterRequestHandler {
+
+        @Override
+        protected void onPostExecute(RegisterResponse result) {
+            Context context = App.getContext();
+            if (result.getHttpStatusCode() == 400) {
+                Toast.makeText(context,
+                        "Nie można zarejestrować nowego użytkownika, "
+                                + "ponieważ nie ma dostępu do internetu",
+                        Toast.LENGTH_LONG).show();
+            } else if (result.getHttpStatusCode() == 201) {
+                Intent intent = new Intent(context, LoginActivity.class);
+                context.startActivity(intent);
+                Toast.makeText(context,
+                        "Uzytkownik zarejestrowany",
+                        Toast.LENGTH_LONG).show();
+            } else {
+                Intent intent = new Intent(context, MainActivity.class);
+                intent.putExtra("response", result);
+                context.startActivity(intent);
+                Log.d(REG_TAG, "Result: " + result);
+            }
+        }
+    }
 }
 
