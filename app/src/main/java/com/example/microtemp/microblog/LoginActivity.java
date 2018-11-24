@@ -17,61 +17,22 @@ import com.example.microtemp.microblog.api.models.responses.LoginResponse;
 
 public class LoginActivity extends AppCompatActivity {
     Button loginBtn, registerBtn;
-    EditText email,password;
-
+    EditText email, password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //
         setContentView(R.layout.activity_login);
-        email = findViewById(R.id.email) ;
-        password = findViewById(R.id.password) ;
+        email = findViewById(R.id.email);
+        password = findViewById(R.id.password);
         loginBtn = findViewById(R.id.sign_in_button);
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // FIXME
-                if(email.getText().toString().equals("")|| password.getText().toString().equals("")) {
-                    Toast.makeText(LoginActivity.this, "Bad mail or password", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(LoginActivity.this, TypeDishActivity.class);
-                    startActivity(intent);
-                }
-                else if(email.getText().toString().equals("admin"))
-                {
-                    Intent intent = new Intent(LoginActivity.this, AdminActivity.class);
-                    startActivity(intent);
-                }
-                else
-                {
-                    LoginRequestBody requestBody = LoginRequestBody.builder()
-                            .email(email.getText().toString())
-                            .password(password.getText().toString())
-                            .build();
-                    HttpRequestData<LoginRequestBody> requestData = HttpRequestData.<LoginRequestBody>builder()
-                            .requestBody(requestBody)
-                            .method(HttpRequestMethods.POST)
-                            .build();
-
-                    new LoginRequestHandler() {
-                        @Override
-                        protected void onPostExecute(LoginResponse result) {
-                            if(result.getHttpStatusCode()==200) {
-                                Intent intent = new Intent(LoginActivity.this, TypeDishActivity.class);
-                                startActivity(intent);
-                            }
-                            else {
-                                // FIXX bledy
-                                Toast.makeText(LoginActivity.this, "Nie mozna sie zalogowac", Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    }.execute(requestData);
-
-
-                }
-           //  new MakeNetworkCall().execute("http://212.191.92.88:5101/"+"email/"+email.getText() +"/haslo/"+ password.getText(), "Get");
+                loginButtonHandler();
             }
         });
+
         registerBtn = findViewById(R.id.register_button);
         registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,9 +41,49 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-
     }
 
-}
+    private void loginButtonHandler() {
+        if (isEmptyEmailOrPassword()) {
+            makeToast("Bad mail or password");
+            Intent intent = new Intent(LoginActivity.this, TypeDishActivity.class);
+            startActivity(intent);
+        } else if (loginAsAdminMock()) {
+            Intent intent = new Intent(LoginActivity.this, AdminActivity.class);
+            startActivity(intent);
+        } else {
+            LoginRequestBody requestBody = LoginRequestBody.builder()
+                    .email(email.getText().toString())
+                    .password(password.getText().toString())
+                    .build();
+            HttpRequestData<LoginRequestBody> requestData = HttpRequestData.<LoginRequestBody>builder()
+                    .requestBody(requestBody)
+                    .method(HttpRequestMethods.POST)
+                    .build();
 
+            new LoginRequestHandler() {
+                @Override
+                protected void onPostExecute(LoginResponse result) {
+                    if (result.getHttpStatusCode() == 200) {
+                        Intent intent = new Intent(LoginActivity.this, TypeDishActivity.class);
+                        startActivity(intent);
+                    } else {
+                        makeToast("Could not log in. Check your email and password");
+                    }
+                }
+            }.execute(requestData);
+        }
+    }
+
+    private boolean loginAsAdminMock() {
+        return email.getText().toString().equals("admin");
+    }
+
+    private boolean isEmptyEmailOrPassword() {
+        return email.getText().toString().equals("") || password.getText().toString().equals("");
+    }
+
+    private void makeToast(String message) {
+        Toast.makeText(LoginActivity.this, message, Toast.LENGTH_SHORT).show();
+    }
+}
