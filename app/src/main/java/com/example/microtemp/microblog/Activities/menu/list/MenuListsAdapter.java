@@ -33,6 +33,7 @@ class MenuListsAdapter extends RecyclerView.Adapter<MenuListsViewHolder> {
     public void onBindViewHolder(@NonNull MenuListsViewHolder holder, int position) {
         holder.name.setText(this.menus.get(position).getName());
         holder._id = this.menus.get(position).get_id();
+        holder.menu = this.menus.get(position);
     }
 
     @Override

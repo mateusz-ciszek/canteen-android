@@ -1,25 +1,31 @@
 package com.example.microtemp.microblog.Activities.menu.list;
 
+import android.content.Intent;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.example.microtemp.microblog.Activities.menu.MenuActivity;
 import com.example.microtemp.microblog.R;
+import com.example.microtemp.microblog.models.Menu;
 
 class MenuListsViewHolder extends RecyclerView.ViewHolder {
     TextView name;
     String _id;
+    Menu menu;
 
-    MenuListsViewHolder(ConstraintLayout itemView) {
+    MenuListsViewHolder(final ConstraintLayout itemView) {
         super(itemView);
         this.name = itemView.findViewById(R.id.menuNameTextView);
 
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(v.getContext(), _id, Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(itemView.getContext(), MenuActivity.class);
+                intent.putExtra("menu", menu);
+                itemView.getContext().startActivity(intent);
+
             }
         });
     }
