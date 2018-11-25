@@ -58,10 +58,6 @@ public class LoginActivity extends AppCompatActivity {
             // FIXME dodać ikonę na pasku akcji do koszyka z przygotowywanym zamówieniem
             Intent intent = new Intent(App.getContext(), OrderCartActivity.class);
             startActivity(intent);
-        } else if (loginAsAdminMock()) {
-            Intent intent
-                    = new Intent(LoginActivity.this, AdminDashboardActivity.class);
-            startActivity(intent);
         } else {
             LoginRequestBody requestBody = LoginRequestBody.builder()
                     .email(email.getText().toString())
@@ -74,10 +70,6 @@ public class LoginActivity extends AppCompatActivity {
 
             new LoginRequestHandlerImpl().execute(requestData);
         }
-    }
-
-    private boolean loginAsAdminMock() {
-        return email.getText().toString().equals("admin");
     }
 
     private boolean isEmailOrPasswordEmpty() {
