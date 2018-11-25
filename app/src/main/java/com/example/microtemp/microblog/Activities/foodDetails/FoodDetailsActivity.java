@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
@@ -60,5 +61,10 @@ public class FoodDetailsActivity extends AppCompatActivity {
                         Toast.LENGTH_SHORT).show();
             }
         });
+
+        this.foodAdditionsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        FoodAdditionAdapter adapter = new FoodAdditionAdapter(this.food.getFoodAdditions());
+        this.foodAdditionsRecyclerView.setAdapter(adapter);
     }
 }

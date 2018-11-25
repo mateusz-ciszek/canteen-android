@@ -1,5 +1,7 @@
 package com.example.microtemp.microblog.models;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -13,5 +15,6 @@ public class Food implements Serializable {
     private String name;
     private String description;
     private double price;
-    private List<Addition> additions;
+    @SerializedName("additions")
+    private List<FoodAddition> foodAdditions;
 }

@@ -7,7 +7,7 @@ import lombok.Setter;
 
 @Setter
 @Getter
-public class Addition implements Serializable {
+public class FoodAddition implements Serializable {
     private String _id;
     private String name;
     private double price;
