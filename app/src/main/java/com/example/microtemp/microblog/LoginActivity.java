@@ -8,7 +8,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.microtemp.microblog.Activities.menu.list.MenuListsActivity;
+import com.example.microtemp.microblog.activity.administration.dashboard.AdminDashboardActivity;
+import com.example.microtemp.microblog.activity.menu.list.MenuListsActivity;
 import com.example.microtemp.microblog.api.HttpRequestData;
 import com.example.microtemp.microblog.api.HttpRequestMethods;
 import com.example.microtemp.microblog.api.handlers.LoginRequestHandler;
@@ -46,14 +47,13 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void loginButtonHandler() {
-        if (isEmptyEmailOrPassword()) {
+        if (isEmailOrPasswordEmpty()) {
             Toast.makeText(LoginActivity.this,
                     "Bad mail or password",
                     Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(LoginActivity.this, TypeDishActivity.class);
-            startActivity(intent);
         } else if (loginAsAdminMock()) {
-            Intent intent = new Intent(LoginActivity.this, AdminActivity.class);
+            Intent intent
+                    = new Intent(LoginActivity.this, AdminDashboardActivity.class);
             startActivity(intent);
         } else {
             LoginRequestBody requestBody = LoginRequestBody.builder()
@@ -73,7 +73,7 @@ public class LoginActivity extends AppCompatActivity {
         return email.getText().toString().equals("admin");
     }
 
-    private boolean isEmptyEmailOrPassword() {
+    private boolean isEmailOrPasswordEmpty() {
         return email.getText().toString().equals("") || password.getText().toString().equals("");
     }
 

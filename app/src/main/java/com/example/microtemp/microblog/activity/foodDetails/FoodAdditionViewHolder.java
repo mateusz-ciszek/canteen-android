@@ -1,4 +1,4 @@
-package com.example.microtemp.microblog.Activities.foodDetails;
+package com.example.microtemp.microblog.activity.foodDetails;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;

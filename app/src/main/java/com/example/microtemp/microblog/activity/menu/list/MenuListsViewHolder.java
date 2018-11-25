@@ -1,4 +1,4 @@
-package com.example.microtemp.microblog.Activities.menu.list;
+package com.example.microtemp.microblog.activity.menu.list;
 
 import android.content.Intent;
 import android.support.constraint.ConstraintLayout;
@@ -6,7 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
-import com.example.microtemp.microblog.Activities.menu.MenuActivity;
+import com.example.microtemp.microblog.activity.menu.MenuActivity;
 import com.example.microtemp.microblog.R;
 import com.example.microtemp.microblog.models.Menu;
 

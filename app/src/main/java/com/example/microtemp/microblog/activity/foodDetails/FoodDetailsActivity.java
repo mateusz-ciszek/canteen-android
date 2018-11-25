@@ -1,4 +1,4 @@
-package com.example.microtemp.microblog.Activities.foodDetails;
+package com.example.microtemp.microblog.activity.foodDetails;
 
 import android.content.Intent;
 import android.os.Bundle;

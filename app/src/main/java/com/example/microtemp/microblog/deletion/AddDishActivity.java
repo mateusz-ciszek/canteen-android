@@ -1,15 +1,17 @@
-package com.example.microtemp.microblog;
+package com.example.microtemp.microblog.deletion;
 
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.microtemp.microblog.LoginActivity;
+import com.example.microtemp.microblog.MainActivity;
+import com.example.microtemp.microblog.R;
 import com.example.microtemp.microblog.api.HttpRequestData;
 import com.example.microtemp.microblog.api.HttpRequestMethods;
 import com.example.microtemp.microblog.api.handlers.AddFoodRequestHandler;

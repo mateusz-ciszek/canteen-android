@@ -1,4 +1,4 @@
-package com.example.microtemp.microblog.Activities.menu.list;
+package com.example.microtemp.microblog.activity.menu.list;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;

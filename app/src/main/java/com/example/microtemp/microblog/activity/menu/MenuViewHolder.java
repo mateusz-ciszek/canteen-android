@@ -1,4 +1,4 @@
-package com.example.microtemp.microblog.Activities.menu;
+package com.example.microtemp.microblog.activity.menu;
 
 import android.content.Intent;
 import android.support.constraint.ConstraintLayout;
@@ -8,7 +8,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.microtemp.microblog.Activities.foodDetails.FoodDetailsActivity;
+import com.example.microtemp.microblog.activity.foodDetails.FoodDetailsActivity;
 import com.example.microtemp.microblog.App;
 import com.example.microtemp.microblog.R;
 import com.example.microtemp.microblog.models.Food;

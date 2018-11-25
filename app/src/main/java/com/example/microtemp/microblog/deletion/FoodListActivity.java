@@ -1,4 +1,4 @@
-package com.example.microtemp.microblog;
+package com.example.microtemp.microblog.deletion;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -9,14 +9,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.example.microtemp.microblog.api.Request;
-import com.example.microtemp.microblog.api.data.Example;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
+import com.example.microtemp.microblog.R;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class FoodListActivity extends AppCompatActivity {
     private ArrayList<String> list = new ArrayList<String>(); //Initialize ArrayList with String data type
