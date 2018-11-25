@@ -9,7 +9,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.microtemp.microblog.App;
 import com.example.microtemp.microblog.OrderCart;
 import com.example.microtemp.microblog.R;
 import com.example.microtemp.microblog.models.Food;
@@ -56,6 +58,8 @@ public class FoodDetailsActivity extends AppCompatActivity implements PriceConta
             @Override
             public void onClick(View v) {
                 OrderCart.getInstance().addItem(food, adapter.getSelected());
+                Toast.makeText(App.getContext(), "Food added to cart", Toast.LENGTH_SHORT)
+                        .show();
             }
         });
     }
