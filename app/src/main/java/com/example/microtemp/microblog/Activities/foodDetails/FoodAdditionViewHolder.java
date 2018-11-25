@@ -10,23 +10,27 @@ import com.example.microtemp.microblog.models.FoodAddition;
 
 import java.util.Locale;
 
-public class FoodAdditionViewHolder extends RecyclerView.ViewHolder {
+class FoodAdditionViewHolder extends RecyclerView.ViewHolder {
     private FoodAddition foodAddition;
     private CheckBox foodAdditionCheckBox;
     private TextView foodAdditionPriceTextView;
 
-    public FoodAdditionViewHolder(View itemView) {
+    FoodAdditionViewHolder(View itemView) {
         super(itemView);
 
         this.foodAdditionCheckBox = itemView.findViewById(R.id.foodAdditionCheckBox);
         this.foodAdditionPriceTextView = itemView.findViewById(R.id.foodAdditionPriceTextView);
     }
 
-    public void setFoodAddition(FoodAddition foodAddition) {
+    void setFoodAddition(FoodAddition foodAddition) {
         this.foodAddition = foodAddition;
         this.foodAdditionCheckBox.setText(this.foodAddition.getName());
         this.foodAdditionPriceTextView.setText(String.format(Locale.getDefault(),
                 "%.2f zł",
                 this.foodAddition.getPrice()));
+    }
+
+    CheckBox getFoodAdditionCheckBox() {
+        return this.foodAdditionCheckBox;
     }
 }

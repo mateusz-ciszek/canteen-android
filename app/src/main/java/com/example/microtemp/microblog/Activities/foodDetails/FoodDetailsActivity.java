@@ -16,7 +16,7 @@ import com.example.microtemp.microblog.models.Food;
 
 import java.util.Locale;
 
-public class FoodDetailsActivity extends AppCompatActivity {
+public class FoodDetailsActivity extends AppCompatActivity implements PriceContainer {
 
     private Food food;
     private TextView foodDescriptionTextView;
@@ -30,8 +30,8 @@ public class FoodDetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_food_details);
 
         this.initView();
-
         this.retrieveFood();
+        this.updatePrice(0);
     }
 
     private void initView() {
@@ -51,8 +51,6 @@ public class FoodDetailsActivity extends AppCompatActivity {
         }
 
         this.foodDescriptionTextView.setText(this.food.getDescription());
-        this.foodPriceTextView
-                .setText(String.format(Locale.getDefault(), "%.2f zł", food.getPrice()));
         this.addToCartButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -64,7 +62,15 @@ public class FoodDetailsActivity extends AppCompatActivity {
 
         this.foodAdditionsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        FoodAdditionAdapter adapter = new FoodAdditionAdapter(this.food.getFoodAdditions());
+        FoodAdditionAdapter adapter
+                = new FoodAdditionAdapter(this.food.getFoodAdditions(), this);
         this.foodAdditionsRecyclerView.setAdapter(adapter);
+    }
+
+    @Override
+    public void updatePrice(double priceIncrease) {
+        this.foodPriceTextView.setText(String.format(Locale.getDefault(),
+                "%.2f zł",
+                food.getPrice() + priceIncrease));
     }
 }
