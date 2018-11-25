@@ -60,4 +60,8 @@ public class FoodAdditionAdapter extends RecyclerView.Adapter<FoodAdditionViewHo
     public int getItemCount() {
         return this.foodAdditions.size();
     }
+
+    public List<FoodAddition> getSelected() {
+        return this.selected;
+    }
 }

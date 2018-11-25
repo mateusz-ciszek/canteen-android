@@ -9,8 +9,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.example.microtemp.microblog.OrderCart;
 import com.example.microtemp.microblog.R;
 import com.example.microtemp.microblog.models.Food;
 
@@ -29,8 +29,8 @@ public class FoodDetailsActivity extends AppCompatActivity implements PriceConta
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_food_details);
 
-        this.initView();
         this.retrieveFood();
+        this.initView();
         this.updatePrice(0);
     }
 
@@ -39,32 +39,30 @@ public class FoodDetailsActivity extends AppCompatActivity implements PriceConta
         this.foodAdditionsRecyclerView = findViewById(R.id.foodAdditionsRecyclerView);
         this.foodPriceTextView = findViewById(R.id.foodPriceTextView);
         this.addToCartButton = findViewById(R.id.addToCartButton);
-    }
-
-    private void retrieveFood() {
-        Intent intent = getIntent();
-        this.food = (Food) intent.getSerializableExtra("food");
 
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setTitle(this.food.getName());
         }
 
+        this.foodAdditionsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        final FoodAdditionAdapter adapter
+                = new FoodAdditionAdapter(this.food.getFoodAdditions(), this);
+        this.foodAdditionsRecyclerView.setAdapter(adapter);
+
         this.foodDescriptionTextView.setText(this.food.getDescription());
         this.addToCartButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(addToCartButton.getContext(),
-                        "Cart not implemented",
-                        Toast.LENGTH_SHORT).show();
+                OrderCart.getInstance().addItem(food, adapter.getSelected());
             }
         });
+    }
 
-        this.foodAdditionsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-        FoodAdditionAdapter adapter
-                = new FoodAdditionAdapter(this.food.getFoodAdditions(), this);
-        this.foodAdditionsRecyclerView.setAdapter(adapter);
+    private void retrieveFood() {
+        Intent intent = getIntent();
+        this.food = (Food) intent.getSerializableExtra("food");
     }
 
     @Override

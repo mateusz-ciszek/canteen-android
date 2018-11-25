@@ -8,9 +8,10 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.microtemp.microblog.activity.foodDetails.FoodDetailsActivity;
 import com.example.microtemp.microblog.App;
+import com.example.microtemp.microblog.OrderCart;
 import com.example.microtemp.microblog.R;
+import com.example.microtemp.microblog.activity.foodDetails.FoodDetailsActivity;
 import com.example.microtemp.microblog.models.Food;
 
 import java.util.Locale;
@@ -39,8 +40,10 @@ class MenuViewHolder extends RecyclerView.ViewHolder {
         this.addToCartButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(App.getContext(), "Cart not implemented", Toast.LENGTH_SHORT)
-                        .show();
+                OrderCart.getInstance().addItem(food);
+                Toast.makeText(App.getContext(),
+                        "Food added to cart",
+                        Toast.LENGTH_SHORT).show();
             }
         });
     }
