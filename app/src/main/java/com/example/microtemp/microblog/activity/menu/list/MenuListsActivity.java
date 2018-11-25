@@ -1,12 +1,17 @@
 package com.example.microtemp.microblog.activity.menu.list;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
 import com.example.microtemp.microblog.AdapterContainer;
 import com.example.microtemp.microblog.R;
+import com.example.microtemp.microblog.activity.cart.OrderCartActivity;
 import com.example.microtemp.microblog.api.HttpRequestData;
 import com.example.microtemp.microblog.api.HttpRequestMethods;
 import com.example.microtemp.microblog.api.handlers.AllMenusRequestHandler;
@@ -36,6 +41,25 @@ public class MenuListsActivity extends AppCompatActivity implements AdapterConta
                 .requestBody(requestBody)
                 .build();
         new AllMenusRequestHandlerImpl(this).execute(requestData);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_cart:
+                startActivity(new Intent(this, OrderCartActivity.class));
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     @Override
