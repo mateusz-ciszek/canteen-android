@@ -33,6 +33,7 @@
         <activity android:name=".AdditionsActivity" />
         <activity android:name=".CurrentOrderActivity" />
         <activity android:name=".Activities.menu.MenuActivity" />
+        <activity android:name=".Activities.foodDetails.FoodDetailsActivity" />
     </application>
 
 </manifest>

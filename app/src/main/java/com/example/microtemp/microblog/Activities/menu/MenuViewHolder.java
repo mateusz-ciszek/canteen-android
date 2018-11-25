@@ -1,5 +1,6 @@
 package com.example.microtemp.microblog.Activities.menu;
 
+import android.content.Intent;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -7,16 +8,18 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.microtemp.microblog.Activities.foodDetails.FoodDetailsActivity;
 import com.example.microtemp.microblog.App;
 import com.example.microtemp.microblog.R;
 import com.example.microtemp.microblog.models.Food;
 
+import java.util.Locale;
+
 class MenuViewHolder extends RecyclerView.ViewHolder {
-    TextView name;
-    TextView price;
-    ImageButton addToCartButton;
-    String _id;
-    Food food;
+    private Food food;
+    private TextView name;
+    private TextView price;
+    private ImageButton addToCartButton;
 
     MenuViewHolder(final ConstraintLayout itemView) {
         super(itemView);
@@ -27,7 +30,9 @@ class MenuViewHolder extends RecyclerView.ViewHolder {
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(App.getContext(), _id, Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(itemView.getContext(), FoodDetailsActivity.class);
+                intent.putExtra("food", food);
+                itemView.getContext().startActivity(intent);
             }
         });
 
@@ -40,7 +45,9 @@ class MenuViewHolder extends RecyclerView.ViewHolder {
         });
     }
 
-    void setPrice(double price) {
-        this.price.setText(Double.toString(price) + " zł");
+    void setFood(Food food) {
+        this.food = food;
+        this.name.setText(food.getName());
+        this.price.setText(String.format(Locale.getDefault(), "%.2f zł", food.getPrice()));
     }
 }
