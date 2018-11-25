@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.auth0.android.jwt.JWT;
 import com.example.microtemp.microblog.activity.administration.dashboard.AdminDashboardActivity;
+import com.example.microtemp.microblog.activity.cart.OrderCartActivity;
 import com.example.microtemp.microblog.activity.menu.list.MenuListsActivity;
 import com.example.microtemp.microblog.api.HttpRequestData;
 import com.example.microtemp.microblog.api.HttpRequestMethods;
@@ -54,6 +55,9 @@ public class LoginActivity extends AppCompatActivity {
             Toast.makeText(LoginActivity.this,
                     "Bad mail or password",
                     Toast.LENGTH_SHORT).show();
+            // FIXME dodać ikonę na pasku akcji do koszyka z przygotowywanym zamówieniem
+            Intent intent = new Intent(App.getContext(), OrderCartActivity.class);
+            startActivity(intent);
         } else if (loginAsAdminMock()) {
             Intent intent
                     = new Intent(LoginActivity.this, AdminDashboardActivity.class);
