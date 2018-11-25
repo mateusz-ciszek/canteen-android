@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.auth0.android.jwt.JWT;
 import com.example.microtemp.microblog.activity.administration.dashboard.AdminDashboardActivity;
 import com.example.microtemp.microblog.activity.menu.list.MenuListsActivity;
 import com.example.microtemp.microblog.api.HttpRequestData;
@@ -83,7 +84,16 @@ public class LoginActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(LoginResponse result) {
             if (result.getHttpStatusCode() == 200) {
-                Intent intent = new Intent(App.getContext(), MenuListsActivity.class);
+
+                JWT jwt = new JWT(result.getData().getToken());
+                boolean isAdmin = jwt.getClaim("admin").asBoolean();
+
+                Intent intent;
+                if (isAdmin) {
+                    intent = new Intent(App.getContext(), AdminDashboardActivity.class);
+                } else {
+                    intent = new Intent(App.getContext(), MenuListsActivity.class);
+                }
                 App.getContext().startActivity(intent);
             } else {
                 Toast.makeText(App.getContext(),
