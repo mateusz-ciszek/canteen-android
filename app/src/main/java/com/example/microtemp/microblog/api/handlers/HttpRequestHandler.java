@@ -1,8 +1,10 @@
 package com.example.microtemp.microblog.api.handlers;
 
 import android.os.AsyncTask;
+import android.preference.PreferenceManager;
 import android.util.Log;
 
+import com.example.microtemp.microblog.App;
 import com.example.microtemp.microblog.api.HttpRequestData;
 import com.example.microtemp.microblog.api.HttpRequestMethods;
 import com.example.microtemp.microblog.api.models.requests.RequestBody;
@@ -82,6 +84,7 @@ public abstract class HttpRequestHandler<T extends RequestBody, U extends Respon
                 url.openConnection();
         cc.setConnectTimeout(5000);
         cc.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+        cc.setRequestProperty("Authorization", "Bearer " + getToken());
         cc.setRequestMethod(method.name());
         cc.setDoInput(true);
 
@@ -134,6 +137,11 @@ public abstract class HttpRequestHandler<T extends RequestBody, U extends Respon
             }
         }
         return response.toString();
+    }
+
+    private static String getToken() {
+        return PreferenceManager
+                .getDefaultSharedPreferences(App.getContext()).getString("token", "");
     }
 
     @Getter
