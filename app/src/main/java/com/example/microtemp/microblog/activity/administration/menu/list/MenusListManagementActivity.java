@@ -1,0 +1,68 @@
+package com.example.microtemp.microblog.activity.administration.menu.list;
+
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.view.MenuInflater;
+import android.widget.Toast;
+
+import com.example.microtemp.microblog.R;
+import com.example.microtemp.microblog.api.HttpRequestData;
+import com.example.microtemp.microblog.api.HttpRequestMethods;
+import com.example.microtemp.microblog.api.handlers.AllMenusRequestHandler;
+import com.example.microtemp.microblog.api.models.requests.AllMenusRequestBody;
+import com.example.microtemp.microblog.api.models.responses.AllMenusResponse;
+
+import java.util.concurrent.ExecutionException;
+
+public class MenusListManagementActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_menus_list_management);
+
+        RecyclerView menusListRecyclerView = findViewById(R.id.menusListRecyclerView);
+
+        AllMenusResponse response = makeRequest();
+        if (response == null) return; // TODO Co zrobić jeśli nie uda się pobrać menu?
+
+        menusListRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        MenusListManagementAdapter adapter
+                = new MenusListManagementAdapter(response.getData().getMenus());
+        menusListRecyclerView.setAdapter(adapter);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(android.view.Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_list_menu, menu);
+        return true;
+    }
+
+    private AllMenusResponse makeRequest() {
+        AllMenusRequestBody requestBody = new AllMenusRequestBody();
+        HttpRequestData<AllMenusRequestBody> requestData = HttpRequestData.<AllMenusRequestBody>builder()
+                .requestBody(requestBody)
+                .method(HttpRequestMethods.GET)
+                .build();
+
+        AllMenusResponse response = null;
+        try {
+            response = new AllMenusRequestHandlerImpl().execute(requestData).get();
+        } catch (InterruptedException | ExecutionException e) {
+            e.printStackTrace();
+            Toast.makeText(getBaseContext(), "Something went wrong", Toast.LENGTH_SHORT)
+                    .show();
+            finish();
+        }
+        return response;
+    }
+
+    static class AllMenusRequestHandlerImpl extends AllMenusRequestHandler {
+        @Override
+        protected void onPostExecute(AllMenusResponse result) { }
+    }
+}

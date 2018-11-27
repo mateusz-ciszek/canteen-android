@@ -32,8 +32,8 @@
         android:text="Completed orders" />
 
     <Button
-        android:id="@+id/add_dish_button"
+        android:id="@+id/manageMenusButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Add Dish" />
+        android:text="Manage menus" />
 </LinearLayout>

@@ -37,7 +37,8 @@
         <activity android:name=".activity.administration.dashboard.AdminDashboardActivity" />
         <activity android:name=".activity.administration.order.details.OrderDetailsActivity" />
         <activity android:name=".activity.administration.order.list.OrdersListActivity" />
-        <activity android:name=".activity.cart.OrderCartActivity"></activity>
+        <activity android:name=".activity.cart.OrderCartActivity" />
+        <activity android:name=".activity.administration.menu.list.MenusListManagementActivity" />
     </application>
 
 </manifest>
