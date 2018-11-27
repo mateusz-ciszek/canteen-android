@@ -7,9 +7,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.microtemp.microblog.R;
 import com.example.microtemp.microblog.models.Menu;
+import com.example.microtemp.microblog.service.MenuService;
 
 import java.util.Locale;
 
@@ -32,6 +34,7 @@ class MenusListManagementViewHolder extends RecyclerView.ViewHolder {
                     public void onClick(DialogInterface dialog, int which) {
                         switch (which) {
                             case DialogInterface.BUTTON_POSITIVE:
+                                deleteMenu();
                                 break;
                         }
                     }
@@ -52,5 +55,29 @@ class MenusListManagementViewHolder extends RecyclerView.ViewHolder {
     void setMenu(Menu menu) {
         this.menu = menu;
         this.menuNameTextView.setText(menu.getName());
+    }
+
+    private void deleteMenu() {
+        MenuService menuService = MenuService.getInstance();
+        MenuService.DeleteMenuRequestHandlerImpl.ResponseHandler<Boolean> handler
+                = new MenuService.DeleteMenuRequestHandlerImpl.ResponseHandler<Boolean>() {
+            @Override
+            public void handle(Boolean response) {
+                if (response) {
+                    Toast.makeText(menuNameTextView.getContext(),
+                            "Menu has been deleted",
+                            Toast.LENGTH_SHORT).show();
+                    // TODO usunięcie menu z listy
+                    // (odświeżenie/usunięcie tego samego menu z adaptera)
+                } else {
+                    Toast.makeText(menuNameTextView.getContext(),
+                            "Something went wrong",
+                            Toast.LENGTH_SHORT).show();
+                }
+            }
+        };
+
+        menuService.deleteMenu(menu, handler);
+
     }
 }
