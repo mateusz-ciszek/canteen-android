@@ -33,17 +33,14 @@ public class AdminDashboardActivity extends AppCompatActivity {
             actionBar.setTitle("Administration panel");
         }
 
-        View.OnClickListener listener = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(App.getContext(), OrdersListActivity.class);
-                startActivity(intent);
-            }
-        };
 
-        this.newOrdersButton.setOnClickListener(listener);
-        this.inProgressOrdersButton.setOnClickListener(listener);
-        this.completedOrdersButton.setOnClickListener(listener);
+
+        this.newOrdersButton
+                .setOnClickListener(createListener(OrdersListActivity.OrderState.SAVED));
+        this.inProgressOrdersButton
+                .setOnClickListener(createListener(OrdersListActivity.OrderState.READY));
+        this.completedOrdersButton
+                .setOnClickListener(createListener(OrdersListActivity.OrderState.SERVED));
         this.manageMenusButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -51,5 +48,18 @@ public class AdminDashboardActivity extends AppCompatActivity {
                         MenusListManagementActivity.class));
             }
         });
+    }
+
+    private View.OnClickListener createListener(final String state) {
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(App.getContext(), OrdersListActivity.class);
+                if (state != null) {
+                    intent.putExtra("state", state);
+                }
+                startActivity(intent);
+            }
+        };
     }
 }
