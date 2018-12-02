@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">Canteen App</string>
     <string name="title_activity_login">Logowanie</string>
+    <!-- Example values, these are immediately replaced by actual data -->
+    <string name="example_price">49.99 zł</string>
+    <string name="example_order_items">Frytki, Barszcz…</string>
     <!-- Strings related to login -->
     <string name="mail_login">Username or nick</string>
     <string name="prompt_password">Password</string>
@@ -16,4 +19,8 @@
     <string name="retype_password_register">Retype password</string>
     <string name="nickname_register">Nick</string>
     <string name="action_back">Go back</string>
+    <string name="price">Price</string>
+    <!-- String related to orders -->
+    <string name="noOrders">There are no orders</string>
+    <string name="order_for">Order for </string>
 </resources>

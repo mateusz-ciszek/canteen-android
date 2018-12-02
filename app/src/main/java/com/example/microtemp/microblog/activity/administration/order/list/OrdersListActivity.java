@@ -3,6 +3,10 @@ package com.example.microtemp.microblog.activity.administration.order.list;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.TextView;
 
 import com.example.microtemp.microblog.R;
 import com.example.microtemp.microblog.api.HttpRequestData;
@@ -16,12 +20,14 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 public class OrdersListActivity extends AppCompatActivity {
-    private List<Order> orders;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_orders_list);
+
+        RecyclerView ordersRecyclerView = findViewById(R.id.ordersRecyclerView);
+        TextView noOrdersTextView = findViewById(R.id.noOrdersTextView);
 
         String state = getIntent().getStringExtra("state");
 
@@ -31,13 +37,26 @@ public class OrdersListActivity extends AppCompatActivity {
                 .requestBody(requestBody).build();
         AsyncTask requestHandler = new OrdersListRequestHandlerImpl().execute(requestData);
 
+        OrdersListResponse response;
         try {
-            OrdersListResponse response = (OrdersListResponse) requestHandler.get();
-            orders = response.getData().getOrders();
-            System.out.println(orders);
+            response = (OrdersListResponse) requestHandler.get();
         } catch (InterruptedException | ExecutionException e) {
-            e.printStackTrace();
+            ordersRecyclerView.setVisibility(View.GONE);
+            noOrdersTextView.setVisibility(View.VISIBLE);
+            return;
         }
+
+        List<Order> orders = response.getData().getOrders();
+
+        if (orders.isEmpty()) {
+            ordersRecyclerView.setVisibility(View.GONE);
+            noOrdersTextView.setVisibility(View.VISIBLE);
+            return;
+        }
+
+        ordersRecyclerView.setLayoutManager(new LinearLayoutManager(noOrdersTextView.getContext()));
+        OrdersListAdapter adapter = new OrdersListAdapter(orders);
+        ordersRecyclerView.setAdapter(adapter);
     }
 
     public class OrderState {
