@@ -21,6 +21,6 @@
     <string name="action_back">Go back</string>
     <string name="price">Price</string>
     <!-- String related to orders -->
-    <string name="noOrders">There are no orders</string>
-    <string name="order_for">Order for </string>
+    <string name="no_orders">There are no orders</string>
+    <string name="order_for">Order for</string>
 </resources>
