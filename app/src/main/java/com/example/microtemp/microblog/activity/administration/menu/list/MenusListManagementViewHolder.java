@@ -18,6 +18,7 @@ import java.util.Locale;
 class MenusListManagementViewHolder extends RecyclerView.ViewHolder {
     private TextView menuNameTextView;
     private Button deleteButton;
+
     private Menu menu;
 
     MenusListManagementViewHolder(final ConstraintLayout itemView) {
@@ -51,6 +52,7 @@ class MenusListManagementViewHolder extends RecyclerView.ViewHolder {
             }
         });
     }
+
 
     void setMenu(Menu menu) {
         this.menu = menu;
