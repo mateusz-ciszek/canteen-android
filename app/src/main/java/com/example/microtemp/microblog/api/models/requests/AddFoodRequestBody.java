@@ -13,6 +13,7 @@ public class AddFoodRequestBody extends RequestBody {
     private String name;
     private int price;
     private String description;
+  //  private List<AdditionAdd> additions ;
 
 
     @Override

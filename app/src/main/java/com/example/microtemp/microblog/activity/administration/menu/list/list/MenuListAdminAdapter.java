@@ -15,6 +15,7 @@ class MenuListAdminAdapter extends RecyclerView.Adapter<MenuListAdminViewHolder>
 
     private List<Food> foods;
 
+
     MenuListAdminAdapter(List<Food> foods) {
         this.foods = foods;
     }
