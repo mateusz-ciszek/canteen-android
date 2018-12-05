@@ -104,8 +104,8 @@ public abstract class HttpRequestHandler<T extends RequestBody, U extends Respon
 
     private static boolean isSendingData(HttpRequestMethods method) {
         return Arrays.asList(
-                HttpRequestMethods.POST
-                // TODO Dodanie kolejnych metod HTTP
+                HttpRequestMethods.POST,
+                HttpRequestMethods.PATCH
         ).contains(method);
     }
 
