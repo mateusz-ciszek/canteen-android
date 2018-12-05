@@ -4,6 +4,7 @@ import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
 
+import com.example.microtemp.microblog.App;
 import com.example.microtemp.microblog.R;
 import com.example.microtemp.microblog.models.Order;
 import com.example.microtemp.microblog.models.OrderItem;
@@ -27,8 +28,8 @@ class OrdersListViewHolder extends RecyclerView.ViewHolder {
 
     void setOrder(Order order) {
         // FIXME podmienić na faktyczne imię i nazwisko jak już to będzie przekazywane
-        orderNameTextView.setText(String.format(Locale.getDefault(),
-                "%d<userName>", R.string.order_for));
+        orderNameTextView.setText(String.format("%s <userName>",
+                App.getContext().getString(R.string.order_for)));
 
         StringBuilder sb = new StringBuilder();
         for (OrderItem food : order.getItems()) {

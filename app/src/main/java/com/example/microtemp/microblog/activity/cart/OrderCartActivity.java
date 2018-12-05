@@ -8,11 +8,18 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.microtemp.microblog.OrderCart;
 import com.example.microtemp.microblog.R;
+import com.example.microtemp.microblog.api.HttpRequestData;
+import com.example.microtemp.microblog.api.HttpRequestMethods;
+import com.example.microtemp.microblog.api.handlers.CreateOrderRequestHandler;
+import com.example.microtemp.microblog.api.models.requests.CreateOrderRequestBody;
+import com.example.microtemp.microblog.api.models.responses.EmptyResponse;
 
 import java.util.Locale;
+import java.util.concurrent.ExecutionException;
 
 public class OrderCartActivity extends AppCompatActivity implements OrderCart.OnChangeListener {
 
@@ -54,6 +61,38 @@ public class OrderCartActivity extends AppCompatActivity implements OrderCart.On
             }
         });
 
+        confirmButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CreateOrderRequestBody requestBody
+                        = new CreateOrderRequestBody(orderCart.getItems());
+
+                HttpRequestData<CreateOrderRequestBody> requestData = HttpRequestData.<CreateOrderRequestBody>builder()
+                        .method(HttpRequestMethods.POST).requestBody(requestBody).build();
+
+                EmptyResponse response;
+                try {
+                    response = new CreateOrderRequestHandlerImpl().execute(requestData).get();
+                } catch (InterruptedException | ExecutionException e) {
+                    e.printStackTrace();
+                    Toast.makeText(cancelButton.getContext(), "Something went wrong",
+                            Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if (response.getHttpStatusCode() == 200) {
+                    Toast.makeText(cancelButton.getContext(), "Your order has been submitted",
+                            Toast.LENGTH_SHORT).show();
+                    orderCart.clear();
+                    finish();
+                } else {
+                    Toast.makeText(cancelButton.getContext(),
+                            "Couldn't submit your order. Please try again later",
+                            Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
         this.orderItemsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         OrderItemsListAdapter adapter
                 = new OrderItemsListAdapter(OrderCart.getInstance().getItems());
@@ -80,5 +119,10 @@ public class OrderCartActivity extends AppCompatActivity implements OrderCart.On
                 "Items in cart: %d", orderCart.getCount()));
 
         this.orderItemsRecyclerView.getAdapter().notifyDataSetChanged();
+    }
+
+    private static class CreateOrderRequestHandlerImpl extends CreateOrderRequestHandler {
+        @Override
+        protected void onPostExecute(EmptyResponse result) { }
     }
 }
