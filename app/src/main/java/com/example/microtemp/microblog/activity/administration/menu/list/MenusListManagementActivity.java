@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.example.microtemp.microblog.App;
 import com.example.microtemp.microblog.R;
+import com.example.microtemp.microblog.activity.cart.OrderCartActivity;
 import com.example.microtemp.microblog.api.HttpRequestData;
 import com.example.microtemp.microblog.api.HttpRequestMethods;
 import com.example.microtemp.microblog.api.handlers.AllMenusRequestHandler;
@@ -72,6 +73,18 @@ public class MenusListManagementActivity extends AppCompatActivity {
        Intent intent = new Intent(App.getContext(), AddMenuActivity.class);
         App.getContext().startActivity(intent);
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_cart:
+                startActivity(new Intent(this, OrderCartActivity.class));
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
 
     static class AllMenusRequestHandlerImpl extends AllMenusRequestHandler {
         @Override
