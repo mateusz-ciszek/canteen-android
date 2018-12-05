@@ -48,8 +48,8 @@ public class AddDishActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-
-                    AddFoodRequestBody requestBody =AddFoodRequestBody.builder()
+                if (checkAll()) {
+                    AddFoodRequestBody requestBody = AddFoodRequestBody.builder()
                             .name(nameEt.getText().toString())
                             .description(descriptionEt.getText().toString())
                             .price(Integer.parseInt(priceEt.getText().toString()))
@@ -65,11 +65,14 @@ public class AddDishActivity extends AppCompatActivity {
                                 Toast.makeText(acceptBtn.getContext(),
                                         "Cant add dish",
                                         Toast.LENGTH_LONG).show();
-                               Intent intent = new Intent(App.getContext(), AdminDashboardActivity.class);
-                               App.getContext().startActivity(intent);
+                            } else if (result.getHttpStatusCode() == 201) {
+
                                 Toast.makeText(acceptBtn.getContext(),
                                         "Dish added",
                                         Toast.LENGTH_LONG).show();
+                                Intent intent = new Intent(App.getContext(), AdminDashboardActivity.class);
+                                App.getContext().startActivity(intent);
+
                             } else {
                                 Intent intent = new Intent(AddDishActivity.this, AdminDashboardActivity.class);
                                 intent.putExtra("response", result);
@@ -78,6 +81,52 @@ public class AddDishActivity extends AppCompatActivity {
                         }
                     }.execute(requestData);
                 }
+
+                }
             } );
     }
+
+    public boolean checkAll() {
+        boolean flag=true;
+        if(!(checkIsNotNull(nameEt.getText().toString())&&checkIsNotNull(descriptionEt.getText().toString())&&checkIsNotNull(priceEt.getText().toString())))
+        {
+            Toast.makeText(acceptBtn.getContext(),
+                    "Null",
+                    Toast.LENGTH_LONG).show();
+            flag=false;
+        }
+        if( !isNumber(priceEt.getText().toString()))
+        {
+            Toast.makeText(acceptBtn.getContext(),
+                    "Price is number",
+                    Toast.LENGTH_LONG).show();
+            flag=false;
+        }
+
+        return flag;
+    }
+    public boolean checkIsNotNull(String string)
+    {
+        if(string.length()==0)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
+    public boolean isNumber(String string)
+    {
+        try
+        {
+            double d = Double.parseDouble(string);
+        }
+        catch(NumberFormatException nfe)
+        {
+            return false;
+        }
+        return true;
+    }
+
 }
