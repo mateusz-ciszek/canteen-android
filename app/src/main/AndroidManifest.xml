@@ -17,7 +17,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity" />
-        <activity android:name=".LoginActivity">
+        <activity android:name=".LoginActivity"
+                  android:windowSoftInputMode="stateVisible|adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -27,7 +28,8 @@
         <activity android:name=".RegisterActivity" />
         <activity android:name=".activity.menu.list.MenuListsActivity" />
         <activity android:name=".deletion.AdminActivity" />
-        <activity android:name=".deletion.AddDishActivity" />
+        <activity android:name=".deletion.AddDishActivity"
+                  android:windowSoftInputMode="stateVisible|adjustPan"/>
         <activity android:name=".deletion.TypeDishActivity" />
         <activity android:name=".deletion.FoodListActivity" />
         <activity android:name=".deletion.AdditionsActivity" />
