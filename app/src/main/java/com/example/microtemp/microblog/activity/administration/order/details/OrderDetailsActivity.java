@@ -2,6 +2,7 @@ package com.example.microtemp.microblog.activity.administration.order.details;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
@@ -56,7 +57,10 @@ public class OrderDetailsActivity extends AppCompatActivity {
 
         this.setFields();
 
-        // FIXME zapełnić recycler view
+        OrderDetailsAdapter adater = new OrderDetailsAdapter(order.getItems());
+        orderedItemsRecyclerView.setAdapter(adater);
+        orderedItemsRecyclerView
+                .setLayoutManager(new LinearLayoutManager(rejectButton.getContext()));
 
         configureButtons();
     }
@@ -78,7 +82,7 @@ public class OrderDetailsActivity extends AppCompatActivity {
     private void configureButtons() {
         View.OnClickListener listener = createListener(getNextOrderState(order.getState()));
         String text = confirmButton.getText().toString();
-        switch(order.getState()) {
+        switch (order.getState()) {
             case "SAVED":
                 text = getString(R.string.set_order_ready);
                 break;
