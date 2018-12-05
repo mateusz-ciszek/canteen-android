@@ -15,12 +15,14 @@ import com.example.microtemp.microblog.activity.administration.menu.list.list.Fo
 import com.example.microtemp.microblog.models.Menu;
 import com.example.microtemp.microblog.service.MenuService;
 
+import java.util.List;
 import java.util.Locale;
 
 class MenusListManagementViewHolder extends RecyclerView.ViewHolder {
     private TextView menuNameTextView;
     private Button deleteButton;
-
+    private List<Menu> menus;
+    private int position;
     private Menu menu;
 
     MenusListManagementViewHolder(final ConstraintLayout itemView) {
@@ -65,8 +67,10 @@ class MenusListManagementViewHolder extends RecyclerView.ViewHolder {
     }
 
 
-    void setMenu(Menu menu) {
+    void setMenu(Menu menu,List<Menu> menus,int position) {
         this.menu = menu;
+        this.position=position;
+        this.menus=menus;
         this.menuNameTextView.setText(menu.getName());
     }
 
@@ -80,6 +84,10 @@ class MenusListManagementViewHolder extends RecyclerView.ViewHolder {
                     Toast.makeText(menuNameTextView.getContext(),
                             "Menu has been deleted",
                             Toast.LENGTH_SHORT).show();
+                    menus.remove(position);
+                    Intent intent = new Intent(itemView.getContext(), MenusListManagementActivity.class);
+                    itemView.getContext().startActivity(intent);
+                    
                     // TODO usunięcie menu z listy
                     // (odświeżenie/usunięcie tego samego menu z adaptera)
                 } else {
