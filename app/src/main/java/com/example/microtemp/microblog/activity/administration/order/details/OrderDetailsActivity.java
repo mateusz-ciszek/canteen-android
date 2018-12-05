@@ -58,8 +58,7 @@ public class OrderDetailsActivity extends AppCompatActivity {
 
         // FIXME zapełnić recycler view
 
-        configureConfirmButton();
-        // FIXME dodanie akcji dla przycisku Odrzucenia
+        configureButtons();
     }
 
     private void setFields() {
@@ -76,7 +75,7 @@ public class OrderDetailsActivity extends AppCompatActivity {
         return text.substring(0, 1).toUpperCase() + text.substring(1);
     }
 
-    private void configureConfirmButton() {
+    private void configureButtons() {
         View.OnClickListener listener = createListener(getNextOrderState(order.getState()));
         String text = confirmButton.getText().toString();
         switch(order.getState()) {
@@ -94,6 +93,7 @@ public class OrderDetailsActivity extends AppCompatActivity {
         }
         confirmButton.setText(text);
         confirmButton.setOnClickListener(listener);
+        rejectButton.setOnClickListener(createListener("REJECTED"));
     }
 
     private View.OnClickListener createListener(final String requestedState) {
