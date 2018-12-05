@@ -13,7 +13,7 @@ import com.example.microtemp.microblog.R;
 
 import java.util.ArrayList;
 
-public class AdditionsActivity extends AppCompatActivity {
+public class  AdditionsActivity extends AppCompatActivity {
     private ArrayList<String> list = new ArrayList<String>(); //Initialize ArrayList with String data type
     Intent mIntent;
     static int actPostion;

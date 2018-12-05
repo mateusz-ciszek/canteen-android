@@ -1,5 +1,7 @@
 package com.example.microtemp.microblog.api.models.requests;
 
+import com.example.microtemp.microblog.activity.administration.menu.list.list.FoodListActivityAdmin;
+
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -15,6 +17,6 @@ public class AddFoodRequestBody extends RequestBody {
 
     @Override
     public String getUrl() {
-        return "/menu/5bef0f8a2230ef670c779b05/food";
+        return "/menu/"+ FoodListActivityAdmin.menuId+"/food";
     }
 }

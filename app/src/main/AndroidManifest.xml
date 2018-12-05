@@ -40,7 +40,8 @@
         <activity android:name=".activity.cart.OrderCartActivity" />
         <activity android:name=".activity.administration.menu.list.MenusListManagementActivity" />
         <activity android:name=".activity.administration.menu.list.AddMenuActivity" />
-        <activity android:name=".activity.administration.menu.list.list.FoodListActivityAdmin"></activity>
+        <activity android:name=".activity.administration.menu.list.list.FoodListActivityAdmin" />
+        <activity android:name=".menu_admin"></activity>
     </application>
 
 </manifest>

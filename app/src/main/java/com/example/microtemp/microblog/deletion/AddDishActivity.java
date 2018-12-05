@@ -2,27 +2,29 @@ package com.example.microtemp.microblog.deletion;
 
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.microtemp.microblog.LoginActivity;
-import com.example.microtemp.microblog.MainActivity;
+import com.example.microtemp.microblog.App;
 import com.example.microtemp.microblog.R;
+import com.example.microtemp.microblog.activity.administration.dashboard.AdminDashboardActivity;
 import com.example.microtemp.microblog.api.HttpRequestData;
 import com.example.microtemp.microblog.api.HttpRequestMethods;
 import com.example.microtemp.microblog.api.handlers.AddFoodRequestHandler;
 import com.example.microtemp.microblog.api.models.requests.AddFoodRequestBody;
 import com.example.microtemp.microblog.api.models.responses.AddFoodResponse;
+import com.example.microtemp.microblog.models.Menu;
 
 
 public class AddDishActivity extends AppCompatActivity {
 
     Button backBtn, acceptBtn;
     EditText priceEt, descriptionEt, nameEt;
+    private Menu menu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,8 +40,7 @@ public class AddDishActivity extends AppCompatActivity {
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AddDishActivity.this, AdminActivity.class);
-                startActivity(intent);
+                finish();
             }
         });
 
@@ -62,16 +63,15 @@ public class AddDishActivity extends AppCompatActivity {
                         protected void onPostExecute(AddFoodResponse result) {
                             if (result.getHttpStatusCode() == 400) {
                                 Toast.makeText(acceptBtn.getContext(),
-                                        "Nie można zarejestrować nowego użytkownika, ponieważ nie ma dostępu do internetu",
+                                        "Cant add dish",
                                         Toast.LENGTH_LONG).show();
-                            } else if (result.getHttpStatusCode() == 201) {
-                                Intent intent = new Intent(AddDishActivity.this, LoginActivity.class);
-                                startActivity(intent);
+                               Intent intent = new Intent(App.getContext(), AdminDashboardActivity.class);
+                               App.getContext().startActivity(intent);
                                 Toast.makeText(acceptBtn.getContext(),
-                                        "Uzytkownik zarejestrowany",
+                                        "Dish added",
                                         Toast.LENGTH_LONG).show();
                             } else {
-                                Intent intent = new Intent(AddDishActivity.this, MainActivity.class);
+                                Intent intent = new Intent(AddDishActivity.this, AdminDashboardActivity.class);
                                 intent.putExtra("response", result);
                                 startActivity(intent);
                             }

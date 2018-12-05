@@ -10,10 +10,12 @@ import android.view.MenuItem;
 
 import com.example.microtemp.microblog.R;
 import com.example.microtemp.microblog.activity.cart.OrderCartActivity;
+import com.example.microtemp.microblog.deletion.AddDishActivity;
 import com.example.microtemp.microblog.models.Menu;
 
 public class FoodListActivityAdmin extends AppCompatActivity {
 
+    public static String menuId;
     private Menu menu;
 
     private RecyclerView foodsRecyclerView;
@@ -22,17 +24,18 @@ public class FoodListActivityAdmin extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_food_list_admin);
-
         this.initRecyclerView();
 
+
         this.retrieveMenu();
+        FoodListActivityAdmin.menuId=menu.get_id();
     }
 
     @Override
     public boolean onCreateOptionsMenu(android.view.Menu menu) {
         super.onCreateOptionsMenu(menu);
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu, menu);
+        inflater.inflate(R.menu.menu_admin, menu);
         return true;
     }
 
@@ -66,5 +69,11 @@ public class FoodListActivityAdmin extends AppCompatActivity {
 
         MenuListAdminAdapter adapter = new MenuListAdminAdapter(this.menu.getFoods());
         this.foodsRecyclerView.setAdapter(adapter);
+    }
+
+    public void addMenus(MenuItem item) {
+        Intent intent = new Intent(FoodListActivityAdmin.this, AddDishActivity.class);
+        startActivity(intent);
+
     }
 }
