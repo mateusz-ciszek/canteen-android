@@ -8,15 +8,18 @@ import android.view.ViewGroup;
 
 import com.example.microtemp.microblog.R;
 import com.example.microtemp.microblog.models.Food;
+import com.example.microtemp.microblog.models.Menu;
 
 import java.util.List;
 
 class MenuListAdminAdapter extends RecyclerView.Adapter<MenuListAdminViewHolder> {
 
     private List<Food> foods;
+    private Menu menu;
 
-    MenuListAdminAdapter(List<Food> foods) {
-        this.foods = foods;
+    MenuListAdminAdapter(Menu menu) {
+        this.foods = menu.getFoods();
+        this.menu=menu;
     }
 
 
@@ -31,7 +34,7 @@ class MenuListAdminAdapter extends RecyclerView.Adapter<MenuListAdminViewHolder>
 
     @Override
     public void onBindViewHolder(@NonNull MenuListAdminViewHolder holder, int position) {
-        holder.setFood(this.foods.get(position));
+        holder.setFood(this.foods.get(position),this.menu,position);
     }
 
     @Override

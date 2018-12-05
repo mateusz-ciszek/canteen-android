@@ -29,7 +29,7 @@ public class MenusListManagementAdapter extends Adapter<MenusListManagementViewH
 
     @Override
     public void onBindViewHolder(@NonNull MenusListManagementViewHolder holder, int position) {
-        holder.setMenu(menus.get(position));
+        holder.setMenu(menus.get(position),menus,position);
     }
 
     @Override

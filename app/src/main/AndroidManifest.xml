@@ -43,7 +43,7 @@
         <activity android:name=".activity.administration.menu.list.MenusListManagementActivity" />
         <activity android:name=".activity.administration.menu.list.AddMenuActivity" />
         <activity android:name=".activity.administration.menu.list.list.FoodListActivityAdmin" />
-        <activity android:name=".menu_admin"></activity>
+        <activity android:name=".activity.foodDetails.FoodDetailsActivityAdmin"></activity>
     </application>
 
 </manifest>

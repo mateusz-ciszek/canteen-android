@@ -4,6 +4,7 @@
     <!-- Example values, these are immediately replaced by actual data -->
     <string name="example_price">49.99 zł</string>
     <string name="example_order_items">Frytki, Barszcz…</string>
+    <string name="example_order_state">READY</string>
     <!-- Strings related to login -->
     <string name="mail_login">Username or nick</string>
     <string name="prompt_password">Password</string>
@@ -21,8 +22,18 @@
     <string name="action_back">Go back</string>
     <string name="price">Price</string>
     <!-- String related to orders -->
-    <string name="noOrders">There are no orders</string>
-    <string name="order_for">Order for </string>
+    <string name="no_orders">There are no orders</string>
+    <string name="order_for">Order for</string>
     <string name="menu_name">Name</string>
     <string name="accept_button">Accept</string>
+    <string name="set_order_ready">Ready</string>
+    <string name="set_order_served">Serve</string>
+    <string name="ordered_by">Ordered by</string>
+    <string name="user_name_dummy"><![CDATA[<User name>]]></string>
+    <string name="total_items_ordered">Total items ordered</string>
+    <string name="ordered_items">Ordered items</string>
+    <string name="confirm">Confirm</string>
+    <string name="reject">Reject</string>
+    <string name="order_state">Order state</string>
+    <string name="example_amount">4</string>
 </resources>

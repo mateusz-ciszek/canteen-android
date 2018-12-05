@@ -57,7 +57,7 @@ public class AddMenuActivity extends AppCompatActivity {
                             } else {
                                 Intent intent = new Intent(AddMenuActivity.this, AdminDashboardActivity.class);
                                 intent.putExtra("response", result);
-                                startActivity(intent);
+                                 startActivity(intent);
                             }
                         }
                     }.execute(requestData);
