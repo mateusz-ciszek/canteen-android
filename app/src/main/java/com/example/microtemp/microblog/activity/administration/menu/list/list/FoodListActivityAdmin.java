@@ -67,7 +67,7 @@ public class FoodListActivityAdmin extends AppCompatActivity {
             actionBar.setTitle(this.menu.getName());
         }
 
-        MenuListAdminAdapter adapter = new MenuListAdminAdapter(this.menu.getFoods());
+        MenuListAdminAdapter adapter = new MenuListAdminAdapter(this.menu);
         this.foodsRecyclerView.setAdapter(adapter);
     }
 

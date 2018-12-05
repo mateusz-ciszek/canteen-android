@@ -13,9 +13,9 @@ import android.widget.Toast;
 
 import com.example.microtemp.microblog.App;
 import com.example.microtemp.microblog.R;
-import com.example.microtemp.microblog.activity.administration.dashboard.AdminDashboardActivity;
 import com.example.microtemp.microblog.activity.foodDetails.FoodDetailsActivityAdmin;
 import com.example.microtemp.microblog.models.Food;
+import com.example.microtemp.microblog.models.Menu;
 import com.example.microtemp.microblog.service.FoodService;
 
 import java.util.Locale;
@@ -25,6 +25,9 @@ class MenuListAdminViewHolder extends RecyclerView.ViewHolder {
     private TextView name;
     private TextView price;
     private ImageButton removeItemButton;
+    private Menu menu;
+    int position;
+
 
     MenuListAdminViewHolder(final ConstraintLayout itemView) {
         super(itemView);
@@ -69,6 +72,7 @@ class MenuListAdminViewHolder extends RecyclerView.ViewHolder {
 
     }
 
+
     private void deleteFood() {
         FoodService foodService = FoodService.getInstance();
         FoodService.DeleteFoodRequestHandlerImpl.ResponseHandler<Boolean> handler
@@ -80,7 +84,10 @@ class MenuListAdminViewHolder extends RecyclerView.ViewHolder {
                             "Food has been deleted",
                             Toast.LENGTH_SHORT).show();
                     // TODO usunięcie food z listy
-                    Intent intent = new Intent(App.getContext(), AdminDashboardActivity.class);
+
+                    Intent intent = new Intent(App.getContext(), FoodListActivityAdmin.class);
+                    menu.getFoods().remove(position);
+                    intent.putExtra("menu", menu);
                     App.getContext().startActivity(intent);
                     // (odświeżenie/usunięcie tego samego menu z adaptera)
                 } else {
@@ -94,7 +101,9 @@ class MenuListAdminViewHolder extends RecyclerView.ViewHolder {
         foodService.deleteMenu(food, handler);
 
     }
-    void setFood(Food food) {
+    void setFood(Food food,Menu menu,int postion) {
+        this.menu=menu;
+        this.position=postion;
         this.food = food;
         this.name.setText(food.getName());
         this.price.setText(String.format(Locale.getDefault(), "%.2f zł", food.getPrice()));

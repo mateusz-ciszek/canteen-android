@@ -50,7 +50,7 @@ public class MenusListManagementActivity extends AppCompatActivity {
         return true;
     }
 
-    private AllMenusResponse makeRequest() {
+    public AllMenusResponse makeRequest() {
         AllMenusRequestBody requestBody = new AllMenusRequestBody();
         HttpRequestData<AllMenusRequestBody> requestData = HttpRequestData.<AllMenusRequestBody>builder()
                 .requestBody(requestBody)
