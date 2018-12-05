@@ -4,7 +4,7 @@
 
     <item
         android:id="@+id/addMenu"
-        android:title="Add menu"
+        android:title="Add food"
         android:onClick="addMenus"
         app:showAsAction="always|withText" />
 </menu>

@@ -23,4 +23,6 @@
     <!-- String related to orders -->
     <string name="no_orders">There are no orders</string>
     <string name="order_for">Order for</string>
+    <string name="menu_name">Name</string>
+    <string name="accept_button">Accept</string>
 </resources>

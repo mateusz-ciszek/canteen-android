@@ -1,13 +1,18 @@
 package com.example.microtemp.microblog.activity.administration.menu.list;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.view.menu.MenuView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.example.microtemp.microblog.App;
 import com.example.microtemp.microblog.R;
+import com.example.microtemp.microblog.activity.cart.OrderCartActivity;
 import com.example.microtemp.microblog.api.HttpRequestData;
 import com.example.microtemp.microblog.api.HttpRequestMethods;
 import com.example.microtemp.microblog.api.handlers.AllMenusRequestHandler;
@@ -18,10 +23,13 @@ import java.util.concurrent.ExecutionException;
 
 public class MenusListManagementActivity extends AppCompatActivity {
 
+    private MenuView.ItemView addButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menus_list_management);
+        addButton = findViewById(R.id.addMenu);
+
 
         RecyclerView menusListRecyclerView = findViewById(R.id.menusListRecyclerView);
 
@@ -60,6 +68,23 @@ public class MenusListManagementActivity extends AppCompatActivity {
         }
         return response;
     }
+
+    public void addMenus(MenuItem item) {
+       Intent intent = new Intent(App.getContext(), AddMenuActivity.class);
+        App.getContext().startActivity(intent);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_cart:
+                startActivity(new Intent(this, OrderCartActivity.class));
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
 
     static class AllMenusRequestHandlerImpl extends AllMenusRequestHandler {
         @Override
