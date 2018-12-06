@@ -9,13 +9,13 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:name=".App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        a
         <activity android:name=".MainActivity" />
         <activity android:name=".LoginActivity">
             <intent-filter>
@@ -25,13 +25,23 @@
             </intent-filter>
         </activity>
         <activity android:name=".RegisterActivity" />
-        <activity android:name=".MenuActivity" />
-        <activity android:name=".AdminActivity" />
-        <activity android:name=".AddDishActivity" />
-        <activity android:name=".TypeDishActivity" />
-        <activity android:name=".FoodListActivity" />
-        <activity android:name=".AdditionsActivity" />
-        <activity android:name=".CurrentOrderActivity"></activity>
+        <activity android:name=".activity.menu.list.MenuListsActivity" />
+        <activity android:name=".deletion.AdminActivity" />
+        <activity android:name=".deletion.AddDishActivity"/>
+        <activity android:name=".deletion.TypeDishActivity" />
+        <activity android:name=".deletion.FoodListActivity" />
+        <activity android:name=".deletion.AdditionsActivity" />
+        <activity android:name=".deletion.CurrentOrderActivity" />
+        <activity android:name=".activity.menu.MenuActivity" />
+        <activity android:name=".activity.foodDetails.FoodDetailsActivity" />
+        <activity android:name=".activity.administration.dashboard.AdminDashboardActivity" />
+        <activity android:name=".activity.administration.order.details.OrderDetailsActivity" />
+        <activity android:name=".activity.administration.order.list.OrdersListActivity" />
+        <activity android:name=".activity.cart.OrderCartActivity" />
+        <activity android:name=".activity.administration.menu.list.MenusListManagementActivity" />
+        <activity android:name=".activity.administration.menu.list.AddMenuActivity" />
+        <activity android:name=".activity.administration.menu.list.list.FoodListActivityAdmin" />
+        <activity android:name=".activity.foodDetails.FoodDetailsActivityAdmin"></activity>
     </application>
 
 </manifest>

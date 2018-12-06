@@ -1,0 +1,32 @@
+package com.example.microtemp.microblog.activity.menu.list;
+
+import android.content.Intent;
+import android.support.constraint.ConstraintLayout;
+import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.TextView;
+
+import com.example.microtemp.microblog.activity.menu.MenuActivity;
+import com.example.microtemp.microblog.R;
+import com.example.microtemp.microblog.models.Menu;
+
+class MenuListsViewHolder extends RecyclerView.ViewHolder {
+    TextView name;
+    String _id;
+    Menu menu;
+
+    MenuListsViewHolder(final ConstraintLayout itemView) {
+        super(itemView);
+        this.name = itemView.findViewById(R.id.menuNameTextView);
+
+        itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(itemView.getContext(), MenuActivity.class);
+                intent.putExtra("menu", menu);
+                itemView.getContext().startActivity(intent);
+
+            }
+        });
+    }
+}

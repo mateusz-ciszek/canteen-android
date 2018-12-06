@@ -5,15 +5,13 @@
     android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <EditText
-        android:id="@+id/editText"
-        style="@style/TextAppearance.AppCompat.Small"
+    <TextView
+        android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
         android:gravity="center"
-        android:inputType="textPersonName"
-        android:text="Administrator panel" />
+        android:text="Administrator Panel "
+        android:textSize="18dp" />
 
     <ImageView
         android:id="@+id/imageView2"

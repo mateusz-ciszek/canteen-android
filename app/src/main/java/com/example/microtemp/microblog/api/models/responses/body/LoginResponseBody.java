@@ -9,4 +9,5 @@ import lombok.Setter;
 @Builder
 public class LoginResponseBody implements BaseResponseBody {
     private String message;
+    private String token;
 }

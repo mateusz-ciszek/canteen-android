@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName;
 
 public class Food {
 
-    @SerializedName("additions")
+    @SerializedName("foodAdditions")
     @Expose
     private List<Addition> additions = null;
     @SerializedName("_id")

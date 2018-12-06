@@ -1,5 +1,5 @@
 package com.example.microtemp.microblog.api;
 
 public enum HttpRequestMethods {
-    POST,GET
+    POST, GET, DELETE, PATCH
 }
