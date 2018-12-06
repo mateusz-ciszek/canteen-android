@@ -73,6 +73,7 @@ public class FoodListActivityAdmin extends AppCompatActivity {
 
     public void addMenus(MenuItem item) {
         Intent intent = new Intent(FoodListActivityAdmin.this, AddDishActivity.class);
+        intent.putExtra("menu", menu);
         startActivity(intent);
 
     }

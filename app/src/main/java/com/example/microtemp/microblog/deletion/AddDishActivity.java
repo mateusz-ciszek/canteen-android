@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.example.microtemp.microblog.App;
 import com.example.microtemp.microblog.R;
 import com.example.microtemp.microblog.activity.administration.dashboard.AdminDashboardActivity;
+import com.example.microtemp.microblog.activity.administration.menu.list.list.FoodListActivityAdmin;
 import com.example.microtemp.microblog.api.HttpRequestData;
 import com.example.microtemp.microblog.api.HttpRequestMethods;
 import com.example.microtemp.microblog.api.handlers.AddFoodRequestHandler;
@@ -42,8 +43,10 @@ public class AddDishActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_dish);
+        this.retrieveMenu();
         switchFood = findViewById(R.id.switchFood);
         linearLayout = findViewById(R.id.linearLayoutAdditives);
         displayAdditives = findViewById(R.id.displayAdditives);
@@ -123,8 +126,10 @@ public class AddDishActivity extends AppCompatActivity {
                                 Toast.makeText(acceptBtn.getContext(),
                                         "Dish added",
                                         Toast.LENGTH_LONG).show();
-                                Intent intent = new Intent(App.getContext(), AdminDashboardActivity.class);
+                                Intent intent = new Intent(App.getContext(), FoodListActivityAdmin.class);
+                                intent.putExtra("menu",menu);
                                 App.getContext().startActivity(intent);
+                                finish();
 
                             } else {
                                 Intent intent = new Intent(AddDishActivity.this, AdminDashboardActivity.class);
@@ -180,6 +185,12 @@ public class AddDishActivity extends AppCompatActivity {
             return false;
         }
         return true;
+    }
+    private void retrieveMenu() {
+        Intent intent = getIntent();
+        this.menu = (Menu) intent.getSerializableExtra("menu");
+
+
     }
 
 }

@@ -1,6 +1,7 @@
 package com.example.microtemp.microblog.activity.administration.menu.list.list;
 
 
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.constraint.ConstraintLayout;
@@ -89,6 +90,7 @@ class MenuListAdminViewHolder extends RecyclerView.ViewHolder {
                     menu.getFoods().remove(position);
                     intent.putExtra("menu", menu);
                     App.getContext().startActivity(intent);
+                    ((Activity) App.getContext()).finish();
                     // (odświeżenie/usunięcie tego samego menu z adaptera)
                 } else {
                     Toast.makeText(name.getContext(),
