@@ -1,7 +1,6 @@
 package com.example.microtemp.microblog.activity.administration.menu.list.list;
 
 
-import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.constraint.ConstraintLayout;
@@ -14,7 +13,6 @@ import android.widget.Toast;
 
 import com.example.microtemp.microblog.App;
 import com.example.microtemp.microblog.R;
-import com.example.microtemp.microblog.activity.foodDetails.FoodDetailsActivityAdmin;
 import com.example.microtemp.microblog.models.Food;
 import com.example.microtemp.microblog.models.Menu;
 import com.example.microtemp.microblog.service.FoodService;
@@ -61,14 +59,7 @@ class MenuListAdminViewHolder extends RecyclerView.ViewHolder {
             }
         });
 
-        itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(itemView.getContext(), FoodDetailsActivityAdmin.class);
-                intent.putExtra("food", food);
-                itemView.getContext().startActivity(intent);
-            }
-        });
+
 
 
     }
@@ -90,7 +81,8 @@ class MenuListAdminViewHolder extends RecyclerView.ViewHolder {
                     menu.getFoods().remove(position);
                     intent.putExtra("menu", menu);
                     App.getContext().startActivity(intent);
-                    ((Activity) App.getContext()).finish();
+
+                   // ((Activity) App.getContext()).finish();
                     // (odświeżenie/usunięcie tego samego menu z adaptera)
                 } else {
                     Toast.makeText(name.getContext(),

@@ -28,7 +28,7 @@ class MenusListManagementViewHolder extends RecyclerView.ViewHolder {
     MenusListManagementViewHolder(final ConstraintLayout itemView) {
         super(itemView);
 
-        this.menuNameTextView = itemView.findViewById(R.id.menuNameTextView);
+        this.menuNameTextView =  itemView.findViewById(R.id.menuNameTextView);
         this.deleteButton = itemView.findViewById(R.id.deleteButton);
 
         this.deleteButton.setOnClickListener(new View.OnClickListener() {

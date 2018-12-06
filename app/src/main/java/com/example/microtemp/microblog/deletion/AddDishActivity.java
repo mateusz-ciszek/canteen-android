@@ -22,7 +22,8 @@ import com.example.microtemp.microblog.api.HttpRequestMethods;
 import com.example.microtemp.microblog.api.handlers.AddFoodRequestHandler;
 import com.example.microtemp.microblog.api.models.requests.AddFoodRequestBody;
 import com.example.microtemp.microblog.api.models.responses.AddFoodResponse;
-import com.example.microtemp.microblog.models.AdditionAdd;
+import com.example.microtemp.microblog.models.Food;
+import com.example.microtemp.microblog.models.FoodAddition;
 import com.example.microtemp.microblog.models.Menu;
 
 import java.util.ArrayList;
@@ -37,7 +38,7 @@ public class AddDishActivity extends AppCompatActivity {
     LinearLayout linearLayout;
     TextView displayAdditives;
     String displayString;
-    private List<AdditionAdd> additions=new ArrayList<AdditionAdd>();
+    private List<FoodAddition> additions=new ArrayList<FoodAddition>();
 
     private Menu menu;
 
@@ -89,7 +90,7 @@ public class AddDishActivity extends AppCompatActivity {
                             Toast.LENGTH_LONG).show();
                 }
                 else {
-                    AdditionAdd additionAdd=new AdditionAdd();
+                    FoodAddition additionAdd=new FoodAddition();
                     additionAdd.setName(editNameAdditives.getText().toString());
                     additionAdd.setPrice(Double.valueOf(editTextAdditivesPrice.getText().toString()));
                     additions.add(additionAdd);
@@ -127,6 +128,12 @@ public class AddDishActivity extends AppCompatActivity {
                                         "Dish added",
                                         Toast.LENGTH_LONG).show();
                                 Intent intent = new Intent(App.getContext(), FoodListActivityAdmin.class);
+                                Food food =new Food();
+                                food.setDescription(descriptionEt.getText().toString());
+                                food.setName(nameEt.getText().toString());
+                                food.setPrice(Integer.parseInt(priceEt.getText().toString()));
+                                food.setFoodAdditions(additions);
+                                menu.getFoods().add(food);
                                 intent.putExtra("menu",menu);
                                 App.getContext().startActivity(intent);
                                 finish();

@@ -1,7 +1,7 @@
 package com.example.microtemp.microblog.api.models.requests;
 
 import com.example.microtemp.microblog.activity.administration.menu.list.list.FoodListActivityAdmin;
-import com.example.microtemp.microblog.models.AdditionAdd;
+import com.example.microtemp.microblog.models.FoodAddition;
 
 import java.util.List;
 
@@ -16,7 +16,7 @@ public class AddFoodRequestBody extends RequestBody {
     private String name;
     private int price;
     private String description;
-    private List<AdditionAdd> additions ;
+    private List<FoodAddition> additions ;
 
 
     @Override

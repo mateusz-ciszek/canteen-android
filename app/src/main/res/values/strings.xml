@@ -30,7 +30,7 @@
     <string name="set_order_ready">Ready</string>
     <string name="set_order_served">Serve</string>
     <string name="ordered_by">Ordered by</string>
-    <string name="user_name_dummy"><![CDATA[<User name>]]></string>
+    <string name="user_name_dummy">Jacek</string>
     <string name="total_items_ordered">Total items ordered</string>
     <string name="ordered_items">Ordered items</string>
     <string name="confirm">Confirm</string>

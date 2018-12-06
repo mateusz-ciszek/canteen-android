@@ -67,7 +67,8 @@ public class OrderDetailsActivity extends AppCompatActivity {
 
     private void setFields() {
         // FIXME poprawić jak będzie zwracany pełen użytkownik
-        userNameTextView.setText(order.getUser());
+        //userNameTextView.setText(order.getUser());
+        userNameTextView.setText("Jacek");
         itemsNumberTextView.setText(String.format(Locale.getDefault(),
                 "%d", order.getItems().size()));
         orderStateTextView.setText(capitalize(order.getState()));
