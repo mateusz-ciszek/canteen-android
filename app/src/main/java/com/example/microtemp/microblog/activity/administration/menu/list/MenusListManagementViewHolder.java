@@ -87,7 +87,7 @@ class MenusListManagementViewHolder extends RecyclerView.ViewHolder {
                     menus.remove(position);
                     Intent intent = new Intent(itemView.getContext(), MenusListManagementActivity.class);
                     itemView.getContext().startActivity(intent);
-                    
+
                     // TODO usunięcie menu z listy
                     // (odświeżenie/usunięcie tego samego menu z adaptera)
                 } else {

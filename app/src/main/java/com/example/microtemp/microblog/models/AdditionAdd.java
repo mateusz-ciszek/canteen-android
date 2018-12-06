@@ -5,7 +5,7 @@ public class AdditionAdd {
 
 
     private String name;
-    private String price;
+    private Double price;
 
     public String getName() {
         return name;
@@ -15,11 +15,11 @@ public class AdditionAdd {
         this.name = name;
     }
 
-    public String getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 

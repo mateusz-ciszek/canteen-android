@@ -6,7 +6,11 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.microtemp.microblog.App;
@@ -17,32 +21,80 @@ import com.example.microtemp.microblog.api.HttpRequestMethods;
 import com.example.microtemp.microblog.api.handlers.AddFoodRequestHandler;
 import com.example.microtemp.microblog.api.models.requests.AddFoodRequestBody;
 import com.example.microtemp.microblog.api.models.responses.AddFoodResponse;
+import com.example.microtemp.microblog.models.AdditionAdd;
 import com.example.microtemp.microblog.models.Menu;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class AddDishActivity extends AppCompatActivity {
 
-    Button backBtn, acceptBtn;
-    EditText priceEt, descriptionEt, nameEt;
+    Button backBtn, acceptBtn,addAdditivesbtn;
+    EditText priceEt, descriptionEt, nameEt,editNameAdditives,editTextAdditivesPrice;
+    Switch switchFood;
+    LinearLayout linearLayout;
+    TextView displayAdditives;
+    String displayString;
+    private List<AdditionAdd> additions=new ArrayList<AdditionAdd>();
+
     private Menu menu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_dish);
-
+        switchFood = findViewById(R.id.switchFood);
+        linearLayout = findViewById(R.id.linearLayoutAdditives);
+        displayAdditives = findViewById(R.id.displayAdditives);
+        editNameAdditives = findViewById(R.id.editNameAdditives);
+        editTextAdditivesPrice = findViewById(R.id.editTextAdditives);
+        addAdditivesbtn=findViewById(R.id.addAdditivesbtn);
         priceEt = findViewById(R.id.price_et);
         descriptionEt = findViewById(R.id.description_et);
         nameEt = findViewById(R.id.name_et);
         backBtn = findViewById(R.id.back_button);
         acceptBtn = findViewById(R.id.accept_button);
+        switchFood.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked)
+             linearLayout.setVisibility(View.VISIBLE);
+                else {
+                    linearLayout.setVisibility(View.INVISIBLE);
 
+                }
+            }
+        });
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
             }
         });
+
+        addAdditivesbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!(checkIsNotNull(editNameAdditives.getText().toString())&& checkIsNotNull(editTextAdditivesPrice.getText().toString()))) {
+                    Toast.makeText(acceptBtn.getContext(),
+                            "Cant add additives",
+                            Toast.LENGTH_LONG).show();
+                } else if(!(isNumber(editTextAdditivesPrice.getText().toString()))) {
+
+                    Toast.makeText(acceptBtn.getContext(),
+                            "Only Number",
+                            Toast.LENGTH_LONG).show();
+                }
+                else {
+                    AdditionAdd additionAdd=new AdditionAdd();
+                    additionAdd.setName(editNameAdditives.getText().toString());
+                    additionAdd.setPrice(Double.valueOf(editTextAdditivesPrice.getText().toString()));
+                    additions.add(additionAdd);
+                    displayString= displayAdditives.getText().toString()+"\n"+additionAdd.getName()+ "     "+additionAdd.getPrice()+ " zł";
+                    displayAdditives.setText(displayString);
+                }
+            }
+        } );
 
         acceptBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,6 +105,7 @@ public class AddDishActivity extends AppCompatActivity {
                             .name(nameEt.getText().toString())
                             .description(descriptionEt.getText().toString())
                             .price(Integer.parseInt(priceEt.getText().toString()))
+                            .additions(additions)
                             .build();
                     HttpRequestData<AddFoodRequestBody> requestData = HttpRequestData.<AddFoodRequestBody>builder()
                             .requestBody(requestBody)

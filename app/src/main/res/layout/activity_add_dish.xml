@@ -131,10 +131,12 @@
                 android:marqueeRepeatLimit ="marquee_forever"/>
 
             <LinearLayout
+                android:id="@+id/linearLayoutAdditives"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="25dp"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:visibility="invisible">
 
                 <TextView
                     android:id="@+id/textAdditives"
