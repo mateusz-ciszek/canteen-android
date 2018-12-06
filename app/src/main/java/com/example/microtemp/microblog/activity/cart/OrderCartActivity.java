@@ -81,7 +81,7 @@ public class OrderCartActivity extends AppCompatActivity implements OrderCart.On
                 }
 
                 if (response.getHttpStatusCode() == 200) {
-                    Toast.makeText(cancelButton.getContext(), "Your order has been submitted",
+                    Toast.makeText(cancelButton.getContext(), "Your order has been submitted, You need wait 40 minutes",
                             Toast.LENGTH_SHORT).show();
                     orderCart.clear();
                     finish();
