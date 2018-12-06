@@ -31,8 +31,9 @@ class OrdersListViewHolder extends RecyclerView.ViewHolder {
 
     void setOrder(final Order order) {
         // FIXME podmienić na faktyczne imię i nazwisko jak już to będzie przekazywane
-        orderNameTextView.setText(String.format("%s <userName>",
-                App.getContext().getString(R.string.order_for)));
+        orderNameTextView.setText(String.format("%s %s",
+                App.getContext().getString(R.string.order_for),
+                App.getContext().getString(R.string.user_name_dummy)));
 
         StringBuilder sb = new StringBuilder();
         for (OrderItem food : order.getItems()) {

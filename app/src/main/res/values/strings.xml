@@ -2,9 +2,10 @@
     <string name="app_name">Canteen App</string>
     <string name="title_activity_login">Logowanie</string>
     <!-- Example values, these are immediately replaced by actual data -->
-    <string name="example_price">49.99 zł</string>
+    <string name="example_amount">4</string>
     <string name="example_order_items">Frytki, Barszcz…</string>
     <string name="example_order_state">READY</string>
+    <string name="example_price">49.99 zł</string>
     <!-- Strings related to login -->
     <string name="mail_login">Username or nick</string>
     <string name="prompt_password">Password</string>
@@ -35,5 +36,7 @@
     <string name="confirm">Confirm</string>
     <string name="reject">Reject</string>
     <string name="order_state">Order state</string>
-    <string name="example_amount">4</string>
+    <string name="example_name">Food name</string>
+    <string name="example_additions">Selected additions: add1, add2</string>
+    <string name="selected_additions">Selected additions:</string>
 </resources>
