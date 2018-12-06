@@ -5,6 +5,6 @@
     android:id="@+id/foodsRecyclerView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.menu.MenuActivity">
+    tools:context="com.canteen.app.activity.menu.MenuActivity">
 
 </android.support.v7.widget.RecyclerView>

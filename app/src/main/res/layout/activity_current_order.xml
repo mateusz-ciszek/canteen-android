@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".deletion.CurrentOrderActivity">
+    tools:context="com.canteen.app.deletion.CurrentOrderActivity">
 
     <ListView
         android:id="@+id/order_lv"

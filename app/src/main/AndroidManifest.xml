@@ -9,39 +9,39 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:name=".App"
+        android:name="com.canteen.app.App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity" />
-        <activity android:name=".LoginActivity">
+        <activity android:name="com.canteen.app.MainActivity" />
+        <activity android:name="com.canteen.app.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".RegisterActivity" />
-        <activity android:name=".activity.menu.list.MenuListsActivity" />
-        <activity android:name=".deletion.AdminActivity" />
-        <activity android:name=".deletion.AddDishActivity"/>
-        <activity android:name=".deletion.TypeDishActivity" />
-        <activity android:name=".deletion.FoodListActivity" />
-        <activity android:name=".deletion.AdditionsActivity" />
-        <activity android:name=".deletion.CurrentOrderActivity" />
-        <activity android:name=".activity.menu.MenuActivity" />
-        <activity android:name=".activity.foodDetails.FoodDetailsActivity" />
-        <activity android:name=".activity.administration.dashboard.AdminDashboardActivity" />
-        <activity android:name=".activity.administration.order.details.OrderDetailsActivity" />
-        <activity android:name=".activity.administration.order.list.OrdersListActivity" />
-        <activity android:name=".activity.cart.OrderCartActivity" />
-        <activity android:name=".activity.administration.menu.list.MenusListManagementActivity" />
-        <activity android:name=".activity.administration.menu.list.AddMenuActivity" />
-        <activity android:name=".activity.administration.menu.list.list.FoodListActivityAdmin" />
-        <activity android:name=".activity.foodDetails.FoodDetailsActivityAdmin"></activity>
+        <activity android:name="com.canteen.app.RegisterActivity" />
+        <activity android:name="com.canteen.app.activity.menu.list.MenuListsActivity" />
+        <activity android:name="com.canteen.app.deletion.AdminActivity" />
+        <activity android:name="com.canteen.app.deletion.AddDishActivity"/>
+        <activity android:name="com.canteen.app.deletion.TypeDishActivity" />
+        <activity android:name="com.canteen.app.deletion.FoodListActivity" />
+        <activity android:name="com.canteen.app.deletion.AdditionsActivity" />
+        <activity android:name="com.canteen.app.deletion.CurrentOrderActivity" />
+        <activity android:name="com.canteen.app.activity.menu.MenuActivity" />
+        <activity android:name="com.canteen.app.activity.foodDetails.FoodDetailsActivity" />
+        <activity android:name="com.canteen.app.activity.administration.dashboard.AdminDashboardActivity" />
+        <activity android:name="com.canteen.app.activity.administration.order.details.OrderDetailsActivity" />
+        <activity android:name="com.canteen.app.activity.administration.order.list.OrdersListActivity" />
+        <activity android:name="com.canteen.app.activity.cart.OrderCartActivity" />
+        <activity android:name="com.canteen.app.activity.administration.menu.list.MenusListManagementActivity" />
+        <activity android:name="com.canteen.app.activity.administration.menu.list.AddMenuActivity" />
+        <activity android:name="com.canteen.app.activity.administration.menu.list.list.FoodListActivityAdmin" />
+        <activity android:name="com.canteen.app.activity.foodDetails.FoodDetailsActivityAdmin"></activity>
     </application>
 
 </manifest>
