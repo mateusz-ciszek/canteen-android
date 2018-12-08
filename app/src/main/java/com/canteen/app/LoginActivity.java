@@ -18,7 +18,7 @@ import com.canteen.app.api.HttpRequestMethods;
 import com.canteen.app.api.handlers.LoginRequestHandler;
 import com.canteen.app.api.models.requests.LoginRequestBody;
 import com.canteen.app.api.models.responses.LoginResponse;
-import com.example.microtemp.microblog.R;
+import com.canteen.app.R;
 
 
 public class LoginActivity extends AppCompatActivity {

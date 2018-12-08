@@ -10,7 +10,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import com.canteen.app.AdapterContainer;
-import com.example.microtemp.microblog.R;
+import com.canteen.app.R;
 import com.canteen.app.activity.cart.OrderCartActivity;
 import com.canteen.app.api.HttpRequestData;
 import com.canteen.app.api.HttpRequestMethods;

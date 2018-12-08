@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.canteen.app.activity.menu.MenuActivity;
-import com.example.microtemp.microblog.R;
+import com.canteen.app.R;
 import com.canteen.app.models.Menu;
 
 class MenuListsViewHolder extends RecyclerView.ViewHolder {

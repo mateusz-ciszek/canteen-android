@@ -5,7 +5,7 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
-import com.example.microtemp.microblog.R;
+import com.canteen.app.R;
 import com.canteen.app.models.FoodAddition;
 
 import java.util.Locale;

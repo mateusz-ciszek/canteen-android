@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 import com.canteen.app.api.models.responses.Response;
-import com.example.microtemp.microblog.R;
+import com.canteen.app.R;
 
 public class MainActivity extends AppCompatActivity {
 

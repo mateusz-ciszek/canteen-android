@@ -14,7 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.canteen.app.App;
-import com.example.microtemp.microblog.R;
+import com.canteen.app.R;
 import com.canteen.app.activity.administration.dashboard.AdminDashboardActivity;
 import com.canteen.app.activity.administration.menu.list.list.FoodListActivityAdmin;
 import com.canteen.app.api.HttpRequestData;

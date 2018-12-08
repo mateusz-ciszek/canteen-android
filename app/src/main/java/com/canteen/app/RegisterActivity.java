@@ -15,7 +15,7 @@ import com.canteen.app.api.HttpRequestMethods;
 import com.canteen.app.api.handlers.RegisterRequestHandler;
 import com.canteen.app.api.models.requests.RegisterRequestBody;
 import com.canteen.app.api.models.responses.RegisterResponse;
-import com.example.microtemp.microblog.R;
+import com.canteen.app.R;
 
 public class RegisterActivity extends AppCompatActivity {
     private static String REG_TAG = "RegisterActivity";
