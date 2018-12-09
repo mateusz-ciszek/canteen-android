@@ -25,36 +25,57 @@
             tools:layout_editor_absoluteY="0dp">
 
             <TextView
-                android:id="@+id/fullOrderPriceTextView"
+                android:id="@+id/fullOrderPriceLabelTextView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:text="Full order price: 129.99 zł"
+                android:text="@string/order_cart_full_order_price"
                 android:textAppearance="@android:style/TextAppearance.Material.Large.Inverse"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:layout_conversion_absoluteHeight="30dp"
                 tools:layout_conversion_absoluteWidth="368dp" />
 
             <TextView
-                android:id="@+id/itemsAmountTextView"
+                android:id="@+id/fullOrderPriceTextView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
+                android:text="@string/example_order_full_price"
+                android:textAppearance="@android:style/TextAppearance.Material.Large.Inverse"
+                app:layout_constraintBottom_toBottomOf="@+id/fullOrderPriceLabelTextView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/fullOrderPriceLabelTextView"
+                app:layout_constraintTop_toTopOf="@+id/fullOrderPriceLabelTextView" />
+
+            <TextView
+                android:id="@+id/itemsAmountTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
                 android:layout_marginBottom="8dp"
-                android:text="Items in cart: 0"
+                android:text="@string/order_cart_items_in_cart"
                 android:textAppearance="@android:style/TextAppearance.Material.Small.Inverse"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/fullOrderPriceTextView"
+                app:layout_constraintTop_toBottomOf="@+id/fullOrderPriceLabelTextView"
                 tools:layout_conversion_absoluteHeight="19dp"
                 tools:layout_conversion_absoluteWidth="368dp" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:text="@string/example_order_items_number"
+                android:textAppearance="@android:style/TextAppearance.Material.Small.Inverse"
+                app:layout_constraintBottom_toBottomOf="@+id/itemsAmountTextView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/itemsAmountTextView"
+                app:layout_constraintTop_toTopOf="@+id/itemsAmountTextView" />
         </android.support.constraint.ConstraintLayout>
     </android.support.design.widget.AppBarLayout>
 
@@ -90,7 +111,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
-            android:text="Confirm order"
+            android:text="@string/order_cart_confirm_order"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/cancelOrderButton"
             app:layout_constraintStart_toStartOf="parent"
@@ -103,7 +124,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
-            android:text="Cancel order"
+            android:text="@string/order_cart_cancel_order"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/confirmOrderButton"

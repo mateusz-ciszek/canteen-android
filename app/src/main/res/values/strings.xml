@@ -1,47 +1,75 @@
 <resources>
+    <!-- Examples, helpful while developing -->
+    <string name="example_menu_name">Breakfast menu</string>
+    <string name="example_food_name">Fish and chips</string>
+    <string name="example_food_description">Fish and chips is a hot dish of British origin consisting of fried battered fish and hot potato chips.</string>
+    <string name="example_food_price">49.99 zł</string>
+    <string name="example_food_selected_additions">Selected additions: tartar sauce, coleslaw</string>
+    <string name="example_food_addition_name">Food addition name</string>
+    <string name="example_food_addition_price">1.99 zł</string>
+    <string name="example_order_full_price">129.99 zł</string>
+    <string name="example_order_items_number">8</string>
+    <string name="example_order_state">Ready</string>
+    <string name="example_order_foods">Fish and chips, hamburger</string>
+    <string name="example_user_name">John Smith</string>
+
+    <!-- Common -->
     <string name="app_name">eWaiter</string>
-    <string name="title_activity_login">Logowanie</string>
-    <!-- Example values, these are immediately replaced by actual data -->
-    <string name="example_amount">4</string>
-    <string name="example_order_items">Frytki, Barszcz…</string>
-    <string name="example_order_state">READY</string>
-    <string name="example_price">49.99 zł</string>
-    <!-- Strings related to login -->
-    <string name="mail_login">Username or nick</string>
-    <string name="prompt_password">Password</string>
-    <string name="action_register">Registration</string>
-    <string name="register">Register</string>
-    <string name="action_sign_in">Sign In</string>
-    <string name="error_invalid_email">Incorrect email or username</string>
-    <string name="error_incorrect_password">Incorrect password</string>
-    <string name="error_field_required">TThis field is necessary!</string>
-    <string name="mail_register">Email</string>
-    <string name="surname_register">Surname</string>
-    <string name="name_register">Name</string>
-    <string name="retype_password_register">Retype password</string>
-    <string name="nickname_register">Nick</string>
-    <string name="action_back">Go back</string>
-    <string name="price">Price</string>
-    <!-- String related to orders -->
-    <string name="no_orders">There are no orders</string>
-    <string name="order_for">Order for</string>
-    <string name="menu_name">Name</string>
-    <string name="accept_button">Accept</string>
-    <string name="set_order_ready">Ready</string>
-    <string name="set_order_served">Serve</string>
-    <string name="ordered_by">Ordered by</string>
-    <string name="user_name_dummy">Jacek</string>
-    <string name="total_items_ordered">Total items ordered</string>
-    <string name="ordered_items">Ordered items</string>
-    <string name="confirm">Confirm</string>
-    <string name="reject">Reject</string>
-    <string name="order_state">Order state</string>
-    <string name="example_name">Food name</string>
-    <string name="example_additions">Selected additions: add1, add2</string>
-    <string name="selected_additions">Selected additions:</string>
-    <string name="log_in">Login</string>
-    <string name="sign_in">Register</string>
-    <string name="app_description">Your last stop at ordering food.\nAllows you to browse menu and place orders in a fast and smiple way.\nJust log in and you are good to go.</string>
-    <string name="order_cart_action">Order cart</string>
-    <string name="logout_action">Logout</string>
+    <string name="app_description">Your last stop at ordering food.\nAllows you to browse menu and place orders in a fast and simple way.\nJust log in and you are good to go.</string>
+    <string name="button_log_in">Log in</string>
+    <string name="button_sign_in">Sign in</string>
+
+    <!-- Login/Register activity -->
+    <string name="first_name">First name</string>
+    <string name="last_name">Last name</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="retype_password">Retype password</string>
+    <string name="button_go_back">Go back</string>
+
+    <!-- Customer -->
+        <!-- Actions -->
+        <string name="action_order_cart">Order cart</string>
+        <string name="action_log_out">Logout</string>
+
+        <!-- Food -->
+        <string name="food_added_to_cart">Food added to cart</string>
+        <string name="food_add_food_to_cart">Add food to cart</string>
+
+        <!-- Order cart -->
+        <string name="order_cart_add_to_cart">Add to cart</string>
+        <string name="order_cart_full_order_price">Full order price:</string>
+        <string name="order_cart_items_in_cart">Items in cart:</string>
+        <string name="order_cart_confirm_order">Confirm order</string>
+        <string name="order_cart_cancel_order">Cancel order</string>
+        <string name="order_cart_remove_food_from_order">Remove food from order</string>
+        <string name="order_cart_selected_additions">Selected additions:</string>
+
+    <!-- Management -->
+        <!-- Admin dashboard -->
+        <string name="admin_dashboard_new_orders">New orders</string>
+        <string name="admin_dashboard_orders_in_progress">Orders in progress</string>
+        <string name="admin_dashboard_completed_orders">Completed orders</string>
+        <string name="admin_dashboard_manage_menus">Manage menus</string>
+
+        <!-- Order -->
+        <string name="order_details_ordered_by">Ordered by</string>
+        <string name="order_details_total_items_ordered">Total items ordered</string>
+        <string name="order_details_order_state">Order state</string>
+        <string name="order_details_price">Price</string>
+        <string name="order_details_ordered_items">Ordered items</string>
+        <string name="order_details_confirm">Confirm</string>
+        <string name="order_details_reject">Reject</string>
+        <string name="orders_list_no_orders">There are no orders</string>
+        <string name="orders_list_order_for">Order for</string>
+        <string name="order_details_set_order_ready">Ready</string>
+        <string name="order_details_set_order_served">Serve</string>
+
+        <!-- Food -->
+        <string name="food_details_admin_delete_food">Delete food</string>
+
+        <!-- Menu -->
+        <string name="menu_create_menu_name">Menu name</string>
+        <string name="menu_create_confirm">Create</string>
+        <string name="menus_list_delete">Delete</string>
 </resources>

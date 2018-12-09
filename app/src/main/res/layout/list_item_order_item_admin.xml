@@ -7,38 +7,39 @@
 
     <TextView
         android:id="@+id/foodNameTextViewAdmin"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="16dp"
-        android:text="Food name"
+        android:layout_marginStart="8dp"
+        android:text="@string/example_food_name"
         android:textAppearance="@android:style/TextAppearance.Material.Large"
-        app:layout_constraintEnd_toStartOf="@+id/foodPriceTextView"
+        app:layout_constraintBottom_toBottomOf="@+id/removeItemButtonAdmin"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/removeItemButtonAdmin" />
 
     <TextView
         android:id="@+id/foodPriceTextViewAdmin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="20dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:text="49.99 zł"
+        android:layout_marginEnd="8dp"
+        android:text="@string/example_food_price"
         android:textAppearance="@android:style/TextAppearance.Material.Medium"
+        app:layout_constraintBottom_toBottomOf="@+id/removeItemButtonAdmin"
         app:layout_constraintEnd_toStartOf="@+id/removeItemButtonAdmin"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/foodNameTextViewAdmin"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/removeItemButtonAdmin" />
 
     <ImageButton
         android:id="@+id/removeItemButtonAdmin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:contentDescription="@string/food_details_admin_delete_food"
         android:src="@drawable/trash"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 </android.support.constraint.ConstraintLayout>

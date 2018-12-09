@@ -22,7 +22,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
-public class OrderDetailsActivity extends AppCompatActivity {
+public class OrderDetailsAdminActivity extends AppCompatActivity {
     private TextView userNameTextView;
     private TextView itemsNumberTextView;
     private TextView orderStateTextView;
@@ -36,7 +36,7 @@ public class OrderDetailsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_order_details);
+        setContentView(R.layout.activity_order_details_admin);
 
         this.retrieveOrder();
         this.initView();
@@ -85,10 +85,10 @@ public class OrderDetailsActivity extends AppCompatActivity {
         String text = confirmButton.getText().toString();
         switch (order.getState()) {
             case "SAVED":
-                text = getString(R.string.set_order_ready);
+                text = getString(R.string.order_details_set_order_ready);
                 break;
             case "READY":
-                text = getString(R.string.set_order_served);
+                text = getString(R.string.order_details_set_order_served);
                 break;
             case "SERVED":
             default:

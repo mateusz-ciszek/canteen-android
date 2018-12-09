@@ -14,7 +14,7 @@
         android:layout_margin="0px"
         android:layout_marginEnd="8dp"
         android:padding="0px"
-        android:text="@string/log_in"
+        android:text="@string/button_log_in"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/register_button"
         app:layout_constraintStart_toStartOf="parent" />
@@ -23,7 +23,7 @@
         android:id="@+id/register_button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/sign_in"
+        android:text="@string/button_sign_in"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/login_button" />

@@ -30,7 +30,7 @@ class OrderDetailsViewHolder extends RecyclerView.ViewHolder {
         List<OrderItemAddition> additions = orderItem.getAdditions();
         foodNameTextView.setText(food.getName());
         StringBuilder sb = new StringBuilder(foodNameTextView.getContext()
-                .getString(R.string.selected_additions));
+                .getString(R.string.order_cart_selected_additions));
         for (OrderItemAddition addition : additions) {
             sb.append(addition.getFoodAddition().getName()).append(", ");
         }
