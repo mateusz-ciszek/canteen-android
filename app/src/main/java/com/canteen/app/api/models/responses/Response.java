@@ -22,5 +22,9 @@ public abstract class Response<T extends BaseResponseBody> implements Serializab
         Type classType = ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
         this.data = new Gson().fromJson(data, classType);
     }
+
+    public boolean isSuccessful() {
+        return httpStatusCode >= 200 && httpStatusCode < 300;
+    }
 }
 
