@@ -5,7 +5,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -18,7 +17,6 @@ import com.canteen.app.api.HttpRequestMethods;
 import com.canteen.app.api.handlers.LoginRequestHandler;
 import com.canteen.app.api.models.requests.LoginRequestBody;
 import com.canteen.app.api.models.responses.LoginResponse;
-import com.canteen.app.R;
 
 
 public class LoginActivity extends AppCompatActivity {
@@ -32,22 +30,11 @@ public class LoginActivity extends AppCompatActivity {
         email = findViewById(R.id.email);
         password = findViewById(R.id.password);
         loginBtn = findViewById(R.id.sign_in_button);
-        loginBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                loginButtonHandler();
-            }
-        });
+        loginBtn.setOnClickListener(v -> loginButtonHandler());
 
         registerBtn = findViewById(R.id.register_button);
-        registerBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this,
-                        RegisterActivity.class);
-                startActivity(intent);
-            }
-        });
+        registerBtn.setOnClickListener(v ->
+                startActivity(new Intent(LoginActivity.this, RegisterActivity.class)));
     }
 
     private void loginButtonHandler() {
@@ -95,6 +82,9 @@ public class LoginActivity extends AppCompatActivity {
                 } else {
                     intent = new Intent(App.getContext(), MenuListsActivity.class);
                 }
+                // Setting flags clearing history stack trace
+                // Hitting back on activity from intent will exit the app instead of returning here
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 App.getContext().startActivity(intent);
             } else {
                 Toast.makeText(App.getContext(),
