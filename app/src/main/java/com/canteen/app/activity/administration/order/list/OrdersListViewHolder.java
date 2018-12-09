@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 import com.canteen.app.App;
 import com.canteen.app.R;
-import com.canteen.app.activity.administration.order.details.OrderDetailsActivity;
+import com.canteen.app.activity.administration.order.details.OrderDetailsAdminActivity;
 import com.canteen.app.models.Order;
 import com.canteen.app.models.OrderItem;
 
@@ -32,8 +32,8 @@ class OrdersListViewHolder extends RecyclerView.ViewHolder {
     void setOrder(final Order order) {
         // FIXME podmienić na faktyczne imię i nazwisko jak już to będzie przekazywane
         orderNameTextView.setText(String.format("%s %s",
-                App.getContext().getString(R.string.order_for),
-                App.getContext().getString(R.string.user_name_dummy)));
+                App.getContext().getString(R.string.orders_list_order_for),
+                App.getContext().getString(R.string.example_user_name)));
 
         StringBuilder sb = new StringBuilder();
         for (OrderItem food : order.getItems()) {
@@ -46,7 +46,7 @@ class OrdersListViewHolder extends RecyclerView.ViewHolder {
         layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(layout.getContext(), OrderDetailsActivity.class);
+                Intent intent = new Intent(layout.getContext(), OrderDetailsAdminActivity.class);
                 intent.putExtra("order", order);
                 layout.getContext().startActivity(intent);
             }

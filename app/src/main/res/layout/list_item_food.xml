@@ -14,7 +14,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:text="Nazwa posiłku"
+        android:text="@string/example_food_name"
         android:textColor="#000"
         android:textAppearance="@android:style/TextAppearance.Material.Large"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -29,7 +29,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:text="49.99 zł"
+        android:text="@string/example_food_price"
         android:textAlignment="viewEnd"
         android:textAppearance="@android:style/TextAppearance.Large"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -48,7 +48,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/buttonGuideline"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_add_shopping_cart_black_24dp" />
+        app:srcCompat="@drawable/ic_add_shopping_cart_black_24dp"
+        android:contentDescription="@string/food_add_food_to_cart" />
 
     <android.support.constraint.Guideline
         android:id="@+id/buttonGuideline"

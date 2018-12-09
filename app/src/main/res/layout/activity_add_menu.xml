@@ -29,14 +29,16 @@
         android:layout_height="188dp"
         android:layout_marginBottom="25px"
         app:srcCompat="@drawable/logo" />
+
     <EditText
         android:id="@+id/et_addMenu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:hint="@string/menu_name"
+        android:hint="@string/menu_create_menu_name"
         android:imeActionId="6"
         android:imeOptions="actionUnspecified"
+        android:inputType="text"
         android:maxLines="1"
         android:singleLine="true" />
 
@@ -46,7 +48,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="@string/accept_button"
+        android:text="@string/menu_create_confirm"
         android:textColor="@color/colorControlHighlight"
         android:textStyle="bold" />
 

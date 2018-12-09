@@ -13,7 +13,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:text="Opis posiłku"
+        android:text="@string/example_food_description"
         android:textAppearance="@android:style/TextAppearance.Material.Large"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,10 +22,9 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/foodAdditionsRecyclerViewAdmin"
         android:layout_width="match_parent"
-        android:layout_height="399dp"
-        android:layout_marginTop="8dp"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
-        app:layout_constraintTop_toBottomOf="@+id/foodDescriptionTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/foodDescriptionTextViewAdmin" />
 
     <Button
         android:id="@+id/deleteFoodButton"
@@ -35,10 +34,9 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:text="Delete food"
+        android:text="@string/food_details_admin_delete_food"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/foodPriceTextView"
         app:layout_constraintTop_toTopOf="@+id/guideline2" />
 
     <TextView
@@ -48,7 +46,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
-        android:text="49.99 zł"
+        android:text="@string/example_food_price"
         android:textAppearance="@android:style/TextAppearance.Material.Large"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
