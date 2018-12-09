@@ -28,8 +28,7 @@
                 android:id="@+id/fullOrderPriceLabelTextView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginStart="16dp"
                 android:text="@string/order_cart_full_order_price"
                 android:textAppearance="@android:style/TextAppearance.Material.Large.Inverse"
                 app:layout_constraintStart_toStartOf="parent"
@@ -51,10 +50,10 @@
                 app:layout_constraintTop_toTopOf="@+id/fullOrderPriceLabelTextView" />
 
             <TextView
-                android:id="@+id/itemsAmountTextView"
+                android:id="@+id/itemsAmountLabelTextView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginBottom="8dp"
                 android:text="@string/order_cart_items_in_cart"
                 android:textAppearance="@android:style/TextAppearance.Material.Small.Inverse"
@@ -65,17 +64,17 @@
                 tools:layout_conversion_absoluteWidth="368dp" />
 
             <TextView
-                android:id="@+id/textView3"
+                android:id="@+id/itemsAmountTextView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
                 android:text="@string/example_order_items_number"
                 android:textAppearance="@android:style/TextAppearance.Material.Small.Inverse"
-                app:layout_constraintBottom_toBottomOf="@+id/itemsAmountTextView"
+                app:layout_constraintBottom_toBottomOf="@+id/itemsAmountLabelTextView"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/itemsAmountTextView"
-                app:layout_constraintTop_toTopOf="@+id/itemsAmountTextView" />
+                app:layout_constraintStart_toEndOf="@+id/itemsAmountLabelTextView"
+                app:layout_constraintTop_toTopOf="@+id/itemsAmountLabelTextView" />
         </android.support.constraint.ConstraintLayout>
     </android.support.design.widget.AppBarLayout>
 
