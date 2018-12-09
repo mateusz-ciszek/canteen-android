@@ -11,7 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.canteen.app.OrderCart;
-import com.example.microtemp.microblog.R;
+import com.canteen.app.R;
 import com.canteen.app.api.HttpRequestData;
 import com.canteen.app.api.HttpRequestMethods;
 import com.canteen.app.api.handlers.CreateOrderRequestHandler;

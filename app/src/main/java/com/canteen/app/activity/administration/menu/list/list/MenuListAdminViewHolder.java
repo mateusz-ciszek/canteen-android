@@ -12,7 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.canteen.app.App;
-import com.example.microtemp.microblog.R;
+import com.canteen.app.R;
 import com.canteen.app.models.Food;
 import com.canteen.app.models.Menu;
 import com.canteen.app.service.FoodService;

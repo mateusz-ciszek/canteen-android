@@ -9,7 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
-import com.example.microtemp.microblog.R;
+import com.canteen.app.R;
 import com.canteen.app.activity.cart.OrderCartActivity;
 import com.canteen.app.models.Menu;
 

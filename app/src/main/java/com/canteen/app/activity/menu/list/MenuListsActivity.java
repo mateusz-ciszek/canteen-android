@@ -1,7 +1,9 @@
 package com.canteen.app.activity.menu.list;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -10,7 +12,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import com.canteen.app.AdapterContainer;
-import com.example.microtemp.microblog.R;
+import com.canteen.app.MainActivity;
+import com.canteen.app.R;
 import com.canteen.app.activity.cart.OrderCartActivity;
 import com.canteen.app.api.HttpRequestData;
 import com.canteen.app.api.HttpRequestMethods;
@@ -57,6 +60,11 @@ public class MenuListsActivity extends AppCompatActivity implements AdapterConta
             case R.id.action_cart:
                 startActivity(new Intent(this, OrderCartActivity.class));
                 return true;
+            case R.id.action_logout:
+                SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
+                sp.edit().remove("token").apply();
+                finish();
+                startActivity(new Intent(this, MainActivity.class));
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -78,6 +86,7 @@ public class MenuListsActivity extends AppCompatActivity implements AdapterConta
 
         @Override
         protected void onPostExecute(AllMenusResponse result) {
+            // TODO handle error response
             MenuListsAdapter adapter = new MenuListsAdapter(result.getData().getMenus());
             this.adapterContainer.setAdapter(adapter);
         }

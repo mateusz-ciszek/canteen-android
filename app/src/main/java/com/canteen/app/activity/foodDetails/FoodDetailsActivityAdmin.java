@@ -15,7 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.canteen.app.App;
-import com.example.microtemp.microblog.R;
+import com.canteen.app.R;
 import com.canteen.app.activity.cart.OrderCartActivity;
 import com.canteen.app.models.Food;
 

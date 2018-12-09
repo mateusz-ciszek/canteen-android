@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Canteen App</string>
+    <string name="app_name">eWaiter</string>
     <string name="title_activity_login">Logowanie</string>
     <!-- Example values, these are immediately replaced by actual data -->
     <string name="example_amount">4</string>
@@ -39,4 +39,9 @@
     <string name="example_name">Food name</string>
     <string name="example_additions">Selected additions: add1, add2</string>
     <string name="selected_additions">Selected additions:</string>
+    <string name="log_in">Login</string>
+    <string name="sign_in">Register</string>
+    <string name="app_description">Your last stop at ordering food.\nAllows you to browse menu and place orders in a fast and smiple way.\nJust log in and you are good to go.</string>
+    <string name="order_cart_action">Order cart</string>
+    <string name="logout_action">Logout</string>
 </resources>

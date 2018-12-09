@@ -1,27 +1,37 @@
 package com.canteen.app;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.widget.TextView;
+import android.preference.PreferenceManager;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
+import android.widget.Button;
 
-import com.canteen.app.api.models.responses.Response;
-import com.example.microtemp.microblog.R;
+import com.canteen.app.activity.menu.list.MenuListsActivity;
 
 public class MainActivity extends AppCompatActivity {
-
-    TextView textViewResponse;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
+        if (sp.contains("token")) {
+            finish();
+            startActivity(new Intent(this, MenuListsActivity.class));
+        }
 
-        textViewResponse = findViewById(R.id.response);
-        Intent intent = getIntent();
-        Response data = (Response) intent.getSerializableExtra("response");
-        textViewResponse.setText(data.getHttpStatusCode() + ": " + data.getData().getMessage());
+        Button loginButton = findViewById(R.id.login_button);
+        loginButton.setOnClickListener(v ->
+                startActivity(new Intent(this, LoginActivity.class)));
+        Button registerButton = findViewById(R.id.register_button);
+        registerButton.setOnClickListener(v ->
+                startActivity(new Intent(this, RegisterActivity.class)));
 
-
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.hide();
+        }
     }
 }

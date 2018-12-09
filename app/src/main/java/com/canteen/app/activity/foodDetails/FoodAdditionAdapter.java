@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 
-import com.example.microtemp.microblog.R;
+import com.canteen.app.R;
 import com.canteen.app.models.FoodAddition;
 
 import java.util.ArrayList;

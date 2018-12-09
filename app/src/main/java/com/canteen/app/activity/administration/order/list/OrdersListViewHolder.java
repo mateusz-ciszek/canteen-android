@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.canteen.app.App;
-import com.example.microtemp.microblog.R;
+import com.canteen.app.R;
 import com.canteen.app.activity.administration.order.details.OrderDetailsActivity;
 import com.canteen.app.models.Order;
 import com.canteen.app.models.OrderItem;

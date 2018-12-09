@@ -4,7 +4,7 @@ import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
 
-import com.example.microtemp.microblog.R;
+import com.canteen.app.R;
 import com.canteen.app.models.Food;
 import com.canteen.app.models.OrderItem;
 import com.canteen.app.models.OrderItemAddition;

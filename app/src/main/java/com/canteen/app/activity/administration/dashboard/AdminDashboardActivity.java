@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.canteen.app.App;
-import com.example.microtemp.microblog.R;
+import com.canteen.app.R;
 import com.canteen.app.activity.administration.menu.list.MenusListManagementActivity;
 import com.canteen.app.activity.administration.order.list.OrdersListActivity;
 

@@ -5,7 +5,10 @@
         android:id="@+id/action_cart"
         android:icon="@drawable/ic_shopping_cart_white_24dp"
         android:orderInCategory="100"
-        android:title="Order cart"
+        android:title="@string/order_cart_action"
         app:showAsAction="always" />
+    <item
+        android:id="@+id/action_logout"
+        android:title="@string/logout_action" />
 
 </menu>
