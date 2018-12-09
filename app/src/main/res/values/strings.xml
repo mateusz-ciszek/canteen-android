@@ -12,12 +12,15 @@
     <string name="example_order_state">Ready</string>
     <string name="example_order_foods">Fish and chips, hamburger</string>
     <string name="example_user_name">John Smith</string>
+    <string name="example_currency">zł</string>
+    <string name="example_waiting_time">40</string>
 
     <!-- Common -->
     <string name="app_name">eWaiter</string>
     <string name="app_description">Your last stop at ordering food.\nAllows you to browse menu and place orders in a fast and simple way.\nJust log in and you are good to go.</string>
     <string name="button_log_in">Log in</string>
     <string name="button_sign_in">Sign in</string>
+    <string name="something_wrong">Something went wrong</string>
 
     <!-- Login/Register activity -->
     <string name="first_name">First name</string>
@@ -44,6 +47,8 @@
         <string name="order_cart_cancel_order">Cancel order</string>
         <string name="order_cart_remove_food_from_order">Remove food from order</string>
         <string name="order_cart_selected_additions">Selected additions:</string>
+        <string name="order_cart_submitted_order">Your order has been submitted. It should be ready in about %s minutes.</string>
+        <string name="order_cart_submitting_error">Couldn\'t submit your order. Please try again later.</string>
 
     <!-- Management -->
         <!-- Admin dashboard -->

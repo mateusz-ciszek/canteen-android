@@ -10,6 +10,7 @@ public class OrderCart {
     private static final OrderCart ourInstance = new OrderCart();
     private List<OrderItem> items = new ArrayList<>();
     private List<OnChangeListener> listeners = new ArrayList<>();
+    private String currency = null;
 
     public static OrderCart getInstance() {
         return ourInstance;
@@ -53,6 +54,11 @@ public class OrderCart {
         return this.items;
     }
 
+    // TODO should be getting this from server on login
+    public String getCurrency() {
+        return currency != null ? currency : App.getContext().getString(R.string.example_currency);
+    }
+
     public void registerOnChangeListener(OnChangeListener listener) {
         this.listeners.add(listener);
     }
@@ -73,7 +79,7 @@ public class OrderCart {
 
         OrderItem(Food food, List<FoodAddition> additions) {
             this.food = food;
-            this.additions = additions != null ? additions : new ArrayList<FoodAddition>();
+            this.additions = additions != null ? additions : new ArrayList<>();
         }
 
         public Food getFood() {

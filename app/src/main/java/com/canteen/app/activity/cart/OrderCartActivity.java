@@ -5,7 +5,6 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -53,43 +52,40 @@ public class OrderCartActivity extends AppCompatActivity implements OrderCart.On
         final OrderCart orderCart = OrderCart.getInstance();
         orderCart.registerOnChangeListener(this);
 
-        cancelButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                orderCart.clear();
-                finish();
-            }
+        cancelButton.setOnClickListener(v -> {
+            orderCart.clear();
+            finish();
         });
 
-        confirmButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                CreateOrderRequestBody requestBody
-                        = new CreateOrderRequestBody(orderCart.getItems());
+        confirmButton.setOnClickListener(v -> {
+            CreateOrderRequestBody requestBody
+                    = new CreateOrderRequestBody(orderCart.getItems());
 
-                HttpRequestData<CreateOrderRequestBody> requestData = HttpRequestData.<CreateOrderRequestBody>builder()
-                        .method(HttpRequestMethods.POST).requestBody(requestBody).build();
+            HttpRequestData<CreateOrderRequestBody> requestData = HttpRequestData.<CreateOrderRequestBody>builder()
+                    .method(HttpRequestMethods.POST).requestBody(requestBody).build();
 
-                EmptyResponse response;
-                try {
-                    response = new CreateOrderRequestHandlerImpl().execute(requestData).get();
-                } catch (InterruptedException | ExecutionException e) {
-                    e.printStackTrace();
-                    Toast.makeText(cancelButton.getContext(), "Something went wrong",
-                            Toast.LENGTH_SHORT).show();
-                    return;
-                }
+            EmptyResponse response;
+            try {
+                response = new CreateOrderRequestHandlerImpl().execute(requestData).get();
+            } catch (InterruptedException | ExecutionException e) {
+                e.printStackTrace();
+                Toast.makeText(cancelButton.getContext(), getString(R.string.something_wrong),
+                        Toast.LENGTH_SHORT).show();
+                return;
+            }
 
-                if (response.getHttpStatusCode() == 200) {
-                    Toast.makeText(cancelButton.getContext(), "Your order has been submitted, You need wait 40 minutes",
-                            Toast.LENGTH_SHORT).show();
-                    orderCart.clear();
-                    finish();
-                } else {
-                    Toast.makeText(cancelButton.getContext(),
-                            "Couldn't submit your order. Please try again later",
-                            Toast.LENGTH_SHORT).show();
-                }
+            if (response.getHttpStatusCode() == 200) {
+                Toast.makeText(cancelButton.getContext(),
+                        getString(R.string.order_cart_submitted_order,
+                                // TODO replace with actual waiting time once implemented
+                                getString(R.string.example_waiting_time)),
+                        Toast.LENGTH_SHORT).show();
+                orderCart.clear();
+                finish();
+            } else {
+                Toast.makeText(cancelButton.getContext(),
+                        getString(R.string.order_cart_submitting_error),
+                        Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -112,13 +108,15 @@ public class OrderCartActivity extends AppCompatActivity implements OrderCart.On
         OrderCart orderCart = OrderCart.getInstance();
 
         this.fullOrderPriceTextView.setText(String.format(Locale.getDefault(),
-                "Full order price: %.2f",
-                orderCart.getPrice()));
+                "%.2f %s", orderCart.getPrice(), orderCart.getCurrency()));
 
         this.itemsAmountTextView.setText(String.format(Locale.getDefault(),
-                "Items in cart: %d", orderCart.getCount()));
+                "%d", orderCart.getCount()));
 
-        this.orderItemsRecyclerView.getAdapter().notifyDataSetChanged();
+        RecyclerView.Adapter adapter = orderItemsRecyclerView.getAdapter();
+        if (adapter != null) {
+            adapter.notifyDataSetChanged();
+        }
     }
 
     private static class CreateOrderRequestHandlerImpl extends CreateOrderRequestHandler {
