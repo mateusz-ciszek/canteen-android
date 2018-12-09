@@ -35,6 +35,9 @@
         <string name="action_order_cart">Order cart</string>
         <string name="action_log_out">Logout</string>
 
+        <!-- Menu -->
+        <string name="menu_list_no_menu_available">There are no menus available</string>
+
         <!-- Food -->
         <string name="food_added_to_cart">Food added to cart</string>
         <string name="food_add_food_to_cart">Add food to cart</string>
