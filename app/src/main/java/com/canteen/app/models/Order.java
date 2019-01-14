@@ -8,7 +8,7 @@ import lombok.Getter;
 @Getter
 public class Order implements Serializable {
     private String _id;
-    private String user;
+    private User user;
     private List<OrderItem> items;
     private double totalPrice;
     private String state;
