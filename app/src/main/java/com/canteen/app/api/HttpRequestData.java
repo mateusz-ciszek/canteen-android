@@ -8,7 +8,7 @@ import lombok.Getter;
 @Getter
 @Builder
 public class HttpRequestData<T extends RequestBody> {
-    private static final String BASE_ADDRESS = "http://212.191.92.88:51010";
+    private static final String BASE_ADDRESS = "https://fathomless-hollows-91988.herokuapp.com";
     private HttpRequestMethods method;
     private T requestBody;
 
