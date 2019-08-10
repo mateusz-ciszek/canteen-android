@@ -74,7 +74,7 @@ public class OrderCartActivity extends AppCompatActivity implements OrderCart.On
                 return;
             }
 
-            if (response.getHttpStatusCode() == 200) {
+            if (response.getHttpStatusCode() == 201) {
                 Toast.makeText(cancelButton.getContext(),
                         getString(R.string.order_cart_submitted_order,
                                 // TODO replace with actual waiting time once implemented
