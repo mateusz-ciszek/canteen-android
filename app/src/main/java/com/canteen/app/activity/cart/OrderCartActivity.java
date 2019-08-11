@@ -20,19 +20,31 @@ import com.canteen.app.api.models.responses.EmptyResponse;
 import java.util.Locale;
 import java.util.concurrent.ExecutionException;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class OrderCartActivity extends AppCompatActivity implements OrderCart.OnChangeListener {
 
-    private TextView fullOrderPriceTextView;
-    private TextView itemsAmountTextView;
-    private RecyclerView orderItemsRecyclerView;
-    private Button confirmButton;
-    private Button cancelButton;
+    @BindView(R.id.fullOrderPriceTextView)
+    TextView fullOrderPriceTextView;
+
+    @BindView(R.id.itemsAmountTextView)
+    TextView itemsAmountTextView;
+
+    @BindView(R.id.orderItemsRecyclerView)
+    RecyclerView orderItemsRecyclerView;
+
+    @BindView(R.id.confirmOrderButton)
+    Button confirmButton;
+
+    @BindView(R.id.cancelOrderButton)
+    Button cancelButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_cart);
-
+        ButterKnife.bind(this);
         this.initView();
     }
 
@@ -43,12 +55,6 @@ public class OrderCartActivity extends AppCompatActivity implements OrderCart.On
     }
 
     private void initView() {
-        fullOrderPriceTextView = findViewById(R.id.fullOrderPriceTextView);
-        itemsAmountTextView = findViewById(R.id.itemsAmountTextView);
-        orderItemsRecyclerView = findViewById(R.id.orderItemsRecyclerView);
-        confirmButton = findViewById(R.id.confirmOrderButton);
-        cancelButton = findViewById(R.id.cancelOrderButton);
-
         OrderCart orderCart = OrderCart.getInstance();
         orderCart.registerOnChangeListener(this);
 
