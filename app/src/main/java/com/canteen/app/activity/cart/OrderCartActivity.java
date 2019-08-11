@@ -43,14 +43,17 @@ public class OrderCartActivity extends AppCompatActivity implements OrderCart.On
     }
 
     private void initView() {
-        this.fullOrderPriceTextView = findViewById(R.id.fullOrderPriceTextView);
-        this.itemsAmountTextView = findViewById(R.id.itemsAmountTextView);
-        this.orderItemsRecyclerView = findViewById(R.id.orderItemsRecyclerView);
-        this.confirmButton = findViewById(R.id.confirmOrderButton);
-        this.cancelButton = findViewById(R.id.cancelOrderButton);
+        fullOrderPriceTextView = findViewById(R.id.fullOrderPriceTextView);
+        itemsAmountTextView = findViewById(R.id.itemsAmountTextView);
+        orderItemsRecyclerView = findViewById(R.id.orderItemsRecyclerView);
+        confirmButton = findViewById(R.id.confirmOrderButton);
+        cancelButton = findViewById(R.id.cancelOrderButton);
 
-        final OrderCart orderCart = OrderCart.getInstance();
+        OrderCart orderCart = OrderCart.getInstance();
         orderCart.registerOnChangeListener(this);
+
+        confirmButton.setEnabled(!orderCart.isEmpty());
+        cancelButton.setEnabled(!orderCart.isEmpty());
 
         cancelButton.setOnClickListener(v -> {
             orderCart.clear();
@@ -58,11 +61,12 @@ public class OrderCartActivity extends AppCompatActivity implements OrderCart.On
         });
 
         confirmButton.setOnClickListener(v -> {
-            CreateOrderRequestBody requestBody
-                    = new CreateOrderRequestBody(orderCart.getItems());
+            CreateOrderRequestBody requestBody = new CreateOrderRequestBody(orderCart.getItems());
 
             HttpRequestData<CreateOrderRequestBody> requestData = HttpRequestData.<CreateOrderRequestBody>builder()
-                    .method(HttpRequestMethods.POST).requestBody(requestBody).build();
+                    .method(HttpRequestMethods.POST)
+                    .requestBody(requestBody)
+                    .build();
 
             EmptyResponse response;
             try {
@@ -90,8 +94,7 @@ public class OrderCartActivity extends AppCompatActivity implements OrderCart.On
         });
 
         this.orderItemsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        OrderItemsListAdapter adapter
-                = new OrderItemsListAdapter(OrderCart.getInstance().getItems());
+        OrderItemsListAdapter adapter = new OrderItemsListAdapter(orderCart.getItems());
         this.orderItemsRecyclerView.setAdapter(adapter);
 
         ActionBar actionBar = getSupportActionBar();
@@ -107,11 +110,9 @@ public class OrderCartActivity extends AppCompatActivity implements OrderCart.On
     public void onChange() {
         OrderCart orderCart = OrderCart.getInstance();
 
-        this.fullOrderPriceTextView.setText(String.format(Locale.getDefault(),
-                "%.2f %s", orderCart.getPrice(), orderCart.getCurrency()));
+        this.fullOrderPriceTextView.setText(String.format(Locale.getDefault(), "%.2f %s", orderCart.getPrice(), orderCart.getCurrency()));
 
-        this.itemsAmountTextView.setText(String.format(Locale.getDefault(),
-                "%d", orderCart.getCount()));
+        this.itemsAmountTextView.setText(String.format(Locale.getDefault(), "%d", orderCart.getCount()));
 
         RecyclerView.Adapter adapter = orderItemsRecyclerView.getAdapter();
         if (adapter != null) {
