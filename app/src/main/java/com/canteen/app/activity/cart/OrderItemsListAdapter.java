@@ -6,15 +6,15 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
-import com.canteen.app.OrderCart;
 import com.canteen.app.R;
+import com.canteen.app.service.order.OrderItem;
 
 import java.util.List;
 
 public class OrderItemsListAdapter extends RecyclerView.Adapter<OrderItemsListViewHolder> {
-    private List<OrderCart.OrderItem> items;
+    private List<OrderItem> items;
 
-    OrderItemsListAdapter(List<OrderCart.OrderItem> items) {
+    OrderItemsListAdapter(final List<OrderItem> items) {
         this.items = items;
     }
 

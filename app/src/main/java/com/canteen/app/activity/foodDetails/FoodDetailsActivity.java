@@ -15,10 +15,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.canteen.app.App;
-import com.canteen.app.OrderCart;
+import com.canteen.app.service.order.OrderCartService;
 import com.canteen.app.R;
 import com.canteen.app.activity.cart.OrderCartActivity;
 import com.canteen.app.models.Food;
+import com.canteen.app.service.order.OrderItem;
 
 import java.util.Locale;
 
@@ -77,13 +78,13 @@ public class FoodDetailsActivity extends AppCompatActivity implements PriceConta
         this.foodAdditionsRecyclerView.setAdapter(adapter);
 
         this.foodDescriptionTextView.setText(this.food.getDescription());
-        this.addToCartButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                OrderCart.getInstance().addItem(food, adapter.getSelected());
-                Toast.makeText(App.getContext(), "Food added to cart", Toast.LENGTH_SHORT)
-                        .show();
-            }
+        this.addToCartButton.setOnClickListener(v -> {
+            OrderCartService.getInstance().addItem(OrderItem.builder()
+                    .food(food)
+                    .additions(adapter.getSelected())
+                    .build());
+            Toast.makeText(App.getContext(), "Food added to cart", Toast.LENGTH_SHORT)
+                    .show();
         });
     }
 

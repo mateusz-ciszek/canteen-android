@@ -1,7 +1,7 @@
 package com.canteen.app.api.models.requests;
 
-import com.canteen.app.OrderCart;
 import com.canteen.app.models.FoodAddition;
+import com.canteen.app.service.order.OrderItem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,9 +19,9 @@ public class CreateOrderRequestBody extends RequestBody {
         return "/order";
     }
 
-    public CreateOrderRequestBody(List<OrderCart.OrderItem> orderItems) {
+    public CreateOrderRequestBody(final List<OrderItem> orderItems) {
         items = new ArrayList<>();
-        for (OrderCart.OrderItem cartItem : orderItems) {
+        for (OrderItem cartItem : orderItems) {
             items.add(new Item(cartItem));
         }
     }
@@ -32,7 +32,7 @@ public class CreateOrderRequestBody extends RequestBody {
         int quantity = 1;
         List<ItemAddition> additions;
 
-        Item(OrderCart.OrderItem cartItem) {
+        Item(final OrderItem cartItem) {
             _id = cartItem.getFood().get_id();
             additions = new ArrayList<>();
             for (FoodAddition foodAddition : cartItem.getAdditions()) {
@@ -45,7 +45,7 @@ public class CreateOrderRequestBody extends RequestBody {
         String _id;
         int quantity = 1;
 
-        ItemAddition(FoodAddition foodAddition) {
+        ItemAddition(final FoodAddition foodAddition) {
             _id = foodAddition.get_id();
         }
     }

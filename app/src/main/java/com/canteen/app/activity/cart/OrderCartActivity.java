@@ -9,7 +9,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.canteen.app.OrderCart;
+import com.canteen.app.service.order.OrderCartChangeListener;
+import com.canteen.app.service.order.OrderCartService;
 import com.canteen.app.R;
 import com.canteen.app.api.HttpRequestData;
 import com.canteen.app.api.HttpRequestMethods;
@@ -23,7 +24,7 @@ import java.util.concurrent.ExecutionException;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class OrderCartActivity extends AppCompatActivity implements OrderCart.OnChangeListener {
+public class OrderCartActivity extends AppCompatActivity implements OrderCartChangeListener {
 
     @BindView(R.id.fullOrderPriceTextView)
     TextView fullOrderPriceTextView;
@@ -40,6 +41,8 @@ public class OrderCartActivity extends AppCompatActivity implements OrderCart.On
     @BindView(R.id.cancelOrderButton)
     Button cancelButton;
 
+    private OrderCartService orderCartService = OrderCartService.getInstance();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,23 +54,22 @@ public class OrderCartActivity extends AppCompatActivity implements OrderCart.On
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        OrderCart.getInstance().unregisterOnChangeListener(this);
+        OrderCartService.getInstance().unregisterOnChangeListener(this);
     }
 
     private void initView() {
-        OrderCart orderCart = OrderCart.getInstance();
-        orderCart.registerOnChangeListener(this);
+        orderCartService.registerOnChangeListener(this);
 
-        confirmButton.setEnabled(!orderCart.isEmpty());
-        cancelButton.setEnabled(!orderCart.isEmpty());
+        confirmButton.setEnabled(!orderCartService.isEmpty());
+        cancelButton.setEnabled(!orderCartService.isEmpty());
 
         cancelButton.setOnClickListener(v -> {
-            orderCart.clear();
+            orderCartService.clear();
             finish();
         });
 
         confirmButton.setOnClickListener(v -> {
-            CreateOrderRequestBody requestBody = new CreateOrderRequestBody(orderCart.getItems());
+            CreateOrderRequestBody requestBody = new CreateOrderRequestBody(orderCartService.getItems());
 
             HttpRequestData<CreateOrderRequestBody> requestData = HttpRequestData.<CreateOrderRequestBody>builder()
                     .method(HttpRequestMethods.POST)
@@ -90,7 +92,7 @@ public class OrderCartActivity extends AppCompatActivity implements OrderCart.On
                                 // TODO replace with actual waiting time once implemented
                                 getString(R.string.example_waiting_time)),
                         Toast.LENGTH_SHORT).show();
-                orderCart.clear();
+                orderCartService.clear();
                 finish();
             } else {
                 Toast.makeText(cancelButton.getContext(),
@@ -100,7 +102,7 @@ public class OrderCartActivity extends AppCompatActivity implements OrderCart.On
         });
 
         this.orderItemsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        OrderItemsListAdapter adapter = new OrderItemsListAdapter(orderCart.getItems());
+        OrderItemsListAdapter adapter = new OrderItemsListAdapter(orderCartService.getItems());
         this.orderItemsRecyclerView.setAdapter(adapter);
 
         ActionBar actionBar = getSupportActionBar();
@@ -109,16 +111,15 @@ public class OrderCartActivity extends AppCompatActivity implements OrderCart.On
             actionBar.setElevation(0);
         }
 
-        this.onChange();
+        this.onOrderCartChange();
     }
 
     @Override
-    public void onChange() {
-        OrderCart orderCart = OrderCart.getInstance();
+    public void onOrderCartChange() {
+        this.fullOrderPriceTextView.setText(String.format(Locale.getDefault(), "%.2f %s", orderCartService.getPrice(),
+                orderCartService.getCurrency()));
 
-        this.fullOrderPriceTextView.setText(String.format(Locale.getDefault(), "%.2f %s", orderCart.getPrice(), orderCart.getCurrency()));
-
-        this.itemsAmountTextView.setText(String.format(Locale.getDefault(), "%d", orderCart.getCount()));
+        this.itemsAmountTextView.setText(String.format(Locale.getDefault(), "%d", orderCartService.getCount()));
 
         RecyclerView.Adapter adapter = orderItemsRecyclerView.getAdapter();
         if (adapter != null) {

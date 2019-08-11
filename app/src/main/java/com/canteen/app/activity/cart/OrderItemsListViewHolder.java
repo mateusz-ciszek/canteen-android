@@ -2,18 +2,18 @@ package com.canteen.app.activity.cart;
 
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.canteen.app.OrderCart;
 import com.canteen.app.R;
 import com.canteen.app.models.FoodAddition;
+import com.canteen.app.service.order.OrderCartService;
+import com.canteen.app.service.order.OrderItem;
 
 import java.util.Locale;
 
 class OrderItemsListViewHolder extends RecyclerView.ViewHolder {
-    private OrderCart.OrderItem orderItem;
+    private OrderItem orderItem;
     private TextView foodNameTextView;
     private TextView foodPriceTextView;
     private TextView selectedAdditionsTextView;
@@ -28,12 +28,11 @@ class OrderItemsListViewHolder extends RecyclerView.ViewHolder {
         this.removeItemButton = itemView.findViewById(R.id.removeItemButton);
     }
 
-    void setOrderItem(final OrderCart.OrderItem orderItem) {
+    void setOrderItem(final OrderItem orderItem) {
         this.orderItem = orderItem;
 
         this.foodNameTextView.setText(this.orderItem.getFood().getName());
-        this.foodPriceTextView
-                .setText(String.format(Locale.getDefault(), "%.2f zł", this.orderItem.getPrice()));
+        this.foodPriceTextView.setText(String.format(Locale.getDefault(), "%.2f zł", this.orderItem.getPrice()));
 
         StringBuilder selectedItemsText;
         if (this.orderItem.getAdditions().size() == 0) {
@@ -47,11 +46,6 @@ class OrderItemsListViewHolder extends RecyclerView.ViewHolder {
         }
         this.selectedAdditionsTextView.setText(selectedItemsText.toString());
 
-        this.removeItemButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                OrderCart.getInstance().removeItem(orderItem);
-            }
-        });
+        this.removeItemButton.setOnClickListener(v -> OrderCartService.getInstance().removeItem(orderItem));
     }
 }
