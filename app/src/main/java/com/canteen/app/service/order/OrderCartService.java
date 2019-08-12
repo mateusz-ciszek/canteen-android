@@ -9,7 +9,7 @@ import java.util.List;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
+@NoArgsConstructor(access = AccessLevel.PACKAGE)
 public class OrderCartService {
     private static final OrderCartService ourInstance = new OrderCartService();
     private List<OrderItem> items = new ArrayList<>();
