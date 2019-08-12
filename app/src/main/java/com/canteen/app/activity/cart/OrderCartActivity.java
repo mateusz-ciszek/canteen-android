@@ -60,8 +60,7 @@ public class OrderCartActivity extends AppCompatActivity implements OrderCartCha
     private void initView() {
         orderCartService.registerOnChangeListener(this);
 
-        confirmButton.setEnabled(!orderCartService.isEmpty());
-        cancelButton.setEnabled(!orderCartService.isEmpty());
+        resolveButtonsState();
 
         cancelButton.setOnClickListener(v -> {
             orderCartService.clear();
@@ -114,6 +113,11 @@ public class OrderCartActivity extends AppCompatActivity implements OrderCartCha
         this.onOrderCartChange();
     }
 
+    private void resolveButtonsState() {
+        confirmButton.setEnabled(!orderCartService.isEmpty());
+        cancelButton.setEnabled(!orderCartService.isEmpty());
+    }
+
     @Override
     public void onOrderCartChange() {
         this.fullOrderPriceTextView.setText(String.format(Locale.getDefault(), "%.2f %s", orderCartService.getPrice(),
@@ -125,6 +129,8 @@ public class OrderCartActivity extends AppCompatActivity implements OrderCartCha
         if (adapter != null) {
             adapter.notifyDataSetChanged();
         }
+
+        resolveButtonsState();
     }
 
     private static class CreateOrderRequestHandlerImpl extends CreateOrderRequestHandler {
