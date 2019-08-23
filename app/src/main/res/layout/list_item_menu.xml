@@ -6,7 +6,7 @@
     android:background="?android:attr/selectableItemBackground" >
 
     <TextView
-        android:id="@+id/menuNameTextView"
+        android:id="@+id/menu_name_text_view"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"

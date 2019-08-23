@@ -22,7 +22,7 @@ class MenuListsAdapter extends RecyclerView.Adapter<MenuListsViewHolder> {
 
     @NonNull
     @Override
-    public MenuListsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public MenuListsViewHolder onCreateViewHolder(final @NonNull ViewGroup parent, final int viewType) {
         ConstraintLayout v = (ConstraintLayout) LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.list_item_menu, parent, false);
 
@@ -30,10 +30,11 @@ class MenuListsAdapter extends RecyclerView.Adapter<MenuListsViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MenuListsViewHolder holder, int position) {
-        holder.name.setText(this.menus.get(position).getName());
-        holder._id = this.menus.get(position).get_id();
-        holder.menu = this.menus.get(position);
+    public void onBindViewHolder(final @NonNull MenuListsViewHolder holder, final int position) {
+        Menu menu = this.menus.get(position);
+        holder.nameTextView.setText(menu.getName());
+        holder.setId(menu.get_id());
+        holder.setMenu(menu);
     }
 
     @Override
