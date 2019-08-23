@@ -3,13 +3,12 @@ package com.canteen.app.activity.menu.details;
 import android.content.Intent;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
-import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.canteen.app.App;
 import com.canteen.app.R;
-import com.canteen.app.activity.foodDetails.FoodDetailsActivity;
+import com.canteen.app.activity.food.details.FoodDetailsActivity;
 import com.canteen.app.models.Food;
 import com.canteen.app.service.order.OrderCartService;
 import com.canteen.app.service.order.OrderItem;

@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.canteen.app.activity.foodDetails.FoodDetailsActivity">
+    tools:context="com.canteen.app.activity.food.details.FoodDetailsActivity">
 
     <TextView
-        android:id="@+id/foodDescriptionTextView"
+        android:id="@+id/food_description_text_view"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -20,15 +20,15 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/foodAdditionsRecyclerView"
+        android:id="@+id/food_additions_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="8dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
-        app:layout_constraintTop_toBottomOf="@+id/foodDescriptionTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/food_description_text_view" />
 
     <Button
-        android:id="@+id/addToCartButton"
+        android:id="@+id/add_to_cart_button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -38,11 +38,11 @@
         android:text="@string/order_cart_add_to_cart"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/foodPriceTextView"
+        app:layout_constraintStart_toEndOf="@+id/food_price_text_view"
         app:layout_constraintTop_toTopOf="@+id/guideline2" />
 
     <TextView
-        android:id="@+id/foodPriceTextView"
+        android:id="@+id/food_price_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"

@@ -30,7 +30,7 @@
         <activity android:name="com.canteen.app.activity.menu.list.MenuListsActivity" />
         <activity android:name="com.canteen.app.deletion.AddDishActivity"/>
         <activity android:name="com.canteen.app.activity.menu.details.MenuDetailsActivity" />
-        <activity android:name="com.canteen.app.activity.foodDetails.FoodDetailsActivity" />
+        <activity android:name="com.canteen.app.activity.food.details.FoodDetailsActivity" />
         <activity android:name="com.canteen.app.activity.administration.dashboard.AdminDashboardActivity" />
         <activity android:name="com.canteen.app.activity.administration.order.details.OrderDetailsAdminActivity" />
         <activity android:name="com.canteen.app.activity.administration.order.list.OrdersListActivity" />
@@ -38,7 +38,7 @@
         <activity android:name="com.canteen.app.activity.administration.menu.list.MenusListManagementActivity" />
         <activity android:name="com.canteen.app.activity.administration.menu.list.AddMenuActivity" />
         <activity android:name="com.canteen.app.activity.administration.menu.list.list.FoodListActivityAdmin" />
-        <activity android:name="com.canteen.app.activity.foodDetails.FoodDetailsActivityAdmin" />
+        <activity android:name="com.canteen.app.activity.food.details.FoodDetailsActivityAdmin" />
     </application>
 
 </manifest>
