@@ -5,7 +5,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -18,58 +17,65 @@ import com.canteen.app.api.handlers.LoginRequestHandler;
 import com.canteen.app.api.models.requests.LoginRequestBody;
 import com.canteen.app.api.models.responses.LoginResponse;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
 
 public class LoginActivity extends AppCompatActivity {
-    Button loginBtn, registerBtn;
-    EditText email, password;
+
+    @BindView(R.id.email_text_edit)
+    EditText emailTextEdit;
+
+    @BindView(R.id.password_text_edit)
+    EditText passwordTextEdit;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        email = findViewById(R.id.email);
-        password = findViewById(R.id.password);
-        loginBtn = findViewById(R.id.sign_in_button);
-        loginBtn.setOnClickListener(v -> loginButtonHandler());
-
-        registerBtn = findViewById(R.id.register_button);
-        registerBtn.setOnClickListener(v ->
-                startActivity(new Intent(LoginActivity.this, RegisterActivity.class)));
+        ButterKnife.bind(this);
     }
 
-    private void loginButtonHandler() {
+    @OnClick(R.id.login_button)
+    void loginButtonHandler() {
         if (isEmailOrPasswordEmpty()) {
             Toast.makeText(LoginActivity.this,
                     "Bad mail or password",
                     Toast.LENGTH_SHORT).show();
-        } else {
-            LoginRequestBody requestBody = LoginRequestBody.builder()
-                    .email(email.getText().toString())
-                    .password(password.getText().toString())
-                    .build();
-            HttpRequestData<LoginRequestBody> requestData = HttpRequestData.<LoginRequestBody>builder()
-                    .requestBody(requestBody)
-                    .method(HttpRequestMethods.POST)
-                    .build();
-
-            new LoginRequestHandlerImpl().execute(requestData);
+            return;
         }
+
+        LoginRequestBody requestBody = LoginRequestBody.builder()
+                .email(emailTextEdit.getText().toString())
+                .password(passwordTextEdit.getText().toString())
+                .build();
+        HttpRequestData<LoginRequestBody> requestData = HttpRequestData.<LoginRequestBody>builder()
+                .requestBody(requestBody)
+                .method(HttpRequestMethods.POST)
+                .build();
+
+        new LoginRequestHandlerImpl().execute(requestData);
+    }
+
+    @OnClick(R.id.register_button)
+    void registerButtonHandler() {
+        startActivity(new Intent(this, RegisterActivity.class));
     }
 
     private boolean isEmailOrPasswordEmpty() {
-        return email.getText().toString().equals("") || password.getText().toString().equals("");
+        return emailTextEdit.getText().toString().isEmpty() || passwordTextEdit.getText().toString().isEmpty();
     }
 
 
     private static class LoginRequestHandlerImpl extends LoginRequestHandler {
 
         @Override
-        protected void onPostExecute(LoginResponse result) {
+        protected void onPostExecute(final LoginResponse result) {
             if (result.getHttpStatusCode() == 200) {
                 final String token = result.getData().getToken();
 
-                SharedPreferences.Editor editor
-                        = PreferenceManager.getDefaultSharedPreferences(App.getContext()).edit();
+                SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(App.getContext()).edit();
                 editor.putString("token", token);
                 editor.apply();
 

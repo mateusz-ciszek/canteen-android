@@ -6,15 +6,19 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.Button;
 
 import com.canteen.app.activity.menu.list.MenuListsActivity;
 
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
 public class MainActivity extends AppCompatActivity {
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
 
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
         if (sp.contains("token")) {
@@ -22,16 +26,19 @@ public class MainActivity extends AppCompatActivity {
             startActivity(new Intent(this, MenuListsActivity.class));
         }
 
-        Button loginButton = findViewById(R.id.login_button);
-        loginButton.setOnClickListener(v ->
-                startActivity(new Intent(this, LoginActivity.class)));
-        Button registerButton = findViewById(R.id.register_button);
-        registerButton.setOnClickListener(v ->
-                startActivity(new Intent(this, RegisterActivity.class)));
-
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.hide();
         }
+    }
+
+    @OnClick(R.id.login_button)
+    void loginButtonHandler() {
+        startActivity(new Intent(this, LoginActivity.class));
+    }
+
+    @OnClick(R.id.register_button)
+    void registerButtonHandler() {
+        startActivity(new Intent(this, RegisterActivity.class));
     }
 }

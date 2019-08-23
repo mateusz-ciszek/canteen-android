@@ -2,11 +2,9 @@ package com.canteen.app;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -15,66 +13,71 @@ import com.canteen.app.api.HttpRequestMethods;
 import com.canteen.app.api.handlers.RegisterRequestHandler;
 import com.canteen.app.api.models.requests.RegisterRequestBody;
 import com.canteen.app.api.models.responses.RegisterResponse;
-import com.canteen.app.R;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class RegisterActivity extends AppCompatActivity {
-    private static String REG_TAG = "RegisterActivity";
-    Button backBtn, registerBtn;
-    EditText email, password, surname, name, passwordRetype;
+
+    private static final String TAG = "RegisterActivity";
+
+    @BindView(R.id.email_text_edit)
+    EditText emailTextEdit;
+
+    @BindView(R.id.password_text_edit)
+    EditText passwordTextEdit;
+
+    @BindView(R.id.last_name_text_edit)
+    EditText lastNameTextEdit;
+
+    @BindView(R.id.first_name_text_edit)
+    EditText firstNameTextEdit;
+
+    @BindView(R.id.retype_password_text_edit)
+    EditText passwordRepeatTextEdit;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        email = findViewById(R.id.email_register);
-        password = findViewById(R.id.password);
-        surname = findViewById(R.id.Surname);
-        passwordRetype = findViewById(R.id.retype_password);
-        name = findViewById(R.id.name);
-        backBtn = findViewById(R.id.back_button);
+        ButterKnife.bind(this);
+    }
 
-        backBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+    @OnClick(R.id.back_button)
+    void backButtonHandler() {
+        finish();
+    }
 
-        registerBtn = findViewById(R.id.register_button);
-        registerBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                if (check()) {
-                    RegisterRequestBody requestBody = RegisterRequestBody.builder()
-                            .email(email.getText().toString())
-                            .password(password.getText().toString())
-                            .firstName(name.getText().toString())
-                            .lastName(surname.getText().toString())
-                            .admin(false)
-                            .build();
-                    HttpRequestData<RegisterRequestBody> requestData = HttpRequestData.<RegisterRequestBody>builder()
-                            .requestBody(requestBody)
-                            .method(HttpRequestMethods.POST)
-                            .build();
-                    new RegisterRequestHandlerImpl().execute(requestData);
-                }
-            }
-        });
-
+    @OnClick(R.id.register_button)
+    void registerButtonHandler() {
+        if (check()) {
+            RegisterRequestBody requestBody = RegisterRequestBody.builder()
+                    .email(emailTextEdit.getText().toString())
+                    .password(passwordTextEdit.getText().toString())
+                    .firstName(firstNameTextEdit.getText().toString())
+                    .lastName(lastNameTextEdit.getText().toString())
+                    .admin(false)
+                    .build();
+            HttpRequestData<RegisterRequestBody> requestData = HttpRequestData.<RegisterRequestBody>builder()
+                    .requestBody(requestBody)
+                    .method(HttpRequestMethods.POST)
+                    .build();
+            new RegisterRequestHandlerImpl().execute(requestData);
+        }
     }
 
     public boolean check() {
-        return checkPassword(password.getText().toString()) &&
-                checkName(surname.getText().toString()) &&
-                checkName(name.getText().toString()) &&
-                checkRetypePassword(password.getText().toString(), passwordRetype.getText().toString());
+        return checkPassword(passwordTextEdit.getText().toString()) &&
+                checkName(lastNameTextEdit.getText().toString()) &&
+                checkName(firstNameTextEdit.getText().toString()) &&
+                checkRetypePassword(passwordTextEdit.getText().toString(), passwordRepeatTextEdit.getText().toString());
     }
 
-    public boolean checkPassword(String password) {
+    public boolean checkPassword(final String password) {
         String patternPassword = "(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,}";
         if (!password.matches(patternPassword)) {
-            Toast.makeText(registerBtn.getContext(),
+            Toast.makeText(getContext(),
                     "Weak password",
                     Toast.LENGTH_LONG).show();
             return false;
@@ -82,10 +85,10 @@ public class RegisterActivity extends AppCompatActivity {
         return true;
     }
 
-    public boolean checkName(String name) {
+    public boolean checkName(final String name) {
         String patternName = "(?=.*[a-z])(?=.*[A-Z]).{3,}";
         if (!name.matches(patternName)) {
-            Toast.makeText(registerBtn.getContext(),
+            Toast.makeText(getContext(),
                     "Bad name",
                     Toast.LENGTH_LONG).show();
             return false;
@@ -93,10 +96,10 @@ public class RegisterActivity extends AppCompatActivity {
         return true;
     }
 
-    public boolean checkEmail(String mail) {
+    public boolean checkEmail(final String mail) {
         String EMAIL_VERIFICATION = "^([\\w-\\.]+){1,64}@([\\w&&[^_]]+){2,255}.[a-z]{2,}$";
         if (!mail.matches(EMAIL_VERIFICATION)) {
-            Toast.makeText(registerBtn.getContext(),
+            Toast.makeText(getContext(),
                     "Bad mail",
                     Toast.LENGTH_LONG).show();
             return false;
@@ -104,9 +107,9 @@ public class RegisterActivity extends AppCompatActivity {
         return true;
     }
 
-    public boolean checkRetypePassword(String password, String retypePassword) {
+    public boolean checkRetypePassword(final String password, final String retypePassword) {
         if (!password.equals(retypePassword)) {
-            Toast.makeText(registerBtn.getContext(),
+            Toast.makeText(getContext(),
                     "Password different",
                     Toast.LENGTH_LONG).show();
             return false;
@@ -114,11 +117,14 @@ public class RegisterActivity extends AppCompatActivity {
         return true;
     }
 
+    private Context getContext() {
+        return emailTextEdit.getContext();
+    }
 
     private static class RegisterRequestHandlerImpl extends RegisterRequestHandler {
 
         @Override
-        protected void onPostExecute(RegisterResponse result) {
+        protected void onPostExecute(final RegisterResponse result) {
             Context context = App.getContext();
             if (result.getHttpStatusCode() == 400) {
                 Toast.makeText(context,
@@ -134,7 +140,7 @@ public class RegisterActivity extends AppCompatActivity {
                 Intent intent = new Intent(context, MainActivity.class);
                 intent.putExtra("response", result);
                 context.startActivity(intent);
-                Log.d(REG_TAG, "Result: " + result);
+                Log.d(TAG, "Result: " + result);
             }
         }
     }
