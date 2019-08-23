@@ -29,7 +29,7 @@
         <activity android:name="com.canteen.app.RegisterActivity" />
         <activity android:name="com.canteen.app.activity.menu.list.MenuListsActivity" />
         <activity android:name="com.canteen.app.deletion.AddDishActivity"/>
-        <activity android:name="com.canteen.app.activity.menu.MenuActivity" />
+        <activity android:name="com.canteen.app.activity.menu.details.MenuDetailsActivity" />
         <activity android:name="com.canteen.app.activity.foodDetails.FoodDetailsActivity" />
         <activity android:name="com.canteen.app.activity.administration.dashboard.AdminDashboardActivity" />
         <activity android:name="com.canteen.app.activity.administration.order.details.OrderDetailsAdminActivity" />

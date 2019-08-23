@@ -5,7 +5,7 @@ import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
 
-import com.canteen.app.activity.menu.MenuActivity;
+import com.canteen.app.activity.menu.details.MenuDetailsActivity;
 import com.canteen.app.R;
 import com.canteen.app.models.Menu;
 
@@ -34,7 +34,7 @@ class MenuListsViewHolder extends RecyclerView.ViewHolder {
 
     @OnClick(R.id.menu_name_text_view)
     void itemViewHandler() {
-        Intent intent = new Intent(itemView.getContext(), MenuActivity.class);
+        Intent intent = new Intent(itemView.getContext(), MenuDetailsActivity.class);
         intent.putExtra("menu", menu);
         itemView.getContext().startActivity(intent);
     }

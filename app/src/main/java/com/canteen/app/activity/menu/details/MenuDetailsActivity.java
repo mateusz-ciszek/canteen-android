@@ -1,4 +1,4 @@
-package com.canteen.app.activity.menu;
+package com.canteen.app.activity.menu.details;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,15 +13,21 @@ import com.canteen.app.R;
 import com.canteen.app.activity.cart.OrderCartActivity;
 import com.canteen.app.models.Menu;
 
-public class MenuActivity extends AppCompatActivity {
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
+public class MenuDetailsActivity extends AppCompatActivity {
 
     private Menu menu;
-    private RecyclerView foodsRecyclerView;
+
+    @BindView(R.id.foods_recycler_view)
+    RecyclerView foodsRecyclerView;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_menu);
+        setContentView(R.layout.activity_menu_details);
+        ButterKnife.bind(this);
 
         this.initRecyclerView();
 
@@ -29,7 +35,7 @@ public class MenuActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onCreateOptionsMenu(android.view.Menu menu) {
+    public boolean onCreateOptionsMenu(final android.view.Menu menu) {
         super.onCreateOptionsMenu(menu);
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu, menu);
@@ -37,7 +43,7 @@ public class MenuActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(final MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_cart:
                 startActivity(new Intent(this, OrderCartActivity.class));
@@ -48,7 +54,6 @@ public class MenuActivity extends AppCompatActivity {
     }
 
     private void initRecyclerView() {
-        this.foodsRecyclerView = findViewById(R.id.foodsRecyclerView);
         this.foodsRecyclerView.setHasFixedSize(true);
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
@@ -64,7 +69,7 @@ public class MenuActivity extends AppCompatActivity {
             actionBar.setTitle(this.menu.getName());
         }
 
-        MenuAdapter adapter = new MenuAdapter(this.menu.getFoods());
+        MenuDetailsAdapter adapter = new MenuDetailsAdapter(this.menu.getFoods());
         this.foodsRecyclerView.setAdapter(adapter);
     }
 }
