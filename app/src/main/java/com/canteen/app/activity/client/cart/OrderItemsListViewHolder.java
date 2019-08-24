@@ -5,10 +5,15 @@ import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
 
 import com.canteen.app.R;
+import com.canteen.app.models.FoodAddition;
 import com.canteen.app.service.order.OrderCartService;
 import com.canteen.app.service.order.OrderItem;
+import com.canteen.app.service.order.item.summary.FoodAdditionName;
+import com.canteen.app.service.order.item.summary.OrderItemSummaryUtil;
 
+import java.util.List;
 import java.util.Locale;
+import java.util.stream.Collectors;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -42,14 +47,12 @@ class OrderItemsListViewHolder extends RecyclerView.ViewHolder {
         foodNameTextView.setText(orderItem.getFood().getName());
         foodPriceTextView.setText(String.format(Locale.getDefault(), "%.2f zł", orderItem.getPrice()));
 
-        StringBuilder selectedItemsText;
-        if (orderItem.getAdditions().size() == 0) {
-            selectedItemsText = new StringBuilder("No additions");
-        } else {
-            selectedItemsText = new StringBuilder("Selected additions: ");
-            orderItem.getAdditions().forEach(addition -> selectedItemsText.append(addition.getName()).append(", "));
-            selectedItemsText.substring(0, selectedItemsText.length() - 2);
-        }
-        selectedAdditionsTextView.setText(selectedItemsText.toString());
+        OrderItemSummaryUtil util = OrderItemSummaryUtil.of();
+        List<FoodAdditionName> names = orderItem.getAdditions().stream()
+                .map(FoodAddition::getName)
+                .map(FoodAdditionName::of)
+                .collect(Collectors.toList());
+        String label = util.generateLabel(names);
+        selectedAdditionsTextView.setText(label);
     }
 }
