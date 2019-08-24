@@ -1,4 +1,4 @@
-package com.canteen.app.activity.client.details;
+package com.canteen.app.activity.client.food.details;
 
 import android.content.Intent;
 import android.os.Bundle;

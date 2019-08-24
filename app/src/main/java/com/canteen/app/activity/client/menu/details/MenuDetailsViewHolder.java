@@ -8,7 +8,7 @@ import android.widget.Toast;
 
 import com.canteen.app.App;
 import com.canteen.app.R;
-import com.canteen.app.activity.client.details.FoodDetailsActivity;
+import com.canteen.app.activity.client.food.details.FoodDetailsActivity;
 import com.canteen.app.models.Food;
 import com.canteen.app.service.order.OrderCartService;
 import com.canteen.app.service.order.OrderItem;

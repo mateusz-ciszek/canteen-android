@@ -1,4 +1,4 @@
-package com.canteen.app.activity.client.details;
+package com.canteen.app.activity.client.food.details;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
