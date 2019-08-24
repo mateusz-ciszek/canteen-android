@@ -1,4 +1,4 @@
-package com.canteen.app.activity.menu.list;
+package com.canteen.app.activity.client.menu.list;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -13,9 +13,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-import com.canteen.app.MainActivity;
+import com.canteen.app.activity.common.MainActivity;
 import com.canteen.app.R;
-import com.canteen.app.activity.cart.OrderCartActivity;
+import com.canteen.app.activity.client.cart.OrderCartActivity;
 import com.canteen.app.api.HttpRequestData;
 import com.canteen.app.api.HttpRequestMethods;
 import com.canteen.app.api.handlers.AllMenusRequestHandler;
@@ -24,27 +24,28 @@ import com.canteen.app.api.models.responses.AllMenusResponse;
 
 import java.util.concurrent.ExecutionException;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 
 public class MenuListsActivity extends AppCompatActivity {
 
-    private RecyclerView menusRecyclerView;
-    private TextView errorTextView;
+    @BindView(R.id.menus_recycler_view)
+    RecyclerView menusRecyclerView;
+
+    @BindView(R.id.error_text_view)
+    TextView errorTextView;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_list);
+        ButterKnife.bind(this);
 
-        errorTextView = findViewById(R.id.errorTextView);
-        this.menusRecyclerView = findViewById(R.id.menusRecyclerView);
-        this.menusRecyclerView.setHasFixedSize(true);
-
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
-        this.menusRecyclerView.setLayoutManager(layoutManager);
+        initRecyclerView();
 
         AllMenusRequestBody requestBody = new AllMenusRequestBody();
-        HttpRequestData<AllMenusRequestBody> requestData = HttpRequestData
-                .<AllMenusRequestBody>builder()
+        HttpRequestData<AllMenusRequestBody> requestData = HttpRequestData.<AllMenusRequestBody>builder()
                 .method(HttpRequestMethods.GET)
                 .requestBody(requestBody)
                 .build();
@@ -71,7 +72,7 @@ public class MenuListsActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(final Menu menu) {
         super.onCreateOptionsMenu(menu);
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu, menu);
@@ -79,7 +80,7 @@ public class MenuListsActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(final MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_cart:
                 startActivity(new Intent(this, OrderCartActivity.class));
@@ -94,7 +95,13 @@ public class MenuListsActivity extends AppCompatActivity {
         }
     }
 
-    private void setError(String message) {
+    private void initRecyclerView() {
+        menusRecyclerView.setHasFixedSize(true);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+        menusRecyclerView.setLayoutManager(layoutManager);
+    }
+
+    private void setError(final String message) {
         menusRecyclerView.setVisibility(View.GONE);
         errorTextView.setVisibility(View.VISIBLE);
         errorTextView.setText(message);
@@ -102,7 +109,7 @@ public class MenuListsActivity extends AppCompatActivity {
 
     private static class AllMenusRequestHandlerImpl extends AllMenusRequestHandler {
         @Override
-        protected void onPostExecute(AllMenusResponse result) { }
+        protected void onPostExecute(final AllMenusResponse result) { }
     }
 }
 

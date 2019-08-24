@@ -1,4 +1,4 @@
-package com.canteen.app.activity.cart;
+package com.canteen.app.activity.client.cart;
 
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
@@ -20,7 +20,7 @@ public class OrderItemsListAdapter extends RecyclerView.Adapter<OrderItemsListVi
 
     @NonNull
     @Override
-    public OrderItemsListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public OrderItemsListViewHolder onCreateViewHolder(@NonNull final ViewGroup parent, final int viewType) {
         ConstraintLayout v = (ConstraintLayout) LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.list_item_order_item, parent, false);
 
@@ -28,12 +28,12 @@ public class OrderItemsListAdapter extends RecyclerView.Adapter<OrderItemsListVi
     }
 
     @Override
-    public void onBindViewHolder(@NonNull OrderItemsListViewHolder holder, int position) {
-        holder.setOrderItem(this.items.get(position));
+    public void onBindViewHolder(@NonNull final OrderItemsListViewHolder holder, final int position) {
+        holder.setOrderItem(items.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return this.items.size();
+        return items.size();
     }
 }

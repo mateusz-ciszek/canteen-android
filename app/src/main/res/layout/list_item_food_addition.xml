@@ -4,7 +4,7 @@
     android:layout_height="wrap_content">
 
     <CheckBox
-        android:id="@+id/foodAdditionCheckBox"
+        android:id="@+id/food_addition_check_box"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -18,7 +18,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/foodAdditionPriceTextView"
+        android:id="@+id/food_addition_price_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"

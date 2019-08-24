@@ -1,6 +1,7 @@
 package com.canteen.app;
 
-import org.junit.Assert;
+import com.canteen.app.activity.common.RegisterActivity;
+
 import org.junit.Test;
 
 import static org.junit.Assert.*;

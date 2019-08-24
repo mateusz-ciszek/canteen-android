@@ -1,4 +1,4 @@
-package com.canteen.app.activity.menu;
+package com.canteen.app.activity.client.menu.details;
 
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
@@ -11,26 +11,26 @@ import com.canteen.app.models.Food;
 
 import java.util.List;
 
-class MenuAdapter extends RecyclerView.Adapter<MenuViewHolder> {
+class MenuDetailsAdapter extends RecyclerView.Adapter<MenuDetailsViewHolder> {
 
     private List<Food> foods;
 
-    MenuAdapter(List<Food> foods) {
+    MenuDetailsAdapter(final List<Food> foods) {
         this.foods = foods;
     }
 
 
     @NonNull
     @Override
-    public MenuViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public MenuDetailsViewHolder onCreateViewHolder(@NonNull final ViewGroup parent, final int viewType) {
         ConstraintLayout v = (ConstraintLayout) LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.list_item_food, parent, false);
 
-        return new MenuViewHolder(v);
+        return new MenuDetailsViewHolder(v);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MenuViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final MenuDetailsViewHolder holder, final int position) {
         holder.setFood(this.foods.get(position));
     }
 
