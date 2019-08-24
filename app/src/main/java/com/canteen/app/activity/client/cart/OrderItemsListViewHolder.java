@@ -10,9 +10,10 @@ import com.canteen.app.service.order.OrderCartService;
 import com.canteen.app.service.order.OrderItem;
 import com.canteen.app.service.order.item.summary.FoodAdditionName;
 import com.canteen.app.service.order.item.summary.OrderItemSummaryUtil;
+import com.canteen.app.service.price.PriceFormatter;
+import com.canteen.app.service.price.PriceFormatterImpl;
 
 import java.util.List;
-import java.util.Locale;
 import java.util.stream.Collectors;
 
 import butterknife.BindView;
@@ -45,7 +46,9 @@ class OrderItemsListViewHolder extends RecyclerView.ViewHolder {
     void setOrderItem(final OrderItem orderItem) {
         this.orderItem = orderItem;
         foodNameTextView.setText(orderItem.getFood().getName());
-        foodPriceTextView.setText(String.format(Locale.getDefault(), "%.2f zł", orderItem.getPrice()));
+
+        PriceFormatter formatter = PriceFormatterImpl.of();
+        foodPriceTextView.setText(formatter.format(orderItem.getPrice()));
 
         OrderItemSummaryUtil util = OrderItemSummaryUtil.of();
         List<FoodAdditionName> names = orderItem.getAdditions().stream()

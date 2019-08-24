@@ -12,8 +12,8 @@ import com.canteen.app.activity.client.food.details.FoodDetailsActivity;
 import com.canteen.app.models.Food;
 import com.canteen.app.service.order.OrderCartService;
 import com.canteen.app.service.order.OrderItem;
-
-import java.util.Locale;
+import com.canteen.app.service.price.PriceFormatter;
+import com.canteen.app.service.price.PriceFormatterImpl;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -53,6 +53,8 @@ class MenuDetailsViewHolder extends RecyclerView.ViewHolder {
     void setFood(Food food) {
         this.food = food;
         this.name.setText(food.getName());
-        this.price.setText(String.format(Locale.getDefault(), "%.2f zł", food.getPrice()));
+
+        PriceFormatter formatter = PriceFormatterImpl.of();
+        this.price.setText(formatter.format(food.getPrice()));
     }
 }

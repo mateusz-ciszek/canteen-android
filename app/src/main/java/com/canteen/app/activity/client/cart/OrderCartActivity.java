@@ -10,16 +10,17 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.canteen.app.service.order.OrderCartChangeListener;
-import com.canteen.app.service.order.OrderCartService;
 import com.canteen.app.R;
 import com.canteen.app.api.HttpRequestData;
 import com.canteen.app.api.HttpRequestMethods;
 import com.canteen.app.api.handlers.CreateOrderRequestHandler;
 import com.canteen.app.api.models.requests.CreateOrderRequestBody;
 import com.canteen.app.api.models.responses.EmptyResponse;
+import com.canteen.app.service.order.OrderCartChangeListener;
+import com.canteen.app.service.order.OrderCartService;
+import com.canteen.app.service.price.PriceFormatter;
+import com.canteen.app.service.price.PriceFormatterImpl;
 
-import java.util.Locale;
 import java.util.concurrent.ExecutionException;
 
 import butterknife.BindView;
@@ -125,10 +126,10 @@ public class OrderCartActivity extends AppCompatActivity implements OrderCartCha
 
     @Override
     public void onOrderCartChange() {
-        fullOrderPriceTextView.setText(String.format(Locale.getDefault(), "%.2f %s", orderCartService.getPrice(),
-                orderCartService.getCurrency()));
+        PriceFormatter formatter = PriceFormatterImpl.of();
+        fullOrderPriceTextView.setText(formatter.format(orderCartService.getPrice(), orderCartService.getCurrency()));
 
-        itemsAmountTextView.setText(String.format(Locale.getDefault(), "%d", orderCartService.getCount()));
+        itemsAmountTextView.setText(String.valueOf(orderCartService.getCount()));
 
         RecyclerView.Adapter adapter = orderItemsRecyclerView.getAdapter();
         if (adapter != null) {

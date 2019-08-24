@@ -18,8 +18,8 @@ import com.canteen.app.App;
 import com.canteen.app.R;
 import com.canteen.app.activity.client.cart.OrderCartActivity;
 import com.canteen.app.models.Food;
-
-import java.util.Locale;
+import com.canteen.app.service.price.PriceFormatter;
+import com.canteen.app.service.price.PriceFormatterImpl;
 
 // TODO: move or remove?
 public class FoodDetailsActivityAdmin extends AppCompatActivity implements PriceContainer {
@@ -95,8 +95,7 @@ public class FoodDetailsActivityAdmin extends AppCompatActivity implements Price
 
     @Override
     public void updatePrice(double priceIncrease) {
-        this.foodPriceTextView.setText(String.format(Locale.getDefault(),
-                "%.2f zł",
-                food.getPrice() + priceIncrease));
+        PriceFormatter formatter = PriceFormatterImpl.of();
+        this.foodPriceTextView.setText(formatter.format(food.getPrice() + priceIncrease));
     }
 }
