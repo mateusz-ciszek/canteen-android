@@ -9,8 +9,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import com.canteen.app.R;
-import com.canteen.app.activity.cart.OrderCartActivity;
-import com.canteen.app.deletion.AddDishActivity;
+import com.canteen.app.activity.client.cart.OrderCartActivity;
+import com.canteen.app.activity.administration.deletion.AddDishActivity;
 import com.canteen.app.models.Menu;
 
 public class FoodListActivityAdmin extends AppCompatActivity {

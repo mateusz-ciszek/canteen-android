@@ -1,4 +1,4 @@
-package com.canteen.app.activity.menu.details;
+package com.canteen.app.activity.client.menu.details;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,7 +10,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import com.canteen.app.R;
-import com.canteen.app.activity.cart.OrderCartActivity;
+import com.canteen.app.activity.client.cart.OrderCartActivity;
 import com.canteen.app.models.Menu;
 
 import butterknife.BindView;

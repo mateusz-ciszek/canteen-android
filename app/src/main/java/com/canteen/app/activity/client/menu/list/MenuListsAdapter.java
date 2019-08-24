@@ -1,4 +1,4 @@
-package com.canteen.app.activity.menu.list;
+package com.canteen.app.activity.client.menu.list;
 
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;

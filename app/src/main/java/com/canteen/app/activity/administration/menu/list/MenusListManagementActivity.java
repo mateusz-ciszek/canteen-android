@@ -12,7 +12,7 @@ import android.widget.Toast;
 
 import com.canteen.app.App;
 import com.canteen.app.R;
-import com.canteen.app.activity.cart.OrderCartActivity;
+import com.canteen.app.activity.client.cart.OrderCartActivity;
 import com.canteen.app.api.HttpRequestData;
 import com.canteen.app.api.HttpRequestMethods;
 import com.canteen.app.api.handlers.AllMenusRequestHandler;

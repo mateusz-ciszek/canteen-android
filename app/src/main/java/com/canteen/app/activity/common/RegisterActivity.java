@@ -1,4 +1,4 @@
-package com.canteen.app;
+package com.canteen.app.activity.common;
 
 import android.content.Context;
 import android.content.Intent;
@@ -8,6 +8,8 @@ import android.util.Log;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.canteen.app.App;
+import com.canteen.app.R;
 import com.canteen.app.api.HttpRequestData;
 import com.canteen.app.api.HttpRequestMethods;
 import com.canteen.app.api.handlers.RegisterRequestHandler;

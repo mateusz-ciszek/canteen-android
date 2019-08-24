@@ -1,4 +1,4 @@
-package com.canteen.app;
+package com.canteen.app.activity.common;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -7,7 +7,8 @@ import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 
-import com.canteen.app.activity.menu.list.MenuListsActivity;
+import com.canteen.app.R;
+import com.canteen.app.activity.client.menu.list.MenuListsActivity;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;

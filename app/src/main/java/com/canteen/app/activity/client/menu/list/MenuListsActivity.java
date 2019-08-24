@@ -1,4 +1,4 @@
-package com.canteen.app.activity.menu.list;
+package com.canteen.app.activity.client.menu.list;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -13,9 +13,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-import com.canteen.app.MainActivity;
+import com.canteen.app.activity.common.MainActivity;
 import com.canteen.app.R;
-import com.canteen.app.activity.cart.OrderCartActivity;
+import com.canteen.app.activity.client.cart.OrderCartActivity;
 import com.canteen.app.api.HttpRequestData;
 import com.canteen.app.api.HttpRequestMethods;
 import com.canteen.app.api.handlers.AllMenusRequestHandler;

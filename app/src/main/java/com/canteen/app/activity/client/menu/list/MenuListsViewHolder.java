@@ -1,11 +1,11 @@
-package com.canteen.app.activity.menu.list;
+package com.canteen.app.activity.client.menu.list;
 
 import android.content.Intent;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
 
-import com.canteen.app.activity.menu.details.MenuDetailsActivity;
+import com.canteen.app.activity.client.menu.details.MenuDetailsActivity;
 import com.canteen.app.R;
 import com.canteen.app.models.Menu;
 

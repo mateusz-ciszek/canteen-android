@@ -1,4 +1,4 @@
-package com.canteen.app.activity.cart;
+package com.canteen.app.activity.client.cart;
 
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;

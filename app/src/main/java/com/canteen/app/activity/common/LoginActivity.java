@@ -1,4 +1,4 @@
-package com.canteen.app;
+package com.canteen.app.activity.common;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -9,8 +9,10 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.auth0.android.jwt.JWT;
+import com.canteen.app.App;
+import com.canteen.app.R;
 import com.canteen.app.activity.administration.dashboard.AdminDashboardActivity;
-import com.canteen.app.activity.menu.list.MenuListsActivity;
+import com.canteen.app.activity.client.menu.list.MenuListsActivity;
 import com.canteen.app.api.HttpRequestData;
 import com.canteen.app.api.HttpRequestMethods;
 import com.canteen.app.api.handlers.LoginRequestHandler;

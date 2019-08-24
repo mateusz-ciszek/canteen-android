@@ -1,4 +1,4 @@
-package com.canteen.app.activity.food.details;
+package com.canteen.app.activity.client.details;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,7 +16,7 @@ import android.widget.Toast;
 
 import com.canteen.app.App;
 import com.canteen.app.R;
-import com.canteen.app.activity.cart.OrderCartActivity;
+import com.canteen.app.activity.client.cart.OrderCartActivity;
 import com.canteen.app.models.Food;
 
 import java.util.Locale;

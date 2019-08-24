@@ -1,4 +1,4 @@
-package com.canteen.app.deletion;
+package com.canteen.app.activity.administration.deletion;
 
 
 import android.content.Intent;

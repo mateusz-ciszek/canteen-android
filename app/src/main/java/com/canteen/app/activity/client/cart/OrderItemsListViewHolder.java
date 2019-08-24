@@ -1,4 +1,4 @@
-package com.canteen.app.activity.cart;
+package com.canteen.app.activity.client.cart;
 
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
