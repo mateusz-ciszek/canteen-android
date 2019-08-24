@@ -5,13 +5,12 @@ import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
 
-import com.canteen.app.activity.client.menu.details.MenuDetailsActivity;
 import com.canteen.app.R;
+import com.canteen.app.activity.client.menu.details.MenuDetailsActivity;
 import com.canteen.app.models.Menu;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -30,12 +29,11 @@ class MenuListsViewHolder extends RecyclerView.ViewHolder {
     MenuListsViewHolder(final ConstraintLayout itemView) {
         super(itemView);
         ButterKnife.bind(this, itemView);
-    }
 
-    @OnClick(R.id.menu_name_text_view)
-    void itemViewHandler() {
-        Intent intent = new Intent(itemView.getContext(), MenuDetailsActivity.class);
-        intent.putExtra("menu", menu);
-        itemView.getContext().startActivity(intent);
+        itemView.setOnClickListener(v -> {
+            Intent intent = new Intent(itemView.getContext(), MenuDetailsActivity.class);
+            intent.putExtra("menu", menu);
+            itemView.getContext().startActivity(intent);
+        });
     }
 }
