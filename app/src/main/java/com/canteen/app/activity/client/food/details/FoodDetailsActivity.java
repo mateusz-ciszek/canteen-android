@@ -10,12 +10,11 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.canteen.app.App;
 import com.canteen.app.R;
 import com.canteen.app.activity.client.cart.OrderCartActivity;
 import com.canteen.app.models.Food;
+import com.canteen.app.service.ToastService;
 import com.canteen.app.service.order.OrderCartService;
 import com.canteen.app.service.order.OrderItem;
 import com.canteen.app.service.price.PriceFormatter;
@@ -76,8 +75,7 @@ public class FoodDetailsActivity extends AppCompatActivity implements PriceConta
                 .food(food)
                 .additions(adapter.getSelected())
                 .build());
-        Toast.makeText(App.getContext(), "Food added to cart", Toast.LENGTH_SHORT)
-                .show();
+        ToastService.make("Food added to cart");
     }
 
     private void initView() {

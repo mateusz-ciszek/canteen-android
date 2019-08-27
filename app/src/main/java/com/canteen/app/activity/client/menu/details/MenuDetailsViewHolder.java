@@ -4,12 +4,11 @@ import android.content.Intent;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.canteen.app.App;
 import com.canteen.app.R;
 import com.canteen.app.activity.client.food.details.FoodDetailsActivity;
 import com.canteen.app.models.Food;
+import com.canteen.app.service.ToastService;
 import com.canteen.app.service.order.OrderCartService;
 import com.canteen.app.service.order.OrderItem;
 import com.canteen.app.service.price.PriceFormatter;
@@ -45,9 +44,7 @@ class MenuDetailsViewHolder extends RecyclerView.ViewHolder {
         OrderCartService.getInstance().addItem(OrderItem.builder()
                 .food(food)
                 .build());
-        Toast.makeText(App.getContext(),
-                "Food added to cart",
-                Toast.LENGTH_SHORT).show();
+        ToastService.make("Food added to cart");
     }
 
     void setFood(Food food) {

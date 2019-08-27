@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.auth0.android.jwt.JWT;
 import com.canteen.app.App;
@@ -18,6 +17,7 @@ import com.canteen.app.api.HttpRequestMethods;
 import com.canteen.app.api.handlers.LoginRequestHandler;
 import com.canteen.app.api.models.requests.LoginRequestBody;
 import com.canteen.app.api.models.responses.LoginResponse;
+import com.canteen.app.service.ToastService;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -42,9 +42,7 @@ public class LoginActivity extends AppCompatActivity {
     @OnClick(R.id.login_button)
     void loginButtonHandler() {
         if (isEmailOrPasswordEmpty()) {
-            Toast.makeText(LoginActivity.this,
-                    "Bad mail or password",
-                    Toast.LENGTH_SHORT).show();
+            ToastService.make("Bad mail or password");
             return;
         }
 
@@ -95,9 +93,7 @@ public class LoginActivity extends AppCompatActivity {
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 App.getContext().startActivity(intent);
             } else {
-                Toast.makeText(App.getContext(),
-                        "Could not log in. Check your email and password",
-                        Toast.LENGTH_SHORT).show();
+                ToastService.make("Could not log in. Check your email and password");
             }
         }
     }
