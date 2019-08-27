@@ -105,7 +105,7 @@ public class OrderCartActivity extends AppCompatActivity implements OrderCartCha
 
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
-            actionBar.setTitle("Order");
+            actionBar.setTitle(R.string.order_cart_title);
             actionBar.setElevation(0);
         }
 

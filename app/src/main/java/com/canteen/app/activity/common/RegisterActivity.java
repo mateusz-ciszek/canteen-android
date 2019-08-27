@@ -79,7 +79,7 @@ public class RegisterActivity extends AppCompatActivity {
     public boolean checkPassword(final String password) {
         String patternPassword = "(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,}";
         if (!password.matches(patternPassword)) {
-            makeToast("Weak password");
+            makeToast(getString(R.string.register_password_length_error));
             return false;
         }
         return true;
@@ -88,7 +88,7 @@ public class RegisterActivity extends AppCompatActivity {
     public boolean checkName(final String name) {
         String patternName = "(?=.*[a-z])(?=.*[A-Z]).{3,}";
         if (!name.matches(patternName)) {
-            makeToast("Bad name");
+            makeToast(getString(R.string.register_name_error));
             return false;
         }
         return true;
@@ -97,7 +97,7 @@ public class RegisterActivity extends AppCompatActivity {
     public boolean checkEmail(final String mail) {
         String EMAIL_VERIFICATION = "^([\\w-\\.]+){1,64}@([\\w&&[^_]]+){2,255}.[a-z]{2,}$";
         if (!mail.matches(EMAIL_VERIFICATION)) {
-            makeToast("Bad mail");
+            makeToast(getString(R.string.register_email_error));
             return false;
         }
         return true;
@@ -105,7 +105,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     public boolean checkRetypePassword(final String password, final String retypePassword) {
         if (!password.equals(retypePassword)) {
-            makeToast("Password different");
+            makeToast(getString(R.string.register_passwords_different_error));
             return false;
         }
         return true;
@@ -121,11 +121,11 @@ public class RegisterActivity extends AppCompatActivity {
         protected void onPostExecute(final RegisterResponse result) {
             Context context = App.getContext();
             if (result.getHttpStatusCode() == 400) {
-                ToastService.make("Could not register new user. No internet connection");
+                ToastService.make(context.getString(R.string.register_no_internet_error));
             } else if (result.getHttpStatusCode() == 201) {
                 Intent intent = new Intent(context, LoginActivity.class);
                 context.startActivity(intent);
-                ToastService.make("New user registered");
+                ToastService.make(context.getString(R.string.register_success));
             } else {
                 Log.d(TAG, "Result: " + result);
                 Intent intent = new Intent(context, MainActivity.class);

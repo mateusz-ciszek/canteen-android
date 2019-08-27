@@ -75,7 +75,7 @@ public class FoodDetailsActivity extends AppCompatActivity implements PriceConta
                 .food(food)
                 .additions(adapter.getSelected())
                 .build());
-        ToastService.make("Food added to cart");
+        ToastService.make(getString(R.string.food_added_to_cart));
     }
 
     private void initView() {

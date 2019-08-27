@@ -1,5 +1,6 @@
 package com.canteen.app.activity.common;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -41,8 +42,13 @@ public class LoginActivity extends AppCompatActivity {
 
     @OnClick(R.id.login_button)
     void loginButtonHandler() {
-        if (isEmailOrPasswordEmpty()) {
-            ToastService.make("Bad mail or password");
+        if (emailTextEdit.getText().toString().isEmpty()) {
+            ToastService.make(getString(R.string.common_empty_email));
+            return;
+        }
+
+        if (passwordTextEdit.getText().toString().isEmpty()) {
+            ToastService.make(getString(R.string.common_password_empty));
             return;
         }
 
@@ -63,19 +69,16 @@ public class LoginActivity extends AppCompatActivity {
         startActivity(new Intent(this, RegisterActivity.class));
     }
 
-    private boolean isEmailOrPasswordEmpty() {
-        return emailTextEdit.getText().toString().isEmpty() || passwordTextEdit.getText().toString().isEmpty();
-    }
-
 
     private static class LoginRequestHandlerImpl extends LoginRequestHandler {
 
         @Override
         protected void onPostExecute(final LoginResponse result) {
+            Context context = App.getContext();
             if (result.getHttpStatusCode() == 200) {
                 final String token = result.getData().getToken();
 
-                SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(App.getContext()).edit();
+                SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(context).edit();
                 editor.putString("token", token);
                 editor.apply();
 
@@ -84,16 +87,16 @@ public class LoginActivity extends AppCompatActivity {
 
                 Intent intent;
                 if (isAdmin) {
-                    intent = new Intent(App.getContext(), AdminDashboardActivity.class);
+                    intent = new Intent(context, AdminDashboardActivity.class);
                 } else {
-                    intent = new Intent(App.getContext(), MenuListsActivity.class);
+                    intent = new Intent(context, MenuListsActivity.class);
                 }
                 // Setting flags clearing history stack trace
                 // Hitting back on activity from intent will exit the app instead of returning here
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                App.getContext().startActivity(intent);
+                context.startActivity(intent);
             } else {
-                ToastService.make("Could not log in. Check your email and password");
+                ToastService.make(context.getString(R.string.login_error));
             }
         }
     }

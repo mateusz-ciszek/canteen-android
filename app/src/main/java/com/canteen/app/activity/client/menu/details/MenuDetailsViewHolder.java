@@ -44,7 +44,7 @@ class MenuDetailsViewHolder extends RecyclerView.ViewHolder {
         OrderCartService.getInstance().addItem(OrderItem.builder()
                 .food(food)
                 .build());
-        ToastService.make("Food added to cart");
+        ToastService.make(name.getContext().getString(R.string.food_added_to_cart));
     }
 
     void setFood(Food food) {

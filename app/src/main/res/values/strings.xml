@@ -21,6 +21,8 @@
     <string name="button_log_in">Log in</string>
     <string name="button_sign_in">Sign in</string>
     <string name="something_wrong">Something went wrong</string>
+    <string name="common_empty_email">Email cannot be empty</string>
+    <string name="common_password_empty">Password cannot be empty</string>
 
     <!-- Login/Register activity -->
     <string name="first_name">First name</string>
@@ -29,6 +31,13 @@
     <string name="password">Password</string>
     <string name="retype_password">Retype password</string>
     <string name="button_go_back">Go back</string>
+    <string name="login_error">Could not log in. Check your email and password.</string>
+    <string name="register_password_length_error">Password is too weak. Needs to be at least 8 characters long.</string>
+    <string name="register_name_error">Invalid name. Name has to be at least 3 characters long without numbers and without special characters.</string>
+    <string name="register_email_error">This is not a valid email.</string>
+    <string name="register_passwords_different_error">Provided password do not match. Make sure you entered the same password to both password fields.</string>
+    <string name="register_no_internet_error">Could not register new user. No internet connection.</string>
+    <string name="register_success">New user registered.</string>
 
     <!-- Customer -->
         <!-- Actions -->
@@ -43,6 +52,7 @@
         <string name="food_add_food_to_cart">Add food to cart</string>
 
         <!-- Order cart -->
+        <string name="order_cart_title">Order</string>
         <string name="order_cart_add_to_cart">Add to cart</string>
         <string name="order_cart_full_order_price">Full order price:</string>
         <string name="order_cart_items_in_cart">Items in cart:</string>
