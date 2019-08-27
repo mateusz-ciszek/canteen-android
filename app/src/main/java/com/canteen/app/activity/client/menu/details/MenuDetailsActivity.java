@@ -18,8 +18,6 @@ import butterknife.ButterKnife;
 
 public class MenuDetailsActivity extends AppCompatActivity {
 
-    private Menu menu;
-
     @BindView(R.id.foods_recycler_view)
     RecyclerView foodsRecyclerView;
 
@@ -62,14 +60,14 @@ public class MenuDetailsActivity extends AppCompatActivity {
 
     private void retrieveMenu() {
         Intent intent = getIntent();
-        this.menu = (Menu) intent.getSerializableExtra("menu");
+        Menu menu = (Menu) intent.getSerializableExtra("menu");
 
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
-            actionBar.setTitle(this.menu.getName());
+            actionBar.setTitle(menu.getName());
         }
 
-        MenuDetailsAdapter adapter = new MenuDetailsAdapter(this.menu.getFoods());
+        MenuDetailsAdapter adapter = new MenuDetailsAdapter(menu.getFoods());
         this.foodsRecyclerView.setAdapter(adapter);
     }
 }
