@@ -7,8 +7,8 @@ import android.widget.TextView;
 
 import com.canteen.app.R;
 import com.canteen.app.models.FoodAddition;
-
-import java.util.Locale;
+import com.canteen.app.service.price.PriceFormatter;
+import com.canteen.app.service.price.PriceFormatterImpl;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -30,8 +30,8 @@ class FoodAdditionViewHolder extends RecyclerView.ViewHolder {
 
     void setFoodAddition(final FoodAddition foodAddition) {
         foodAdditionCheckBox.setText(foodAddition.getName());
-        foodAdditionPriceTextView.setText(String.format(Locale.getDefault(),
-                "%.2f zł",
-                foodAddition.getPrice()));
+
+        PriceFormatter formatter = PriceFormatterImpl.of();
+        foodAdditionPriceTextView.setText(formatter.format(foodAddition.getPrice()));
     }
 }

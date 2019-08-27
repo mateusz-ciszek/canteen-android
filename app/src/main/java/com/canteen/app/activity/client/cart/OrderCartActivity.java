@@ -1,6 +1,5 @@
 package com.canteen.app.activity.client.cart;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -8,18 +7,19 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.canteen.app.service.order.OrderCartChangeListener;
-import com.canteen.app.service.order.OrderCartService;
 import com.canteen.app.R;
 import com.canteen.app.api.HttpRequestData;
 import com.canteen.app.api.HttpRequestMethods;
 import com.canteen.app.api.handlers.CreateOrderRequestHandler;
 import com.canteen.app.api.models.requests.CreateOrderRequestBody;
 import com.canteen.app.api.models.responses.EmptyResponse;
+import com.canteen.app.service.ToastService;
+import com.canteen.app.service.order.OrderCartChangeListener;
+import com.canteen.app.service.order.OrderCartService;
+import com.canteen.app.service.price.PriceFormatter;
+import com.canteen.app.service.price.PriceFormatterImpl;
 
-import java.util.Locale;
 import java.util.concurrent.ExecutionException;
 
 import butterknife.BindView;
@@ -79,25 +79,19 @@ public class OrderCartActivity extends AppCompatActivity implements OrderCartCha
             response = new CreateOrderRequestHandlerImpl().execute(requestData).get();
         } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
-            Toast.makeText(getContext(), getString(R.string.something_wrong), Toast.LENGTH_SHORT).show();
+            ToastService.make(getString(R.string.something_wrong));
             return;
         }
 
         if (response.isSuccessful()) {
-            Toast.makeText(getContext(),
-                    getString(R.string.order_cart_submitted_order,
-                            // TODO replace with actual waiting time once implemented
-                            getString(R.string.example_waiting_time)),
-                    Toast.LENGTH_SHORT).show();
+            ToastService.make(getString(R.string.order_cart_submitted_order,
+                    // TODO replace with actual waiting time once implemented
+                    getString(R.string.example_waiting_time)));
             orderCartService.clear();
             finish();
         } else {
-            Toast.makeText(getContext(), getString(R.string.order_cart_submitting_error), Toast.LENGTH_SHORT).show();
+            ToastService.make(getString(R.string.order_cart_submitting_error));
         }
-    }
-
-    private Context getContext() {
-        return cancelButton.getContext();
     }
 
     private void initView() {
@@ -125,10 +119,10 @@ public class OrderCartActivity extends AppCompatActivity implements OrderCartCha
 
     @Override
     public void onOrderCartChange() {
-        fullOrderPriceTextView.setText(String.format(Locale.getDefault(), "%.2f %s", orderCartService.getPrice(),
-                orderCartService.getCurrency()));
+        PriceFormatter formatter = PriceFormatterImpl.of();
+        fullOrderPriceTextView.setText(formatter.format(orderCartService.getPrice(), orderCartService.getCurrency()));
 
-        itemsAmountTextView.setText(String.format(Locale.getDefault(), "%d", orderCartService.getCount()));
+        itemsAmountTextView.setText(String.valueOf(orderCartService.getCount()));
 
         RecyclerView.Adapter adapter = orderItemsRecyclerView.getAdapter();
         if (adapter != null) {

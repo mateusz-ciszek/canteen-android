@@ -52,6 +52,8 @@
         <string name="order_cart_selected_additions">Selected additions:</string>
         <string name="order_cart_submitted_order">Your order has been submitted. It should be ready in about %s minutes.</string>
         <string name="order_cart_submitting_error">Couldn\'t submit your order. Please try again later.</string>
+        <string name="order_cart_no_additions_label">No additions selected</string>
+        <string name="order_cart_item_summary_begging">Selected additions</string>
 
     <!-- Management -->
         <!-- Admin dashboard -->
