@@ -73,7 +73,7 @@ public class FoodDetailsActivityAdmin extends AppCompatActivity implements Price
         this.foodAdditionsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         final FoodAdditionAdapter adapter
-                = new FoodAdditionAdapter(this.food.getFoodAdditions(), this);
+                = new FoodAdditionAdapter(this.food.getAdditions(), this);
         this.foodAdditionsRecyclerView.setAdapter(adapter);
 
         this.foodDescriptionTextView.setText(this.food.getDescription());

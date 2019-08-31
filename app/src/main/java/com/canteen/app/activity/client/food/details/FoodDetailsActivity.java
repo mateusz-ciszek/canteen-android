@@ -86,7 +86,7 @@ public class FoodDetailsActivity extends AppCompatActivity implements PriceConta
 
         foodAdditionsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        adapter = new FoodAdditionAdapter(food.getFoodAdditions(), this);
+        adapter = new FoodAdditionAdapter(food.getAdditions(), this);
         foodAdditionsRecyclerView.setAdapter(adapter);
 
         foodDescriptionTextView.setText(food.getDescription());

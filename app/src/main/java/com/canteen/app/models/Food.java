@@ -11,10 +11,15 @@ import lombok.Setter;
 @Setter
 @Getter
 public class Food implements Serializable {
-    private String _id;
+
+    @SerializedName("_id")
+    private String id;
+
     private String name;
+
     private String description;
+
     private double price;
-    @SerializedName("additions")
-    private List<FoodAddition> foodAdditions;
+
+    private List<FoodAddition> additions;
 }
