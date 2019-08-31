@@ -106,7 +106,7 @@ public class OrderDetailsAdminActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 ChangeOrderStateRequestBody requestBody = ChangeOrderStateRequestBody.builder()
-                        .id(order.get_id())
+                        .id(order.getId())
                         .state(requestedState)
                         .build();
 

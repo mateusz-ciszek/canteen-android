@@ -132,7 +132,7 @@ public class AddDishActivity extends AppCompatActivity {
                                 food.setDescription(descriptionEt.getText().toString());
                                 food.setName(nameEt.getText().toString());
                                 food.setPrice(Integer.parseInt(priceEt.getText().toString()));
-                                food.setFoodAdditions(additions);
+                                food.setAdditions(additions);
                                 menu.getFoods().add(food);
                                 intent.putExtra("menu",menu);
                                 App.getContext().startActivity(intent);

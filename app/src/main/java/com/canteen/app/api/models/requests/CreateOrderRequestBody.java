@@ -33,7 +33,7 @@ public class CreateOrderRequestBody extends RequestBody {
         List<ItemAddition> additions;
 
         Item(final OrderItem cartItem) {
-            _id = cartItem.getFood().get_id();
+            _id = cartItem.getFood().getId();
             additions = new ArrayList<>();
             for (FoodAddition foodAddition : cartItem.getAdditions()) {
                 additions.add(new ItemAddition(foodAddition));
@@ -46,7 +46,7 @@ public class CreateOrderRequestBody extends RequestBody {
         int quantity = 1;
 
         ItemAddition(final FoodAddition foodAddition) {
-            _id = foodAddition.get_id();
+            _id = foodAddition.getId();
         }
     }
 }

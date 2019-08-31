@@ -17,7 +17,7 @@ public class FoodService {
     private FoodService() { }
 
     public boolean deleteMenu(Food food, DeleteFoodRequestHandlerImpl.ResponseHandler handler) {
-        DeleteFoodRequestBody requestBody = new DeleteFoodRequestBody(food.get_id());
+        DeleteFoodRequestBody requestBody = new DeleteFoodRequestBody(food.getId());
         HttpRequestData requestData = HttpRequestData.builder()
                 .requestBody(requestBody)
                 .method(HttpRequestMethods.DELETE)
