@@ -15,6 +15,10 @@ import com.canteen.app.api.handlers.RegisterRequestHandler;
 import com.canteen.app.api.models.requests.RegisterRequestBody;
 import com.canteen.app.api.models.responses.RegisterResponse;
 import com.canteen.app.service.ToastService;
+import com.canteen.app.service.validation.regex.EmailValidator;
+import com.canteen.app.service.validation.regex.NameValidator;
+import com.canteen.app.service.validation.regex.PasswordValidator;
+import com.canteen.app.service.validation.regex.RegexValidator;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -53,7 +57,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     @OnClick(R.id.register_button)
     void registerButtonHandler() {
-        if (check()) {
+        if (validateAll()) {
             RegisterRequestBody requestBody = RegisterRequestBody.builder()
                     .email(emailTextEdit.getText().toString())
                     .password(passwordTextEdit.getText().toString())
@@ -69,42 +73,43 @@ public class RegisterActivity extends AppCompatActivity {
         }
     }
 
-    public boolean check() {
-        return checkPassword(passwordTextEdit.getText().toString()) &&
-                checkName(lastNameTextEdit.getText().toString()) &&
-                checkName(firstNameTextEdit.getText().toString()) &&
-                checkRetypePassword(passwordTextEdit.getText().toString(), passwordRepeatTextEdit.getText().toString());
+    private boolean validateAll() {
+        return validatePassword(passwordTextEdit.getText().toString())
+                && validateName(lastNameTextEdit.getText().toString())
+                && validateName(firstNameTextEdit.getText().toString())
+                && validateEmail(emailTextEdit.getText().toString())
+                && validatePasswordsEquality(passwordTextEdit.getText().toString(), passwordRepeatTextEdit.getText().toString());
     }
 
-    public boolean checkPassword(final String password) {
-        String patternPassword = "(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,}";
-        if (!password.matches(patternPassword)) {
+    private boolean validatePassword(final String password) {
+        RegexValidator validator = PasswordValidator.of();
+        if (!validator.isValid(password)) {
             makeToast(getString(R.string.register_password_length_error));
             return false;
         }
         return true;
     }
 
-    public boolean checkName(final String name) {
-        String patternName = "(?=.*[a-z])(?=.*[A-Z]).{3,}";
-        if (!name.matches(patternName)) {
+    private boolean validateName(final String name) {
+        RegexValidator validator = NameValidator.of();
+        if (!validator.isValid(name)) {
             makeToast(getString(R.string.register_name_error));
             return false;
         }
         return true;
     }
 
-    public boolean checkEmail(final String mail) {
-        String EMAIL_VERIFICATION = "^([\\w-\\.]+){1,64}@([\\w&&[^_]]+){2,255}.[a-z]{2,}$";
-        if (!mail.matches(EMAIL_VERIFICATION)) {
+    private boolean validateEmail(final String email) {
+        RegexValidator validator = EmailValidator.of();
+        if (!validator.isValid(email)) {
             makeToast(getString(R.string.register_email_error));
             return false;
         }
         return true;
     }
 
-    public boolean checkRetypePassword(final String password, final String retypePassword) {
-        if (!password.equals(retypePassword)) {
+    private boolean validatePasswordsEquality(final String password, final String repeatedPassword) {
+        if (!password.equals(repeatedPassword)) {
             makeToast(getString(R.string.register_passwords_different_error));
             return false;
         }
