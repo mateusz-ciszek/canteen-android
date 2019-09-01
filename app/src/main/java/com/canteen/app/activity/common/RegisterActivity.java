@@ -14,6 +14,7 @@ import com.canteen.app.api.HttpRequestMethods;
 import com.canteen.app.api.handlers.RegisterRequestHandler;
 import com.canteen.app.api.models.requests.RegisterRequestBody;
 import com.canteen.app.api.models.responses.RegisterResponse;
+import com.canteen.app.service.StringUtil;
 import com.canteen.app.service.ToastService;
 import com.canteen.app.service.validation.regex.EmailValidator;
 import com.canteen.app.service.validation.regex.NameValidator;
@@ -109,7 +110,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private boolean validatePasswordsEquality(final String password, final String repeatedPassword) {
-        if (!password.equals(repeatedPassword)) {
+        if (!StringUtil.equal(password, repeatedPassword)) {
             makeToast(getString(R.string.register_passwords_different_error));
             return false;
         }
