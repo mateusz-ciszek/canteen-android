@@ -1,19 +1,21 @@
 package com.canteen.app.activity.common;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 
 import com.canteen.app.R;
 import com.canteen.app.activity.client.menu.list.MenuListsActivity;
+import com.canteen.app.service.auth.AuthService;
+import com.canteen.app.service.auth.AuthServiceImpl;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity {
+
+    private AuthService authService = AuthServiceImpl.of();
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -21,10 +23,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
-        if (sp.contains("token")) {
+        if (authService.getToken().isPresent()) {
             finish();
             startActivity(new Intent(this, MenuListsActivity.class));
+            return;
         }
 
         ActionBar actionBar = getSupportActionBar();

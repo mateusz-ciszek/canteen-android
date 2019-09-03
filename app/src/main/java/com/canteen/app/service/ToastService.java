@@ -14,6 +14,10 @@ public class ToastService {
         Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
     }
 
+    public static void make(final int resId) {
+        Toast.makeText(getContext(), getContext().getString(resId), Toast.LENGTH_SHORT).show();
+    }
+
     private static Context getContext() {
         return App.getContext();
     }

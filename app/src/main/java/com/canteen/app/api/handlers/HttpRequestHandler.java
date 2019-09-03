@@ -9,6 +9,8 @@ import com.canteen.app.api.HttpRequestData;
 import com.canteen.app.api.HttpRequestMethods;
 import com.canteen.app.api.models.requests.RequestBody;
 import com.canteen.app.api.models.responses.Response;
+import com.canteen.app.service.auth.AuthService;
+import com.canteen.app.service.auth.AuthServiceImpl;
 import com.google.gson.Gson;
 
 import java.io.BufferedReader;
@@ -29,6 +31,8 @@ public abstract class HttpRequestHandler<T extends RequestBody, U extends Respon
         extends AsyncTask<HttpRequestData<T>, Void, U> {
 
     private static String LOG_TAG = "LoginActivity";
+
+    private AuthService authService = AuthServiceImpl.of();
 
     @Override
     protected void onPreExecute() {
@@ -139,9 +143,8 @@ public abstract class HttpRequestHandler<T extends RequestBody, U extends Respon
         return response.toString();
     }
 
-    private static String getToken() {
-        return PreferenceManager
-                .getDefaultSharedPreferences(App.getContext()).getString("token", "");
+    private String getToken() {
+        return authService.getToken().orElse("");
     }
 
     @Getter
