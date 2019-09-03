@@ -11,12 +11,17 @@ import android.view.MenuItem;
 
 import com.canteen.app.R;
 import com.canteen.app.activity.client.cart.OrderCartActivity;
+import com.canteen.app.activity.common.MainActivity;
 import com.canteen.app.models.Menu;
+import com.canteen.app.service.auth.AuthService;
+import com.canteen.app.service.auth.AuthServiceImpl;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class MenuDetailsActivity extends AppCompatActivity {
+
+    private AuthService authService = AuthServiceImpl.of();
 
     @BindView(R.id.foods_recycler_view)
     RecyclerView foodsRecyclerView;
@@ -46,6 +51,10 @@ public class MenuDetailsActivity extends AppCompatActivity {
             case R.id.action_cart:
                 startActivity(new Intent(this, OrderCartActivity.class));
                 return true;
+            case R.id.action_logout:
+                authService.clear();
+                finish();
+                startActivity(new Intent(this, MainActivity.class));
             default:
                 return super.onOptionsItemSelected(item);
         }

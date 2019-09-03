@@ -2,13 +2,11 @@ package com.canteen.app.activity.common;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.EditText;
 
-import com.auth0.android.jwt.JWT;
 import com.canteen.app.App;
 import com.canteen.app.R;
 import com.canteen.app.activity.administration.dashboard.AdminDashboardActivity;
@@ -19,6 +17,10 @@ import com.canteen.app.api.handlers.LoginRequestHandler;
 import com.canteen.app.api.models.requests.LoginRequestBody;
 import com.canteen.app.api.models.responses.LoginResponse;
 import com.canteen.app.service.ToastService;
+import com.canteen.app.service.auth.AuthService;
+import com.canteen.app.service.auth.AuthServiceImpl;
+import com.canteen.app.service.auth.InvalidTokenException;
+import com.canteen.app.service.auth.NoTokenException;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -72,32 +74,41 @@ public class LoginActivity extends AppCompatActivity {
 
     private static class LoginRequestHandlerImpl extends LoginRequestHandler {
 
+        private static final String TAG = "LoginRequestHandlerImpl";
+
+        private AuthService authService = AuthServiceImpl.of();
+
         @Override
         protected void onPostExecute(final LoginResponse result) {
             Context context = App.getContext();
-            if (result.getHttpStatusCode() == 200) {
-                final String token = result.getData().getToken();
-
-                SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(context).edit();
-                editor.putString("token", token);
-                editor.apply();
-
-                JWT jwt = new JWT(token);
-                boolean isAdmin = jwt.getClaim("admin").asBoolean();
-
-                Intent intent;
-                if (isAdmin) {
-                    intent = new Intent(context, AdminDashboardActivity.class);
-                } else {
-                    intent = new Intent(context, MenuListsActivity.class);
-                }
-                // Setting flags clearing history stack trace
-                // Hitting back on activity from intent will exit the app instead of returning here
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                context.startActivity(intent);
-            } else {
+            if (!result.isSuccessful()) {
                 ToastService.make(context.getString(R.string.login_error));
+                return;
             }
+
+            final String token = result.getData().getToken();
+            authService.setToken(token);
+
+            boolean hasPrivileges;
+            try {
+                hasPrivileges = authService.hasAdministrativePrivileges();
+            } catch (final NoTokenException | InvalidTokenException e) {
+                Log.d(TAG, "onPostExecute: token error", e);
+                ToastService.make(R.string.login_error);
+                return;
+            }
+
+            Intent intent;
+            // TODO: remove, administrative part is disabled anyway
+            if (hasPrivileges) {
+                intent = new Intent(context, AdminDashboardActivity.class);
+            } else {
+                intent = new Intent(context, MenuListsActivity.class);
+            }
+            // Setting flags clearing history stack trace
+            // Hitting back on activity from intent will exit the app instead of returning here
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            context.startActivity(intent);
         }
     }
 }
