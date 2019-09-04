@@ -3,24 +3,17 @@ package com.canteen.app.activity.client.menu.details;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 
 import com.canteen.app.R;
-import com.canteen.app.activity.client.cart.OrderCartActivity;
+import com.canteen.app.activity.client.common.ActivityWithMainOptionMenu;
 import com.canteen.app.models.Menu;
-import com.canteen.app.service.login.LoginService;
-import com.canteen.app.service.login.LoginServiceImpl;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MenuDetailsActivity extends AppCompatActivity {
-
-    private LoginService loginService = LoginServiceImpl.of();
+public class MenuDetailsActivity extends ActivityWithMainOptionMenu {
 
     @BindView(R.id.foods_recycler_view)
     RecyclerView foodsRecyclerView;
@@ -34,28 +27,6 @@ public class MenuDetailsActivity extends AppCompatActivity {
         this.initRecyclerView();
 
         this.retrieveMenu();
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(final android.view.Menu menu) {
-        super.onCreateOptionsMenu(menu);
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(final MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_cart:
-                startActivity(new Intent(this, OrderCartActivity.class));
-                return true;
-            case R.id.action_logout:
-                loginService.logout(this);
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
     }
 
     private void initRecyclerView() {

@@ -1,25 +1,18 @@
 package com.canteen.app.activity.client.menu.list;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
 import com.canteen.app.R;
-import com.canteen.app.activity.client.cart.OrderCartActivity;
+import com.canteen.app.activity.client.common.ActivityWithMainOptionMenu;
 import com.canteen.app.api.HttpRequestData;
 import com.canteen.app.api.HttpRequestMethods;
 import com.canteen.app.api.handlers.AllMenusRequestHandler;
 import com.canteen.app.api.models.requests.AllMenusRequestBody;
 import com.canteen.app.api.models.responses.AllMenusResponse;
-import com.canteen.app.service.login.LoginService;
-import com.canteen.app.service.login.LoginServiceImpl;
 
 import java.util.concurrent.ExecutionException;
 
@@ -27,9 +20,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 
-public class MenuListsActivity extends AppCompatActivity {
-
-    private LoginService loginService = LoginServiceImpl.of();
+public class MenuListsActivity extends ActivityWithMainOptionMenu {
 
     @BindView(R.id.menus_recycler_view)
     RecyclerView menusRecyclerView;
@@ -72,28 +63,6 @@ public class MenuListsActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(final Menu menu) {
-        super.onCreateOptionsMenu(menu);
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(final MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_cart:
-                startActivity(new Intent(this, OrderCartActivity.class));
-                return true;
-            case R.id.action_logout:
-                loginService.logout(this);
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
     private void initRecyclerView() {
         menusRecyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
@@ -111,4 +80,3 @@ public class MenuListsActivity extends AppCompatActivity {
         protected void onPostExecute(final AllMenusResponse result) { }
     }
 }
-
