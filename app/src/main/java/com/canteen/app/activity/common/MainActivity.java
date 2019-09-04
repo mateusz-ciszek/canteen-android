@@ -7,15 +7,15 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.canteen.app.R;
 import com.canteen.app.activity.client.menu.list.MenuListsActivity;
+import com.canteen.app.component.DaggerAppComponent;
 import com.canteen.app.service.auth.AuthService;
-import com.canteen.app.service.auth.AuthServiceImpl;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity {
 
-    private AuthService authService = AuthServiceImpl.of();
+    private AuthService authService = DaggerAppComponent.create().getAuthService();
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {

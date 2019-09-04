@@ -1,16 +1,14 @@
 package com.canteen.app.api.handlers;
 
 import android.os.AsyncTask;
-import android.preference.PreferenceManager;
 import android.util.Log;
 
-import com.canteen.app.App;
 import com.canteen.app.api.HttpRequestData;
 import com.canteen.app.api.HttpRequestMethods;
 import com.canteen.app.api.models.requests.RequestBody;
 import com.canteen.app.api.models.responses.Response;
+import com.canteen.app.component.DaggerAppComponent;
 import com.canteen.app.service.auth.AuthService;
-import com.canteen.app.service.auth.AuthServiceImpl;
 import com.google.gson.Gson;
 
 import java.io.BufferedReader;
@@ -32,7 +30,7 @@ public abstract class HttpRequestHandler<T extends RequestBody, U extends Respon
 
     private static String LOG_TAG = "LoginActivity";
 
-    private AuthService authService = AuthServiceImpl.of();
+    private AuthService authService = DaggerAppComponent.create().getAuthService();
 
     @Override
     protected void onPreExecute() {

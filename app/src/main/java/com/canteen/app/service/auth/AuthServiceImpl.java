@@ -1,25 +1,22 @@
 package com.canteen.app.service.auth;
 
 import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 
-import com.canteen.app.App;
 import com.canteen.app.service.jwt.JwtService;
-import com.canteen.app.service.jwt.JwtServiceImpl;
 import com.canteen.app.service.jwt.NoSuchClaimException;
 
 import java.util.Optional;
 
-import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
 
-@NoArgsConstructor(staticName = "of")
+@AllArgsConstructor(staticName = "of")
 public class AuthServiceImpl implements AuthService {
 
     private static final String TOKEN = "token";
 
-    private SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(App.getContext());
+    private SharedPreferences sharedPreferences;
 
-    private JwtService jwtService = JwtServiceImpl.of();
+    private JwtService jwtService;
 
     @Override
     public void setToken(final String token) {
