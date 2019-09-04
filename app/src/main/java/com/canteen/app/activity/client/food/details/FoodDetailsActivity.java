@@ -13,11 +13,10 @@ import android.widget.TextView;
 
 import com.canteen.app.R;
 import com.canteen.app.activity.client.cart.OrderCartActivity;
-import com.canteen.app.activity.common.MainActivity;
 import com.canteen.app.models.Food;
 import com.canteen.app.service.ToastService;
-import com.canteen.app.service.auth.AuthService;
-import com.canteen.app.service.auth.AuthServiceImpl;
+import com.canteen.app.service.login.LoginService;
+import com.canteen.app.service.login.LoginServiceImpl;
 import com.canteen.app.service.order.OrderCartService;
 import com.canteen.app.service.order.OrderItem;
 import com.canteen.app.service.price.PriceFormatter;
@@ -33,7 +32,7 @@ public class FoodDetailsActivity extends AppCompatActivity implements PriceConta
 
     private FoodAdditionAdapter adapter;
 
-    private AuthService authService = AuthServiceImpl.of();
+    private LoginService loginService = LoginServiceImpl.of();
 
     @BindView(R.id.food_description_text_view)
     TextView foodDescriptionTextView;
@@ -70,9 +69,8 @@ public class FoodDetailsActivity extends AppCompatActivity implements PriceConta
                 startActivity(new Intent(this, OrderCartActivity.class));
                 return true;
             case R.id.action_logout:
-                authService.clear();
-                finish();
-                startActivity(new Intent(this, MainActivity.class));
+                loginService.logout(this);
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
