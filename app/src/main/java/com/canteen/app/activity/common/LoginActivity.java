@@ -4,23 +4,18 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.widget.EditText;
 
 import com.canteen.app.App;
 import com.canteen.app.R;
-import com.canteen.app.activity.administration.dashboard.AdminDashboardActivity;
-import com.canteen.app.activity.client.menu.list.MenuListsActivity;
 import com.canteen.app.api.HttpRequestData;
 import com.canteen.app.api.HttpRequestMethods;
 import com.canteen.app.api.handlers.LoginRequestHandler;
 import com.canteen.app.api.models.requests.LoginRequestBody;
 import com.canteen.app.api.models.responses.LoginResponse;
 import com.canteen.app.service.ToastService;
-import com.canteen.app.service.auth.AuthService;
-import com.canteen.app.service.auth.AuthServiceImpl;
-import com.canteen.app.service.auth.InvalidTokenException;
-import com.canteen.app.service.auth.NoTokenException;
+import com.canteen.app.service.login.LoginService;
+import com.canteen.app.service.login.LoginServiceImpl;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -74,9 +69,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private static class LoginRequestHandlerImpl extends LoginRequestHandler {
 
-        private static final String TAG = "LoginRequestHandlerImpl";
-
-        private AuthService authService = AuthServiceImpl.of();
+        private LoginService loginService = LoginServiceImpl.of();
 
         @Override
         protected void onPostExecute(final LoginResponse result) {
@@ -87,28 +80,7 @@ public class LoginActivity extends AppCompatActivity {
             }
 
             final String token = result.getData().getToken();
-            authService.setToken(token);
-
-            boolean hasPrivileges;
-            try {
-                hasPrivileges = authService.hasAdministrativePrivileges();
-            } catch (final NoTokenException | InvalidTokenException e) {
-                Log.d(TAG, "onPostExecute: token error", e);
-                ToastService.make(R.string.login_error);
-                return;
-            }
-
-            Intent intent;
-            // TODO: remove, administrative part is disabled anyway
-            if (hasPrivileges) {
-                intent = new Intent(context, AdminDashboardActivity.class);
-            } else {
-                intent = new Intent(context, MenuListsActivity.class);
-            }
-            // Setting flags clearing history stack trace
-            // Hitting back on activity from intent will exit the app instead of returning here
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            context.startActivity(intent);
+            loginService.login(token, context);
         }
     }
 }
