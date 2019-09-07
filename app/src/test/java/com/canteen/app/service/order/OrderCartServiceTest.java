@@ -23,7 +23,7 @@ class OrderCartServiceTest {
 
     @BeforeEach
     void setUp() {
-        service = new OrderCartService();
+        service = OrderCartServiceImpl.of();
     }
 
     @Test

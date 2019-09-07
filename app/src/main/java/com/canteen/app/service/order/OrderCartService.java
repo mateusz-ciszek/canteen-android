@@ -1,71 +1,26 @@
 package com.canteen.app.service.order;
 
-import com.canteen.app.App;
-import com.canteen.app.R;
-
-import java.util.ArrayList;
 import java.util.List;
 
-import lombok.AccessLevel;
-import lombok.NoArgsConstructor;
+public interface OrderCartService {
 
-@NoArgsConstructor(access = AccessLevel.PACKAGE)
-public class OrderCartService {
-    private static final OrderCartService ourInstance = new OrderCartService();
-    private List<OrderItem> items = new ArrayList<>();
-    private String currency = null;
-    private List<OrderCartChangeListener> listeners = new ArrayList<>();
+    void addItem(OrderItem item);
 
-    public static OrderCartService getInstance() {
-        return ourInstance;
-    }
+    void removeItem(OrderItem item);
 
-    public void addItem(final OrderItem item) {
-        items.add(item);
-    }
+    List<OrderItem> getItems();
 
-    public boolean isEmpty() {
-        return items.isEmpty();
-    }
+    void clear();
 
-    public void removeItem(final OrderItem item) {
-        this.items.remove(item);
-        this.notifyListeners();
-    }
+    boolean isEmpty();
 
-    public void clear() {
-        this.items.clear();
-        this.notifyListeners();
-    }
+    int getCount();
 
-    public int getCount() {
-        return this.items.size();
-    }
+    double getPrice();
 
-    public double getPrice() {
-        return items.stream()
-                .mapToDouble(OrderItem::getPrice)
-                .sum();
-    }
+    String getCurrency();
 
-    public List<OrderItem> getItems() {
-        return this.items;
-    }
+    void registerOnChangeListener(OrderCartChangeListener listener);
 
-    // TODO should be getting this from server on login
-    public String getCurrency() {
-        return currency != null ? currency : App.getContext().getString(R.string.example_currency);
-    }
-
-    public void registerOnChangeListener(OrderCartChangeListener listener) {
-        this.listeners.add(listener);
-    }
-
-    public void unregisterOnChangeListener(OrderCartChangeListener listener) {
-        this.listeners.remove(listener);
-    }
-
-    private void notifyListeners() {
-        listeners.forEach(OrderCartChangeListener::onOrderCartChange);
-    }
+    void unregisterOnChangeListener(OrderCartChangeListener listener);
 }

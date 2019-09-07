@@ -8,17 +8,18 @@ import android.support.v7.widget.RecyclerView;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.canteen.app.App;
 import com.canteen.app.R;
 import com.canteen.app.api.HttpRequestData;
 import com.canteen.app.api.HttpRequestMethods;
 import com.canteen.app.api.handlers.CreateOrderRequestHandler;
 import com.canteen.app.api.models.requests.CreateOrderRequestBody;
 import com.canteen.app.api.models.responses.EmptyResponse;
+import com.canteen.app.component.DaggerAppComponent;
 import com.canteen.app.service.ToastService;
 import com.canteen.app.service.order.OrderCartChangeListener;
 import com.canteen.app.service.order.OrderCartService;
 import com.canteen.app.service.price.PriceFormatter;
-import com.canteen.app.service.price.PriceFormatterImpl;
 
 import java.util.concurrent.ExecutionException;
 
@@ -43,7 +44,9 @@ public class OrderCartActivity extends AppCompatActivity implements OrderCartCha
     @BindView(R.id.cancelOrderButton)
     Button cancelButton;
 
-    private OrderCartService orderCartService = OrderCartService.getInstance();
+    private OrderCartService orderCartService = App.getComponent().getOrderCartService();
+
+    private PriceFormatter formatter = DaggerAppComponent.create().getPriceFormatter();
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -56,7 +59,7 @@ public class OrderCartActivity extends AppCompatActivity implements OrderCartCha
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        OrderCartService.getInstance().unregisterOnChangeListener(this);
+        orderCartService.unregisterOnChangeListener(this);
     }
 
     @OnClick(R.id.cancelOrderButton)
@@ -119,7 +122,6 @@ public class OrderCartActivity extends AppCompatActivity implements OrderCartCha
 
     @Override
     public void onOrderCartChange() {
-        PriceFormatter formatter = PriceFormatterImpl.of();
         fullOrderPriceTextView.setText(formatter.format(orderCartService.getPrice(), orderCartService.getCurrency()));
 
         itemsAmountTextView.setText(String.valueOf(orderCartService.getCount()));

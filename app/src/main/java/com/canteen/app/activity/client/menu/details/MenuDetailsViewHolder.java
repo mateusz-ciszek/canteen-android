@@ -5,14 +5,15 @@ import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
 
+import com.canteen.app.App;
 import com.canteen.app.R;
 import com.canteen.app.activity.client.food.details.FoodDetailsActivity;
+import com.canteen.app.component.DaggerAppComponent;
 import com.canteen.app.models.Food;
 import com.canteen.app.service.ToastService;
 import com.canteen.app.service.order.OrderCartService;
 import com.canteen.app.service.order.OrderItem;
 import com.canteen.app.service.price.PriceFormatter;
-import com.canteen.app.service.price.PriceFormatterImpl;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -28,6 +29,10 @@ class MenuDetailsViewHolder extends RecyclerView.ViewHolder {
     @BindView(R.id.food_price_text_view)
     TextView price;
 
+    private OrderCartService orderCartService = App.getComponent().getOrderCartService();
+
+    private PriceFormatter formatter = DaggerAppComponent.create().getPriceFormatter();
+
     MenuDetailsViewHolder(final ConstraintLayout itemView) {
         super(itemView);
         ButterKnife.bind(this, itemView);
@@ -41,17 +46,15 @@ class MenuDetailsViewHolder extends RecyclerView.ViewHolder {
 
     @OnClick(R.id.add_to_cart_button)
     void addToCartButtonHandler() {
-        OrderCartService.getInstance().addItem(OrderItem.builder()
+        orderCartService.addItem(OrderItem.builder()
                 .food(food)
                 .build());
         ToastService.make(name.getContext().getString(R.string.food_added_to_cart));
     }
 
-    void setFood(Food food) {
+    void setFood(final Food food) {
         this.food = food;
         this.name.setText(food.getName());
-
-        PriceFormatter formatter = PriceFormatterImpl.of();
         this.price.setText(formatter.format(food.getPrice()));
     }
 }

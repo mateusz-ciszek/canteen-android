@@ -2,9 +2,9 @@ package com.canteen.app.service.jwt;
 
 import com.auth0.android.jwt.JWT;
 
-import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
 
-@NoArgsConstructor(staticName = "of")
+@AllArgsConstructor(staticName = "of")
 public class JwtServiceImpl implements JwtService {
 
     private static final String ADMIN_CLAIM_KEY = "admin";

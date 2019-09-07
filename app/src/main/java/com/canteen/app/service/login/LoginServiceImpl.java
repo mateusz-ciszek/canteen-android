@@ -11,18 +11,17 @@ import com.canteen.app.activity.client.menu.list.MenuListsActivity;
 import com.canteen.app.activity.common.MainActivity;
 import com.canteen.app.service.ToastService;
 import com.canteen.app.service.auth.AuthService;
-import com.canteen.app.service.auth.AuthServiceImpl;
 import com.canteen.app.service.auth.InvalidTokenException;
 import com.canteen.app.service.auth.NoTokenException;
 
-import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
 
-@NoArgsConstructor(staticName = "of")
+@AllArgsConstructor(staticName = "of")
 public class LoginServiceImpl implements LoginService {
 
     private static final String TAG = "LoginServiceImpl";
 
-    private AuthService authService = AuthServiceImpl.of();
+    private AuthService authService;
 
     @Override
     public void login(final String token, final Context context) {

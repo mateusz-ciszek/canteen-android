@@ -13,9 +13,9 @@ import com.canteen.app.api.HttpRequestMethods;
 import com.canteen.app.api.handlers.LoginRequestHandler;
 import com.canteen.app.api.models.requests.LoginRequestBody;
 import com.canteen.app.api.models.responses.LoginResponse;
+import com.canteen.app.component.DaggerAppComponent;
 import com.canteen.app.service.ToastService;
 import com.canteen.app.service.login.LoginService;
-import com.canteen.app.service.login.LoginServiceImpl;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -69,7 +69,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private static class LoginRequestHandlerImpl extends LoginRequestHandler {
 
-        private LoginService loginService = LoginServiceImpl.of();
+        private LoginService loginService = DaggerAppComponent.create().getLoginService();
 
         @Override
         protected void onPostExecute(final LoginResponse result) {

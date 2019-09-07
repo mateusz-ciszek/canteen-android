@@ -8,12 +8,12 @@ import android.view.MenuItem;
 
 import com.canteen.app.R;
 import com.canteen.app.activity.client.cart.OrderCartActivity;
+import com.canteen.app.component.DaggerAppComponent;
 import com.canteen.app.service.login.LoginService;
-import com.canteen.app.service.login.LoginServiceImpl;
 
 public abstract class ActivityWithMainOptionMenu extends AppCompatActivity {
 
-    private LoginService loginService = LoginServiceImpl.of();
+    private LoginService loginService = DaggerAppComponent.create().getLoginService();
 
     @Override
     public boolean onCreateOptionsMenu(final Menu menu) {
