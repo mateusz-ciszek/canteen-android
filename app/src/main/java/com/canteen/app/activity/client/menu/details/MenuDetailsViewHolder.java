@@ -8,12 +8,12 @@ import android.widget.TextView;
 import com.canteen.app.App;
 import com.canteen.app.R;
 import com.canteen.app.activity.client.food.details.FoodDetailsActivity;
+import com.canteen.app.component.DaggerAppComponent;
 import com.canteen.app.models.Food;
 import com.canteen.app.service.ToastService;
 import com.canteen.app.service.order.OrderCartService;
 import com.canteen.app.service.order.OrderItem;
 import com.canteen.app.service.price.PriceFormatter;
-import com.canteen.app.service.price.PriceFormatterImpl;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -30,6 +30,8 @@ class MenuDetailsViewHolder extends RecyclerView.ViewHolder {
     TextView price;
 
     private OrderCartService orderCartService = App.getComponent().getOrderCartService();
+
+    private PriceFormatter formatter = DaggerAppComponent.create().getPriceFormatter();
 
     MenuDetailsViewHolder(final ConstraintLayout itemView) {
         super(itemView);
@@ -50,11 +52,9 @@ class MenuDetailsViewHolder extends RecyclerView.ViewHolder {
         ToastService.make(name.getContext().getString(R.string.food_added_to_cart));
     }
 
-    void setFood(Food food) {
+    void setFood(final Food food) {
         this.food = food;
         this.name.setText(food.getName());
-
-        PriceFormatter formatter = PriceFormatterImpl.of();
         this.price.setText(formatter.format(food.getPrice()));
     }
 }

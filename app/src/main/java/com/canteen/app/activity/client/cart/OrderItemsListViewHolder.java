@@ -6,13 +6,13 @@ import android.widget.TextView;
 
 import com.canteen.app.App;
 import com.canteen.app.R;
+import com.canteen.app.component.DaggerAppComponent;
 import com.canteen.app.models.FoodAddition;
 import com.canteen.app.service.order.OrderCartService;
 import com.canteen.app.service.order.OrderItem;
 import com.canteen.app.service.order.item.summary.FoodAdditionName;
 import com.canteen.app.service.order.item.summary.OrderItemSummaryUtil;
 import com.canteen.app.service.price.PriceFormatter;
-import com.canteen.app.service.price.PriceFormatterImpl;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -36,6 +36,8 @@ class OrderItemsListViewHolder extends RecyclerView.ViewHolder {
 
     private OrderCartService orderCartService = App.getComponent().getOrderCartService();
 
+    private PriceFormatter formatter = DaggerAppComponent.create().getPriceFormatter();
+
     OrderItemsListViewHolder(ConstraintLayout itemView) {
         super(itemView);
         ButterKnife.bind(this, itemView);
@@ -49,8 +51,6 @@ class OrderItemsListViewHolder extends RecyclerView.ViewHolder {
     void setOrderItem(final OrderItem orderItem) {
         this.orderItem = orderItem;
         foodNameTextView.setText(orderItem.getFood().getName());
-
-        PriceFormatter formatter = PriceFormatterImpl.of();
         foodPriceTextView.setText(formatter.format(orderItem.getPrice()));
 
         OrderItemSummaryUtil util = OrderItemSummaryUtil.of();

@@ -9,12 +9,12 @@ import android.widget.TextView;
 import com.canteen.app.App;
 import com.canteen.app.R;
 import com.canteen.app.activity.client.common.ActivityWithMainOptionMenu;
+import com.canteen.app.component.DaggerAppComponent;
 import com.canteen.app.models.Food;
 import com.canteen.app.service.ToastService;
 import com.canteen.app.service.order.OrderCartService;
 import com.canteen.app.service.order.OrderItem;
 import com.canteen.app.service.price.PriceFormatter;
-import com.canteen.app.service.price.PriceFormatterImpl;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -36,6 +36,8 @@ public class FoodDetailsActivity extends ActivityWithMainOptionMenu implements P
     RecyclerView foodAdditionsRecyclerView;
 
     private OrderCartService orderCartService = App.getComponent().getOrderCartService();
+
+    private PriceFormatter formatter = DaggerAppComponent.create().getPriceFormatter();
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -77,7 +79,6 @@ public class FoodDetailsActivity extends ActivityWithMainOptionMenu implements P
 
     @Override
     public void updatePrice(final double priceIncrease) {
-        PriceFormatter formatter = PriceFormatterImpl.of();
         foodPriceTextView.setText(formatter.format(food.getPrice() + priceIncrease));
     }
 }

@@ -6,9 +6,9 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.canteen.app.R;
+import com.canteen.app.component.DaggerAppComponent;
 import com.canteen.app.models.FoodAddition;
 import com.canteen.app.service.price.PriceFormatter;
-import com.canteen.app.service.price.PriceFormatterImpl;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -23,6 +23,8 @@ class FoodAdditionViewHolder extends RecyclerView.ViewHolder {
     @BindView(R.id.food_addition_price_text_view)
     TextView foodAdditionPriceTextView;
 
+    private PriceFormatter formatter = DaggerAppComponent.create().getPriceFormatter();
+
     FoodAdditionViewHolder(final View itemView) {
         super(itemView);
         ButterKnife.bind(this, itemView);
@@ -30,8 +32,6 @@ class FoodAdditionViewHolder extends RecyclerView.ViewHolder {
 
     void setFoodAddition(final FoodAddition foodAddition) {
         foodAdditionCheckBox.setText(foodAddition.getName());
-
-        PriceFormatter formatter = PriceFormatterImpl.of();
         foodAdditionPriceTextView.setText(formatter.format(foodAddition.getPrice()));
     }
 }

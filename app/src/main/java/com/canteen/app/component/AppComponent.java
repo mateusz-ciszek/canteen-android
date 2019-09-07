@@ -7,6 +7,7 @@ import com.canteen.app.component.modules.OrderModule;
 import com.canteen.app.service.auth.AuthService;
 import com.canteen.app.service.login.LoginService;
 import com.canteen.app.service.order.OrderCartService;
+import com.canteen.app.service.price.PriceFormatter;
 
 import javax.inject.Singleton;
 
@@ -27,4 +28,6 @@ public interface AppComponent {
 
     @Singleton
     OrderCartService getOrderCartService();
+
+    PriceFormatter getPriceFormatter();
 }
