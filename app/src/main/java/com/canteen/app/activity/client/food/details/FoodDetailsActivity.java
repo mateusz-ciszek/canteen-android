@@ -6,6 +6,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
 
+import com.canteen.app.App;
 import com.canteen.app.R;
 import com.canteen.app.activity.client.common.ActivityWithMainOptionMenu;
 import com.canteen.app.models.Food;
@@ -34,6 +35,8 @@ public class FoodDetailsActivity extends ActivityWithMainOptionMenu implements P
     @BindView(R.id.food_additions_recycler_view)
     RecyclerView foodAdditionsRecyclerView;
 
+    private OrderCartService orderCartService = App.getComponent().getOrderCartService();
+
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,7 +50,7 @@ public class FoodDetailsActivity extends ActivityWithMainOptionMenu implements P
 
     @OnClick(R.id.add_to_cart_button)
     void addToCartButtonHandler() {
-        OrderCartService.getInstance().addItem(OrderItem.builder()
+        orderCartService.addItem(OrderItem.builder()
                 .food(food)
                 .additions(adapter.getSelected())
                 .build());

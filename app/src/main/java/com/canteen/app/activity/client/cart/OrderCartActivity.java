@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.canteen.app.App;
 import com.canteen.app.R;
 import com.canteen.app.api.HttpRequestData;
 import com.canteen.app.api.HttpRequestMethods;
@@ -43,7 +44,7 @@ public class OrderCartActivity extends AppCompatActivity implements OrderCartCha
     @BindView(R.id.cancelOrderButton)
     Button cancelButton;
 
-    private OrderCartService orderCartService = OrderCartService.getInstance();
+    private OrderCartService orderCartService = App.getComponent().getOrderCartService();
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -56,7 +57,7 @@ public class OrderCartActivity extends AppCompatActivity implements OrderCartCha
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        OrderCartService.getInstance().unregisterOnChangeListener(this);
+        orderCartService.unregisterOnChangeListener(this);
     }
 
     @OnClick(R.id.cancelOrderButton)

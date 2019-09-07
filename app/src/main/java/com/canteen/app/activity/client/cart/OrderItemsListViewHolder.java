@@ -4,6 +4,7 @@ import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
 
+import com.canteen.app.App;
 import com.canteen.app.R;
 import com.canteen.app.models.FoodAddition;
 import com.canteen.app.service.order.OrderCartService;
@@ -33,6 +34,8 @@ class OrderItemsListViewHolder extends RecyclerView.ViewHolder {
     @BindView(R.id.selected_additions_text_view)
     TextView selectedAdditionsTextView;
 
+    private OrderCartService orderCartService = App.getComponent().getOrderCartService();
+
     OrderItemsListViewHolder(ConstraintLayout itemView) {
         super(itemView);
         ButterKnife.bind(this, itemView);
@@ -40,7 +43,7 @@ class OrderItemsListViewHolder extends RecyclerView.ViewHolder {
 
     @OnClick(R.id.removeItemButton)
     void removeItemButtonHandler() {
-        OrderCartService.getInstance().removeItem(orderItem);
+        orderCartService.removeItem(orderItem);
     }
 
     void setOrderItem(final OrderItem orderItem) {
