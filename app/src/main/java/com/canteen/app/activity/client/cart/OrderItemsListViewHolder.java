@@ -6,12 +6,12 @@ import android.widget.TextView;
 
 import com.canteen.app.App;
 import com.canteen.app.R;
-import com.canteen.app.component.DaggerAppComponent;
+import com.canteen.app.component.AppComponent;
 import com.canteen.app.models.FoodAddition;
 import com.canteen.app.service.order.OrderCartService;
 import com.canteen.app.service.order.OrderItem;
 import com.canteen.app.service.order.item.summary.FoodAdditionName;
-import com.canteen.app.service.order.item.summary.OrderItemSummaryUtil;
+import com.canteen.app.service.order.item.summary.OrderItemSummaryGenerator;
 import com.canteen.app.service.price.PriceFormatter;
 
 import java.util.List;
@@ -34,13 +34,23 @@ class OrderItemsListViewHolder extends RecyclerView.ViewHolder {
     @BindView(R.id.selected_additions_text_view)
     TextView selectedAdditionsTextView;
 
-    private OrderCartService orderCartService = App.getComponent().getOrderCartService();
+    private OrderCartService orderCartService;
 
-    private PriceFormatter formatter = DaggerAppComponent.create().getPriceFormatter();
+    private PriceFormatter formatter;
+
+    private OrderItemSummaryGenerator summaryGenerator;
 
     OrderItemsListViewHolder(ConstraintLayout itemView) {
         super(itemView);
         ButterKnife.bind(this, itemView);
+        init();
+    }
+
+    private void init() {
+        AppComponent component = App.getComponent();
+        orderCartService = component.getOrderCartService();
+        formatter = component.getPriceFormatter();
+        summaryGenerator = component.getOrderItemSummaryGenerator();
     }
 
     @OnClick(R.id.removeItemButton)
@@ -53,12 +63,11 @@ class OrderItemsListViewHolder extends RecyclerView.ViewHolder {
         foodNameTextView.setText(orderItem.getFood().getName());
         foodPriceTextView.setText(formatter.format(orderItem.getPrice()));
 
-        OrderItemSummaryUtil util = OrderItemSummaryUtil.of();
         List<FoodAdditionName> names = orderItem.getAdditions().stream()
                 .map(FoodAddition::getName)
                 .map(FoodAdditionName::of)
                 .collect(Collectors.toList());
-        String label = util.generateLabel(names);
+        String label = summaryGenerator.generate(names);
         selectedAdditionsTextView.setText(label);
     }
 }
